@@ -1,21 +1,29 @@
 <x-app-layout>
 
-    <div class="w-full h-[32rem] bg-cover bg-right-bottom bg-[url('/public/img/homebanner.png')]">
+    <div class="w-full h-[32rem] bg-cover bg-right-bottom"
+        style="background-image: url('/img/homebanner.png')"
+    >
         <div class="container pt-24 mx-auto lg:pt-32">
             <x-jet-application-logo class="w-full px-6 py-4 mx-auto bg-white sm:px-2 sm:w-96 md:p-auto bg-opacity-80 md:bg-opacity-0 md:ml-6 lg:ml-20 lg:w-96"/>
         </div>
     </div>
 
     <div class="grid gap-6 my-6 md:mx-12 md:grid-cols-3">
-        <div class="flex items-center justify-center h-24 bg-cover bg-[url('/public/img/pasta.png')]">
+        <div class="flex items-center justify-center h-24 bg-cover"
+            style="background-image: url('/img/pasta.png')"
+        >
             <span class="px-6 py-1 bg-white bg-opacity-80">Pasta fresca</span>
         </div>
 
-        <div class="flex items-center justify-center h-24 bg-cover bg-[url('/public/img/lasagne.png')]">
+        <div class="flex items-center justify-center h-24 bg-cover"
+            style="background-image: url('/img/lasagne.png')"
+        >
             <span class="px-6 py-1 bg-white bg-opacity-80">Gastronomia</span>
         </div>
 
-        <div class="flex items-center justify-center h-24 bg-cover bg-[url('/public/img/macaron.png')]">
+        <div class="flex items-center justify-center h-24 bg-cover"
+            style="background-image: url('/img/macaron.png')"
+        >
             <span class="px-6 py-1 bg-white bg-opacity-80">Pasticceria</span>
         </div>
     </div>
@@ -57,7 +65,7 @@
                 <p>Consegna in tutta Italia!</p>
                 <a class="underline" href="">Guarda le tariffe</a>
             </div>
-            <img class="h-32 ml-auto mr-12 -mb-10" src="/public/img/no_image.jpg" />
+            <img class="h-32 ml-auto mr-12 -mb-10" src="/img/no_image.jpg" />
         </div>
 
     </div>
@@ -65,7 +73,7 @@
     <div class="w-full text-gray-600 bg-gray-200">
         <div class="container flex flex-col w-full mx-auto my-12 md:h-96 md:flex-row">
             <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" 
-                src="/public/img/shop.png"
+                src="/img/shop.png"
                 
             />
             <div class="flex flex-col items-center w-full">
@@ -97,7 +105,7 @@
                     </p>
                 </div>
             </div>
-            <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" src="/public/img/shipping.png"/>
+            <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" src="/img/shipping.png"/>
         </div>
     </div>
 
