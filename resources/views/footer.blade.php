@@ -1,4 +1,4 @@
-<footer class="text-gray-600 bg-gray-100 body-font">
+<footer class="text-gray-900 bg-neutral-50 body-font">
 
   <div class="container px-5 pt-12 mx-auto md:pt-24">
     <div class="flex flex-wrap order-first text-center md:text-left">
@@ -93,13 +93,13 @@
 
   </div>
 
-  <div class="w-full pt-4 bg-gray-100">
+  <div class="w-full pt-4 bg-neutral-50">
     <div class="container flex flex-col items-center justify-center px-5 py-2 mx-auto sm:flex-row">
       
       <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
         <x-jet-application-mark class="block w-24 w-auto" />
       </a>
-      <p class="mt-4 text-xs text-gray-500 sm:ml-2 sm:mt-0">© 2022 —
+      <p class="mt-4 text-xs text-gray-900 sm:ml-2 sm:mt-0">© 2022 —
         <a href="https://talale.it" rel="noopener noreferrer" class="ml-1 text-gray-600" target="_blank">Alessandro Talamona</a>
       </p>
     </div>

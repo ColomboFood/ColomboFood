@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="fixed z-50 w-full h-16 bg-white border-b border-white">
     <!-- Primary Navigation Menu -->
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="container px-6 mx-auto">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="container hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
                         {{ __('Shop') }}
                     </x-jet-nav-link>

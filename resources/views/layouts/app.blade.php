@@ -3,7 +3,7 @@
     
     @include('layouts._head')
 
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-gray-900">
         <x-jet-banner />
 
         <div class="min-h-screen bg-white">
