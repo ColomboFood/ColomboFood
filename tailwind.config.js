@@ -13,15 +13,47 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['DM Sans', ...defaultTheme.fontFamily.sans],
+                sans: ['DinPro', 'sans'],
+                serif: ['RoxboroughCF', 'serif'],
             },
             colors: {
-                primary: colors.violet,
-                secondary: colors.orange,
-                gray: colors.zinc,
+                primary: {// scarlet
+                    "50": "#FFCABE",
+                    "400": "#FF441B",
+                    "500": "#F12C00",
+                    "600": "#C62602",
+                    "900": "#4B1003"
+                },
+                secondary: {// froly
+                    "50": "#FCC3C5",
+                    "400": "#FA9DA0",
+                    "500": "#F6787C",//
+                    "600": "#F25459",
+                    "900": "#B6151A",
+                },
+                gray: {// outer-space
+                    "50": "#E5EFF4",
+                    "100": "#CADDE6",
+                    "200": "#AFCBD8",
+                    "300": "#95B9C9",
+                    "400": "#7CA6BA",
+                    "500": "#6493A9",
+                    "600": "#547D91",
+                    "700": "#476675",
+                    "800": "#394F5A",
+                    "900": "#2A3940"
+                },
                 danger: colors.rose,
                 success: colors.green,
                 warning: colors.amber,
+            },
+            animation: {
+                shine: "shine 1s",
+            },
+            keyframes: {
+                shine: {
+                    "100%": { left: "125%" },
+                },
             },
         },
     },

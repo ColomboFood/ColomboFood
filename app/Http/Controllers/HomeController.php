@@ -37,6 +37,6 @@ class HomeController extends Controller
                     'description' => $collection->description
                 ]
             ]);
-        return view('home', compact('featured_categories', 'featured_products', 'brands', 'collections'));
+        return view('demo', compact('featured_categories', 'featured_products', 'brands', 'collections'));
     }
 }
