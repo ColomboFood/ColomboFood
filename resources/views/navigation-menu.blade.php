@@ -15,72 +15,20 @@
                     <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
                         {{ __('Shop') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
-                        {{ __('Cart') }}
-                        <x-cart-counter class="w-5 h-5 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
-                        {{ __('Wishlist') }}
-                        <x-wishlist-counter class="w-5 h-5 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
-                    </x-jet-nav-link>
-                    @auth
-                    <x-jet-nav-link href="{{ route('order.index') }}" :active="request()->routeIs('order.index')">
-                        {{ __('Orders') }}
-                    </x-jet-nav-link>
-                    @endauth
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="relative ml-3">
-                        <x-jet-dropdown align="right" width="60">
-                            <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50">
-                                        {{ Auth::user()->currentTeam->name }}
-
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </span>
-                            </x-slot>
-
-                            <x-slot name="content">
-                                <div class="w-60">
-                                    <!-- Team Management -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('Manage Team') }}
-                                    </div>
-
-                                    <!-- Team Settings -->
-                                    <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                        {{ __('Team Settings') }}
-                                    </x-jet-dropdown-link>
-
-                                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                        <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                            {{ __('Create New Team') }}
-                                        </x-jet-dropdown-link>
-                                    @endcan
-
-                                    <div class="border-t border-secondary-50"></div>
-
-                                    <!-- Team Switcher -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('Switch Teams') }}
-                                    </div>
-
-                                    @foreach (Auth::user()->allTeams() as $team)
-                                        <x-jet-switchable-team :team="$team" />
-                                    @endforeach
-                                </div>
-                            </x-slot>
-                        </x-jet-dropdown>
+                    <div class="space-x-2">
+                        <x-jet-nav-link class="relative" href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
+                            <x-icons.cart/>
+                            <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
+                        </x-jet-nav-link>
+                        <x-jet-nav-link class="relative" href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
+                            <x-icons.heart red="false"/>
+                            <x-wishlist-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
+                        </x-jet-nav-link>
                     </div>
-                @endif
 
                 <!-- Settings Dropdown -->
                 <div class="relative ml-3">
@@ -89,7 +37,7 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-secondary-400">
-                                    <img class="object-cover w-10 h-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <img class="object-cover rounded-full w-9 h-9" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -109,21 +57,19 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
                             </div>
-
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            
+                            <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
-                            </x-jet-dropdown-link>
+                            </x-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-jet-dropdown-link>
-                            @endif
+                            <x-dropdown-link href="{{ route('order.index') }}">
+                                {{ __('Orders') }}
+                            </x-dropdown-link>
 
                             @if(Auth::user()->canAccessFilament())
-                                <x-jet-dropdown-link href="{{ route('filament.pages.dashboard') }}" :active="request()->routeIs('filament.pages.dashboard')">
+                                <x-dropdown-link href="{{ route('filament.pages.dashboard') }}">
                                     {{ __('Admin Panel') }}
-                                </x-jet-dropdown-link>
+                                </x-dropdown-link>
                             @endif
 
                             <div class="border-t border-secondary-50"></div>
@@ -132,10 +78,10 @@
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                <x-dropdown-link href="{{ route('logout') }}"
                                          @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
-                                </x-jet-dropdown-link>
+                                </x-dropdown-link>
                             </form>
                         </x-slot>
                     </x-jet-dropdown>
@@ -172,7 +118,7 @@
                 @auth
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="mr-3 shrink-0">
-                            <img class="object-cover w-10 h-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                            <img class="object-cover rounded-full w-9 h-9" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                         </div>
                     @endif
 
@@ -182,68 +128,61 @@
                     </div>
                 @else
                     <div class="flex flex-col text-base font-medium text-gray-800">
-                        <x-jet-dropdown-link href="{{ route('login') }}">
+                        <x-dropdown-link href="{{ route('login') }}">
                                 {{ __('Login') }}
-                        </x-jet-dropdown-link>
-                        <x-jet-dropdown-link href="{{ route('register') }}">
+                        </x-dropdown-link>
+                        <x-dropdown-link href="{{ route('register') }}">
                                 {{ __('Register') }}
-                        </x-jet-dropdown-link>
+                        </x-dropdown-link>
                     </div>
                 @endauth
             </div>
 
             @auth
-            <div class="mt-3 space-y-1">
-                <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
-                </x-jet-responsive-nav-link>
-
+            <div class="px-4 pt-2 pb-1 space-y-1 border-t border-secondary-50">
                 @if(Auth::user()->canAccessFilament())
-                <x-jet-responsive-nav-link href="{{ route('filament.pages.dashboard') }}" :active="request()->routeIs('filament.pages.dashboard')">
+                <x-dropdown-link href="{{ route('filament.pages.dashboard') }}">
                     {{ __('Admin Panel') }}
-                </x-jet-responsive-nav-link>
+                </x-dropdown-link>
                 @endif
 
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
-                    </x-jet-responsive-nav-link>
-                @endif
+                <!-- Account Management -->
+                <x-dropdown-link href="{{ route('profile.show') }}">
+                    {{ __('Profile') }}
+                </x-dropdown-link>
+
+                <x-dropdown-link href="{{ route('order.index') }}">
+                        {{ __('Orders') }}
+                </x-dropdown-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                    <x-dropdown-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
-                    </x-jet-responsive-nav-link>
+                    </x-dropdown-link>
                 </form>
             </div>
             @endauth
         </div>
 
-        <div class="pt-2 pb-1 space-y-1 border-t border-secondary-50 ">
-            <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                {{ __('Home') }}
-            </x-jet-responsive-nav-link>
-                        <x-jet-responsive-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
-                {{ __('Shop') }}
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
+        <div class="px-4 pt-2 pb-1 space-y-1 border-t border-secondary-50">
+            <x-dropdown-link href="{{ route('cart.index') }}">
                 {{ __('Cart') }}
                 <x-cart-counter class="inline-block w-5 h-5 text-xs text-center bg-yellow-300 rounded-full"/>
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
+            </x-dropdown-link>
+            <x-dropdown-link href="{{ route('wishlist.index') }}">
                 {{ __('Wishlist') }}
                 <x-wishlist-counter class="inline-block w-5 h-5 text-xs text-center bg-yellow-300 rounded-full"/>
-            </x-jet-responsive-nav-link>
-            @auth
-            <x-jet-responsive-nav-link href="{{ route('order.index') }}" :active="request()->routeIs('order.index')">
-                {{ __('Orders') }}
-            </x-jet-responsive-nav-link>
-            @endauth
+            </x-dropdown-link>
+            <x-dropdown-link href="{{ route('home') }}">
+                {{ __('Home') }}
+            </x-dropdown-link>
+            <x-dropdown-link href="{{ route('product.index') }}">
+                {{ __('Shop') }}
+            </x-dropdown-link>
         </div>
     </div>
 </nav>

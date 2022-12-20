@@ -24,7 +24,7 @@
 
                 <div class="flex justify-between px-1 mt-4">
                     <div id="powered-by"></div>
-                    <div class="text-xs opacity-50" id="stats"></div>
+                    <div class="-mt-0.5 text-xs opacity-50" id="stats"></div>
                 </div>
 
             </div>

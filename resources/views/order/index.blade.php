@@ -78,8 +78,8 @@
                             <div class="flex flex-col items-center w-full px-5 py-4 mt-8 space-y-1 bg-gray-100 rounded md:mx-4 md:px-12 md:w-1/3">
                             
                                 <form class="w-full" action="{{ route('order.show', $order) }}" method="GET">
-                                    <x-jet-button type="submit" class="justify-center w-full"
-                                    s>{{ __('Details') }}</x-jet-button>
+                                    <x-button type="submit" class="justify-center w-full"
+                                    s>{{ __('Details') }}</x-button>
                                 </form>
                                 @if($order->canBePaied())
                                     <div class="w-full">

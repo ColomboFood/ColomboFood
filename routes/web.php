@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', fn () => view('welcome') );
+Route::get('/', fn() => view('welcome') )->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class , 'index'] )->name('home');
 
 Route::get('/shop', [App\Http\Controllers\ProductController::class , 'index'] )->name('product.index');

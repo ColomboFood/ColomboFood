@@ -1,8 +1,8 @@
 <div>
     <div class="mt-5">
-        <x-jet-danger-button wire:click="$toggle('confirmingCartDeletion')" wire:loading.attr="disabled">
+        <x-danger-button wire:click="$toggle('confirmingCartDeletion')" wire:loading.attr="disabled">
             {{ __('Empty Cart') }}
-        </x-jet-danger-button>
+        </x-danger-button>
     </div>
 
     <x-jet-confirmation-modal wire:model="confirmingCartDeletion">
@@ -19,9 +19,9 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
+            <x-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
                 {{ __('Empty') }}
-            </x-jet-danger-button>
+            </x-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
 </div>

@@ -65,7 +65,7 @@ module.exports = {
                     "800": "#474747",
                     "900": "#323232"
                 },
-                danger: colors.rose,
+                danger: colors.red,
                 success: colors.green,
                 warning: {// bleach-white
                     "50": "#FEEDD7",

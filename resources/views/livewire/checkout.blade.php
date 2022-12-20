@@ -1,8 +1,8 @@
 <div class="w-full">
     <div class="mt-1">
-        <x-jet-button class="justify-center rounded-[4px] w-full text-md py-4" wire:click="confirmPayment" wire:loading.attr="disabled">
+        <x-button class="justify-center rounded-[4px] w-full text-md py-4" wire:click="confirmPayment" wire:loading.attr="disabled">
             {{ __('Complete Payment') }}
-        </x-jet-button>
+        </x-button>
     </div>
 
     <div class="mt-1"
@@ -160,9 +160,9 @@
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
 
-                <x-jet-danger-button wire:click="submitPayment" :disabled="$submitDisabled" class="ml-3" wire:loading.attr="disabled">
+                <x-danger-button wire:click="submitPayment" :disabled="$submitDisabled" class="ml-3" wire:loading.attr="disabled">
                     {{ __('Confirm') }}
-                </x-jet-danger-button>
+                </x-danger-button>
             </x-slot>
         </div>
     </x-jet-dialog-modal>

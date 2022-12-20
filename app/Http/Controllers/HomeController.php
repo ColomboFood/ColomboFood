@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $featured_categories = Category::featured()->take(5)->get();
-        $featured_products = Product::featured()->where('quantity', '>', 0)->inRandomOrder()->take(1)->get();
+        $featured_products = Product::where('quantity', '=', 0)->inRandomOrder()->take(15)->get();
         $brands = Brand::whereHas(
             'media',
             fn ($query) =>
@@ -37,6 +37,6 @@ class HomeController extends Controller
                     'description' => $collection->description
                 ]
             ]);
-        return view('demo', compact('featured_categories', 'featured_products', 'brands', 'collections'));
+        return view('home', compact('featured_categories', 'featured_products', 'brands', 'collections'));
     }
 }
