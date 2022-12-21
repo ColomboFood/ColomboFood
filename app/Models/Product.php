@@ -341,13 +341,13 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
 
     public function applyTax($price, $tax = null)
     {
-        $tax = $tax ?? config('cart.tax');
+        if($tax === null) $tax = $this->attributes['tax'] ?? config('cart.tax');
         return number_format(round($price + round($price * ($tax / 100), 2),2),2);
     }
 
     public function removeTax($price, $tax = null)
     {
-        $tax = $tax ?? config('cart.tax');
+        if($tax === null) $tax = $this->attributes['tax'] ?? config('cart.tax');
         return number_format(round($price / (1 + ($tax/100)),2),2);
     }
 

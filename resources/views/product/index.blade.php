@@ -37,16 +37,18 @@
 
     </div>
 
-    <div class="mt-12 bg-white dark:bg-gray-800" x-data="{
-        playing: false,
-        togglePlaying() {
-            this.playing = !this.playing;
-            if (this.playing)
-                $refs.audio.play();
-            else
-                $refs.audio.pause();
-        }
-    }" x-init="">
+    <div class="mt-12 bg-white dark:bg-gray-800" 
+        x-data="{
+            playing: false,
+            togglePlaying() {
+                this.playing = !this.playing;
+                if (this.playing)
+                    $refs.audio.play();
+                else
+                    $refs.audio.pause();
+            }
+        }"
+    >
         <div class="flex flex-col max-w-5xl px-6 pt-12 mx-auto overflow-hidden md:flex-row">
 
             <div>
@@ -178,8 +180,65 @@
                             window.algoliaWidgets.infiniteHits({
                                 container: '#infinite-hits',
                                 templates: {
-                                    empty: document.getElementById('empty').innerHTML,
-                                    item: document.getElementById('item').innerHTML,
+                                    empty(results, {html}) {
+                                        return html`
+                                            <div class="flex flex-col items-center justify-center py-12">
+                                                <p class="mt-2 text-xl text-center">
+                                                ${results.query && 
+                                                    html`{{__('No results for') }} <strong>"${results.query}"</strong>`
+                                                }
+                                                ${!results.query && 
+                                                    html`{{__('No results') }}`
+                                                }
+                                                </p>
+                                                <img class="h-64" src="/img/searching.gif"/>
+                                            </div>
+                                        `;
+                                    },
+                                    item(hit, { html, components }) {
+                                        return html`
+                                            <div class='flex flex-col w-full max-w-xs mx-auto'>
+                                                <a href='${hit.url}'>
+                                                    <div class='w-full mb-6'>
+                                                        <img class='object-cover w-auto h-48 mx-auto' src='${hit.image}'/>
+                                                    </div>
+                                                    <div class='flex flex-col'>
+                                                        <h2 class='mb-1 font-bold'>
+                                                            <span class="mr-1">
+                                                                ${components.Highlight({ attribute: 'name', hit })}
+                                                            </span>
+                                                            ${ hit.avg_rating && 
+                                                                html`${hit.avg_rating}<x-icons.star class="w-4 h-4"></x-icons.star>`
+                                                            }
+                                                            
+                                                        </h2>
+                                                        <h3 class="h-12 mb-2 font-medium">
+                                                            ${ hit.short_description && 
+                                                                html`${snippet({ attribute: 'short_description', hit })}`
+                                                            }
+                                                        </h3>
+                                                        <div class='flex justify-between'>
+                                                            <span>
+                                                                ${ hit.has_variants && 
+                                                                    html`${ hit.stock_status }`
+                                                                }
+                                                            </span>
+                                                            <div class="relative flex flex-col">
+                                                                ${ hit.discount>0 && 
+                                                                    html`<span class="absolute ml-4 text-base text-gray-900 line-through -right-2 -top-4 dark:text-white">
+                                                                            ${hit.taxed_original_price}€
+                                                                        </span>`
+                                                                }
+                                                                <span class='font-bold'>
+                                                                    ${hit.taxed_price}€
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        `;
+                                    },
                                     showMoreText() {
                                         return '{{ __('Show more') }}';
                                     },
@@ -321,68 +380,6 @@
                     }
                 }))
             })
-        </script>
-
-        <script id="empty" type="text/html">
-            <div class="flex flex-col items-center justify-center py-12">
-                <p class="mt-2 text-xl text-center">
-                    @{{#query}}
-                    {{__('No results for') }} 
-                    <strong>@{{query}}</strong>
-                    @{{/query}}
-                    @{{^query}}
-                    {{__('No results') }}
-                    @{{/query}}
-                </p>
-                <img class="h-64" src="{{ asset('img/searching.gif') }}"/>
-            </div>
-        </script>
-
-        <script id="item" type="text/html">
-            <div class='flex flex-col w-full max-w-xs mx-auto'>
-            <a href='@{{url}}'>
-                <div class='w-full mb-6'>
-                    <img class='object-cover w-auto h-48 mx-auto' src='@{{image}}'/>
-                </div>
-                <div class='flex flex-col'>
-                    <h2 class='mb-1 font-bold'>
-                        <span class="mr-1">
-                            @{{#helpers.highlight}}
-                                { "attribute": "name" }
-                            @{{/helpers.highlight}}
-                        </span>
-                        @{{#avg_rating}}
-                            @{{avg_rating}}<x-icons.star class="w-4 h-4"></x-icons.star>
-                        @{{/avg_rating}}
-                        
-                    </h2>
-                    <h3 class="h-12 mb-2 font-medium">
-                        @{{#short_description}}
-                            @{{#helpers.snippet}}
-                                    { "attribute": "short_description" }
-                            @{{/helpers.snippet}}
-                        @{{/short_description}}
-                    </h3>
-                    <div class='flex justify-between'>
-                        <span>
-                            @{{^has_variants}}
-                                @{{stock_status}}
-                            @{{/has_variants}}
-                        </span>
-                        <div class="relative flex flex-col">
-                            @{{#discount}}
-                                <span class="absolute ml-4 text-base text-gray-900 line-through -right-2 -top-4 dark:text-white">
-                                    @{{taxed_original_price}}€
-                                </span>
-                            @{{/discount}}
-                            <span class='font-bold'>
-                                @{{taxed_price}}€
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            </div>
         </script>
     @endpush
 

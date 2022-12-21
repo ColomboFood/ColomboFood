@@ -33,7 +33,7 @@
         <div class="container flex flex-col items-center justify-center px-5 py-2 mx-auto sm:flex-row">
 
             <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
-                <x-jet-application-mark class="block w-24 w-auto" />
+                <x-jet-application-mark class="block w-24" />
             </a>
             <p class="mt-4 text-xs text-gray-900 sm:ml-2 sm:mt-0">© 2022 —
                 <a href="https://talale.it" rel="noopener noreferrer" class="ml-1 text-gray-600"

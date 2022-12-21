@@ -328,7 +328,7 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\IconColumn::make('avaiable_from')->label(__('Avaiable From'))
                     ->boolean()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('featured')->label(__('Featured'))
                     ->trueColor('primary')
                     ->falseColor('secondary')
