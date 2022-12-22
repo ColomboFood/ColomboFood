@@ -121,7 +121,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
     {
         $query->whereNull('variant_id');
 
-        $query->with('categories');
+        $query->with(['categories','brand','collections']);
 
         $query->when(
             $filters['category'] ?? false,
@@ -129,16 +129,39 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
             $query->whereHas(
                 'categories',
                 fn ($query) =>
-                $query->where('category_id', $filters['category'])
+                $query->where('categories.id', $filters['category'])
+                    ->orWhere('categories.slug', 'like', $filters['category'])
             )
         );
 
         $query->when(
-            $filters['keyword'] ?? false,
+            $filters['brand'] ?? false,
             fn ($query) =>
-            $query->where('name', 'like', '%' . $filters['keyword'] . '%')
-                ->orWhere('short_description', 'like', '%' . $filters['keyword'] . '%')
-                ->orWhere('description', 'like', '%' . $filters['keyword'] . '%')
+            $query->whereHas(
+                'brand',
+                fn ($query) =>
+                $query->whereIn('brands.id', $filters['brand'])
+                    ->orWhereIn('brands.slug', $filters['brand'])
+            )
+        );
+
+        $query->when(
+            $filters['collection'] ?? false,
+            fn ($query) =>
+            $query->whereHas(
+                'collections',
+                fn ($query) =>
+                $query->whereIn('collections.id', $filters['collection'])
+                    ->orWhereIn('collections.slug', $filters['collection'])
+            )
+        );
+
+        $query->when(
+            $filters['query'] ?? false,
+            fn ($query) =>
+            $query->where('name', 'like', '%' . $filters['query'] . '%')
+                ->orWhere('short_description', 'like', '%' . $filters['query'] . '%')
+                ->orWhere('description', 'like', '%' . $filters['query'] . '%')
         );
 
         if ($filters['orderby'] ?? false) {

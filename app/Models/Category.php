@@ -58,6 +58,45 @@ class Category extends Model implements HasMedia
         $query->where('featured', true);
     }
 
+    public function scopeFilterByProducts($query, array $filters)
+    {
+        $query->whereHas('products', function ($query) use ($filters) {
+                $query->when(
+                    $filters['brand'] ?? false,
+                    fn ($query) =>
+                    $query->whereHas(
+                        'brand',
+                        fn ($query) =>
+                        $query->whereIn('brands.id', $filters['brand'])
+                            ->orWhereIn('brands.slug', $filters['brand'])
+                    )
+                );
+
+                $query->when(
+                    $filters['collection'] ?? false,
+                    fn ($query) =>
+                    $query->whereHas(
+                        'collections',
+                        fn ($query) =>
+                        $query->whereIn('collections.id', $filters['collection'])
+                            ->orWhereIn('collections.slug', $filters['collection'])
+                    )
+                );
+
+                $query->when(
+                    $filters['query'] ?? false,
+                    fn ($query) =>
+                    $query->where('name', 'like', '%' . $filters['query'] . '%')
+                        ->orWhere('short_description', 'like', '%' . $filters['query'] . '%')
+                        ->orWhere('description', 'like', '%' . $filters['query'] . '%')
+                );
+
+                return $query;
+            }
+        );
+
+    }
+
     public function products(){
         return $this->belongsToMany(Product::class);
     }

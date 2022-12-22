@@ -10,7 +10,7 @@
         <div>
             <span class="footer-title">Legal</span>
             <a class="link link-hover">Politica di Reso</a>
-            <a class="link link-hover">Privacy</a>
+            <a class="link link-hover">Privacy Policy</a>
             <a class="link link-hover">Impostazioni Cookie</a>
         </div>
         <div>

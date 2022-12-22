@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', fn() => view('welcome') )->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class , 'index'] )->name('home');
 
-Route::get('/shop', [App\Http\Controllers\ProductController::class , 'index'] )->name('product.index');
+Route::get('/shop', App\Http\Livewire\Product\Index::class )->name('product.index');
 Route::get('/shop/{product:slug}', App\Http\Livewire\Product\Show::class )->name('product.show');
 
 Route::get('/cart', App\Http\Livewire\Cart\Index::class )->name('cart.index');
