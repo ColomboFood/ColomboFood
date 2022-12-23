@@ -12,28 +12,16 @@
     </div>
 
     <div class="container grid gap-6 px-6 mx-auto my-6 md:grid-cols-3">
-
-        <a href="{{ route('product.index', [ 'category' => 'pasta-fresca' ]) }}">
-            <div class="relative flex items-center justify-center h-24 overflow-hidden bg-cover cursor-pointer group">
-                <img class="absolute object-cover w-full h-full transition duration-700 ease-in-out transform group-hover:scale-150 group-hover:opacity-70" src="/img/pasta.png" />
-                <span class="absolute px-6 py-1 bg-white bg-opacity-80">Pasta fresca</span>
-            </div>
-        </a>
-
-        <a href="{{ route('product.index', [ 'category' => '2' ]) }}">
-            <div class="relative flex items-center justify-center h-24 overflow-hidden bg-cover cursor-pointer group ">
-                <img class="absolute object-cover w-full h-full transition duration-700 ease-in-out transform group-hover:scale-150 group-hover:opacity-70" src="/img/lasagne.png" />
-                <span class="absolute px-6 py-1 bg-white bg-opacity-80">Gastronomia</span>
-            </div>
-        </a>
-
-        <a href="{{ route('product.index', [ 'category' => '3' ]) }}">
-            <div class="relative flex items-center justify-center h-24 overflow-hidden bg-cover cursor-pointer group ">
-                <img class="absolute object-cover w-full h-full transition duration-700 ease-in-out transform group-hover:scale-150 group-hover:opacity-70" src="/img/macaron.png" />
-                <span class="absolute px-6 py-1 bg-white bg-opacity-80">Pasticceria</span>
-            </div>
-        </a>
-        
+        @foreach($featured_categories as $category)
+            <a href="{{ route('product.index', [ 'category' => $category->slug ]) }}">
+                <div class="relative flex items-center justify-center h-24 overflow-hidden bg-cover cursor-pointer group">
+                    <img class="absolute object-cover w-full h-full transition duration-700 ease-in-out transform group-hover:scale-150 group-hover:opacity-70" 
+                        src="{{ $category->hero }}"
+                    />
+                    <span class="absolute px-6 py-1 bg-white bg-opacity-80">{{ $category->name }}</span>
+                </div>
+            </a>
+        @endforeach
     </div>
     
     <div class="container mx-auto my-12">

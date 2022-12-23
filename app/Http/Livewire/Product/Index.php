@@ -77,6 +77,7 @@ class Index extends Component
 
     public function toggleCategory($category)
     {
+        $this->resetPage();
         $categoryModel = Category::where('id', $category)->orWhere('slug', $category)->first();
         if($this->category == $categoryModel->slug) $this->category = $categoryModel->parent ? $categoryModel->parent->slug : null;
         else $this->category = $categoryModel->slug;

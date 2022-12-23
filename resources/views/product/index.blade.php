@@ -10,7 +10,7 @@
 
             <div class="flex flex-col">
                 <div class="flex w-full">
-                    <x-input type="text" placeholder="Search…" wire:model="query" />
+                    <x-input type="text" placeholder="Search…" wire:model.debounce.500ms="query" />
                     <x-button>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -25,23 +25,36 @@
                 <div class="space-y-2">
                     <div class="mb-2 font-bold">{{ __('Categories') }}</div>
                     @foreach ($categories->where('parent_id', null) as $category1)
-                        <div class="ml-2">
-                            <div class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category1->name) ? 'font-semibold' : '' }}"
-                                wire:click="toggleCategory('{{ $category1->slug }}')">
-                                <span>{{ $category1->name }}</span>
+                        <div class="ml-2"
+                            x-data="{
+                                open: @js($openMenus->contains($category1->name))
+                            }"
+                        >
+                            <div class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category1->name) ? 'font-semibold' : '' }}"]
+                            >
+                                <span wire:click="toggleCategory('{{ $category1->slug }}')"
+                                    x-on:click="open=true"
+                                >{{ $category1->name }}</span>
                                 @if($categories->filter( fn($c) => $c->parent_id == $category1->id )->count())
-                                    @if ($openMenus->contains($category1->name))
-                                        <div class="grid w-6 h-6 place-items-center">
-                                            <x-icons.chevron-right class="w-4 h-4 transform -rotate-90" />
-                                        </div>
-                                    @else
-                                        <div class="grid w-6 h-6 place-items-center">
-                                            <x-icons.chevron-right class="w-4 h-4 transform rotate-90" />
-                                        </div>
-                                    @endif
+                                    <div class="grid w-6 h-6 place-items-center"
+                                        x-cloak
+                                        x-show="open"
+                                        x-on:click="open=!open"
+                                    >
+                                        <x-icons.chevron-right class="w-4 h-4 transform -rotate-90" />
+                                    </div>
+                                    <div class="grid w-6 h-6 place-items-center"
+                                        x-cloak
+                                        x-show="!open"
+                                        x-on:click="open=!open"
+                                    >
+                                        <x-icons.chevron-right class="w-4 h-4 transform rotate-90" />
+                                    </div>
                                 @endif
                             </div>
-                            <div class="ml-4 {{ $openMenus->contains($category1->name) ? '' : 'hidden' }}">
+                            <div class="ml-4"
+                                x-show="open"
+                            >
                                 @foreach ($categories->where('parent_id', $category1->id) as $category2)
                                     <div
                                         class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category2->name) ? 'font-semibold' : '' }}">
@@ -104,6 +117,7 @@
 
             <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach ($products as $product)
+                    <a  href="{{ route('product.show', $product) }}">
                     <div class="flex flex-col items-center justify-center p-2 h-80">
                         <div class="relative h-48 overflow-hidden group">
                             <img class="object-cover h-full transition duration-500 transform group-hover:scale-90"
@@ -114,11 +128,35 @@
                         </div>
                         <div class="text-base font-bold text-center">{{ $product->name }}</div>
                         <div>{{ $product->short_description }}</div>
-                        <form action="{{ route('product.show', $product) }}" method="GET"
-                            class="flex-none w-full mt-auto mb-0">
-                            <x-button class="justify-center w-full">Scopri</x-button>
-                        </form action="" method="get">
+                        <div class="flex-none w-full mt-auto mb-0">
+                            <div class='flex justify-between'>
+                                <span>
+                                    {{-- @if( $product->defaultVariant()->exists() || $product->variants()->exists())
+                                    {{ $product->stock_status}}                                     
+                                    @endif --}}
+                                    {{ $product->stock_status }}
+                                </span>
+                                <div class="relative flex flex-col">
+                                    @if( $product->discount) 
+                                        <span class="absolute ml-4 text-base text-gray-900 line-through -right-2 -top-4 dark:text-white">
+                                            {{ $product->taxed_original_price }}€
+                                        </span>
+                                    @endif
+                                    <span class='font-bold'>
+                                        @auth
+                                        {{ $product->taxed_price }}€
+                                        @else
+                                        <div class="tooltip tooltip-top" data-tip="Registrati per vedere i prezzi">
+                                            <span>--.--€</span>
+                                        </div>
+                                        @endauth
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
+                    </a>
                 @endforeach
             </div>
 
