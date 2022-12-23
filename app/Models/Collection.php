@@ -74,7 +74,7 @@ class Collection extends Model implements HasMedia
                     $query->whereHas(
                         'categories',
                         fn ($query) =>
-                        $query->where('categories.id', $filters['category'])
+                        $query->where('categories.id',  (int) $filters['category'])
                             ->orWhere('categories.slug', 'like', $filters['category'])
                     )
                 );
@@ -85,7 +85,7 @@ class Collection extends Model implements HasMedia
                     $query->whereHas(
                         'brand',
                         fn ($query) =>
-                        $query->whereIn('brands.id', $filters['brand'])
+                        $query->whereIn('brands.id',  collect($filters['brand'])->map( fn($i) => (int)$i )->toArray() )
                             ->orWhereIn('brands.slug', $filters['brand'])
                     )
                 );

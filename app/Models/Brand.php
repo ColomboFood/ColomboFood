@@ -72,7 +72,7 @@ class Brand extends Model implements HasMedia
                     $query->whereHas(
                         'categories',
                         fn ($query) =>
-                        $query->where('categories.id', $filters['category'])
+                        $query->where('categories.id',  (int) $filters['category'])
                             ->orWhere('categories.slug', 'like', $filters['category'])
                     )
                 );
@@ -83,7 +83,7 @@ class Brand extends Model implements HasMedia
                     $query->whereHas(
                         'collections',
                         fn ($query) =>
-                        $query->whereIn('collections.id', $filters['collection'])
+                        $query->whereIn('collections.id', collect($filters['collection'])->map( fn($i) => (int)$i )->toArray() )
                             ->orWhereIn('collections.slug', $filters['collection'])
                     )
                 );

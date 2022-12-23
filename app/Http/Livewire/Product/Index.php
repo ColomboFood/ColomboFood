@@ -70,7 +70,7 @@ class Index extends Component
         $this->openMenus = Str::of('');
         if ($this->category)
         {
-            $categoryModel = Category::where('id', $this->category)->orWhere('slug', $this->category)->first();
+            $categoryModel = Category::where('id', (int) $this->category)->orWhere('slug', $this->category)->first();
             $this->openMenus = Str::of($categoryModel->hierarchyPath())->explode('>');
         }
     }
@@ -78,7 +78,7 @@ class Index extends Component
     public function toggleCategory($category)
     {
         $this->resetPage();
-        $categoryModel = Category::where('id', $category)->orWhere('slug', $category)->first();
+        $categoryModel = Category::where('id', (int) $category)->orWhere('slug', $category)->first();
         if($this->category == $categoryModel->slug) $this->category = $categoryModel->parent ? $categoryModel->parent->slug : null;
         else $this->category = $categoryModel->slug;
         $this->setOpenMenus();

@@ -129,7 +129,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
             $query->whereHas(
                 'categories',
                 fn ($query) =>
-                $query->where('categories.id', $filters['category'])
+                $query->where('categories.id', (int) $filters['category'] )
                     ->orWhere('categories.slug', 'like', $filters['category'])
             )
         );
@@ -140,7 +140,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
             $query->whereHas(
                 'brand',
                 fn ($query) =>
-                $query->whereIn('brands.id', $filters['brand'])
+                $query->whereIn('brands.id', collect($filters['brand'])->map( fn($i) => (int)$i )->toArray() )
                     ->orWhereIn('brands.slug', $filters['brand'])
             )
         );
@@ -151,7 +151,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
             $query->whereHas(
                 'collections',
                 fn ($query) =>
-                $query->whereIn('collections.id', $filters['collection'])
+                $query->whereIn('collections.id', collect($filters['collection'])->map( fn($i) => (int)$i )->toArray() )
                     ->orWhereIn('collections.slug', $filters['collection'])
             )
         );

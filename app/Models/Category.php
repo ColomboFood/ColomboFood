@@ -67,7 +67,7 @@ class Category extends Model implements HasMedia
                     $query->whereHas(
                         'brand',
                         fn ($query) =>
-                        $query->whereIn('brands.id', $filters['brand'])
+                        $query->whereIn('brands.id',  collect($filters['brand'])->map( fn($i) => (int)$i )->toArray() )
                             ->orWhereIn('brands.slug', $filters['brand'])
                     )
                 );
@@ -78,7 +78,7 @@ class Category extends Model implements HasMedia
                     $query->whereHas(
                         'collections',
                         fn ($query) =>
-                        $query->whereIn('collections.id', $filters['collection'])
+                        $query->whereIn('collections.id',  collect($filters['collection'])->map( fn($i) => (int)$i )->toArray() )
                             ->orWhereIn('collections.slug', $filters['collection'])
                     )
                 );
