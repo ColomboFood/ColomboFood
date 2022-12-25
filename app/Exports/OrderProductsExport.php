@@ -58,7 +58,7 @@ class OrderProductsExport implements FromQuery, WithHeadings, WithMapping
             $order_product->order->fiscal_code,
             $order_product->order->vat,
             $order_product->order->email,
-            $order_product->order->billingAddress()->company ? $order_product->order->billingAddress()->company : $order_product->order->billingAddress()->full_name,
+            $order_product->order->billingAddress()->full_name,
             $order_product->order->billingAddress()->address,
             $order_product->order->billingAddress()->city,
             $order_product->order->billingAddress()->province,

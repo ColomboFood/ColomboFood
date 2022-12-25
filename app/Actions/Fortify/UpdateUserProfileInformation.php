@@ -22,8 +22,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:12288'],
-            'vat' => ['nullable','required_without:fiscal_code', 'string', 'max:255'],
-            'fiscal_code' => ['nullable','required_without:vat', 'string', 'max:255'],
+            'vat' => ['nullable', 'numeric', 'digits:11'],
+            'fiscal_code' => ['nullable', 'required_with:vat' ,'alpha_num', 'max:16'],
+            'phone' => ['nullable','numeric', 'digits_between:10,13'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
@@ -37,6 +38,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'phone' => $input['phone'],
+                'fiscal_code' => $input['fiscal_code'],
+                'vat' => $input['vat'],
             ])->save();
         }
     }
@@ -54,6 +58,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => $input['name'],
             'email' => $input['email'],
             'email_verified_at' => null,
+            'phone' => $input['phone'],
+            'fiscal_code' => $input['fiscal_code'],
+            'vat' => $input['vat'],
         ])->save();
 
         $user->sendEmailVerificationNotification();

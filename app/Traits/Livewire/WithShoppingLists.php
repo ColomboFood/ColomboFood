@@ -22,7 +22,8 @@ trait WithShoppingLists
     {
         if ($this->product->quantity)
         {
-            Cart::instance($this->cartInstance)->add($this->product, 1);
+            $item =Cart::instance($this->cartInstance)->add($this->product, 1);
+            if($this->product->tax) Cart::instance($this->cartInstance)->setTax($item->rowId, $this->product->tax);
             $this->persist($this->cartInstance);
             $this->notifyCart();
             $this->notifyBanner(__('shopping_cart.added.cart'));
@@ -82,7 +83,8 @@ trait WithShoppingLists
     public function moveToCart(Product $product)
     {
         if ($product->quantity) {
-            Cart::instance($this->cartInstance)->add($product, 1);
+            $item = Cart::instance($this->cartInstance)->add($product, 1);
+            if($product->tax) Cart::instance($this->cartInstance)->setTax($item->rowId, $product->tax);
             $this->removeFromWishlist($product);
 
             $this->persist($this->cartInstance);

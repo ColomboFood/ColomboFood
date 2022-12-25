@@ -20,16 +20,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class , 'index'] )->na
 Route::get('/shop', App\Http\Livewire\Product\Index::class )->name('product.index');
 Route::get('/shop/{product:slug}', App\Http\Livewire\Product\Show::class )->name('product.show');
 
-Route::get('/cart', App\Http\Livewire\Cart\Index::class )->name('cart.index');
-
-Route::get('/wishlist', App\Http\Livewire\Wishlist\Index::class )->name('wishlist.index');
-
-Route::get('/order/create', App\Http\Livewire\Order\Create::class )->name('order.create');
-Route::get('/order/{order:number}', [App\Http\Controllers\OrderController::class , 'show'] )->name('order.show');
-Route::get('/order/{order:number}/update', App\Http\Livewire\Order\Update::class )->name('order.update');
-
-Route::get('/order/{order:number}/invoice', [App\Http\Controllers\InvoiceController::class , 'show'] )->name('invoice.show');
-
 Route::get('/checkout/response/stripe', [App\Http\Controllers\StripeController::class , 'handleCheckoutResponse'] )->name('stripe.handle.checkout.response');
 
 Route::middleware([
@@ -37,6 +27,17 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
+    Route::get('/cart', App\Http\Livewire\Cart\Index::class )->name('cart.index');
+
+    Route::get('/wishlist', App\Http\Livewire\Wishlist\Index::class )->name('wishlist.index');
+
+    Route::get('/order/create', App\Http\Livewire\Order\Create::class )->name('order.create');
+    Route::get('/order/{order:number}', [App\Http\Controllers\OrderController::class , 'show'] )->name('order.show');
+    Route::get('/order/{order:number}/update', App\Http\Livewire\Order\Update::class )->name('order.update');
+
+    Route::get('/order/{order:number}/invoice', [App\Http\Controllers\InvoiceController::class , 'show'] )->name('invoice.show');
+
     Route::get('/orders', [App\Http\Controllers\OrderController::class , 'index'] )->name('order.index');
     Route::get('/order/create/login', fn() => redirect()->route('order.create') )->name('order.login');
 

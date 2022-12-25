@@ -1,3 +1,11 @@
+<x-slot name="seo">
+    {!! 
+        seo(new RalphJSmit\Laravel\SEO\Support\SEOData(
+                title: __('Order Update')
+            )) 
+    !!}
+</x-slot>
+
 <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
         {{ __('Order Update') }}
@@ -13,7 +21,7 @@
 
                 <div class="px-8 pt-6 pb-12" 
                         x-data="{ 
-                            selected: @js($addresses_confirmed ? null : 1),
+                            selected: @js($addresses_confirmed || count($errors) ? null : 1),
                             same_address : @entangle('same_address'),
                             addresses_confirmed : @entangle('addresses_confirmed'),
                         }"
@@ -37,7 +45,7 @@
                                 <div class="flex items-center justify-between">
                                     <span @class([
                                             'text-lg font-semibold text-gray-900',
-                                            'text-red-500' => $errors->has('shipping_address.*'),
+                                            'text-red-500' => $errors->has('shipping_address.*') || $errors->has('email') || $errors->has('phone') || $errors->has('note'),
                                         ])
                                     >
                                         {{ __('Shipping Address') }}
@@ -58,6 +66,10 @@
                                     x-cloak
                                 >
                                     {!! $shipping_address->label !!}
+                                    <div>{{ $phone }}</div>
+                                    @if($note)
+                                        <div class="mt-2">{{ $note }}</div>
+                                    @endif
                                 </div>
                                 @endif
                             </button>
@@ -75,24 +87,21 @@
                                 </div>
                                 <div class="grid xl:grid-cols-2 xl:gap-6">
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Full Name') }}" name="shipping_address_full_name" wire:model.lazy="shipping_address.full_name"/>
+                                        <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company')) }}" name="shipping_address_full_name" wire:model.lazy="shipping_address.full_name"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Company') }}" name="shipping_address_company" wire:model.lazy="shipping_address.company"/>
+                                        <x-input-floating label="{{ __('Phone Number') }}" name="phone" wire:model.lazy="phone"/>
                                     </div>
                                 </div>
                                 <div class="relative z-0 w-full mb-6 group">
                                     <x-input-floating label="{{ __('Address') }}" name="shipping_address_address" wire:model.lazy="shipping_address.address"/>
-                                </div>
-                                <div class="relative z-0 w-full mb-6 group">
-                                    <x-input-floating label="{{ __('Address2') }}" name="shipping_address_address2" wire:model.lazy="shipping_address.address2"/>
                                 </div>
                                 <div class="grid xl:grid-cols-2 xl:gap-6">
                                     <div class="relative z-0 w-full mb-6 group">
                                         <x-input-floating label="{{ __('City') }}" name="shipping_address_city" wire:model.lazy="shipping_address.city"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Province') }}" name="shipping_address_province" wire:model.lazy="shipping_address.province"/>
+                                        <x-input-floating label="{{ __('Province') }}"  maxlength="2" name="shipping_address_province" wire:model.lazy="shipping_address.province"/>
                                     </div>
                                 </div>
                                 <div class="grid xl:grid-cols-2 xl:gap-6">
@@ -105,7 +114,7 @@
                                 </div>
 
                                 <div class="relative z-0 w-full mb-6 group">  
-                                    <textarea id="note" name="note" rows="4" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" 
+                                    <textarea id="note" name="note" rows="4" maxlength="255" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer" 
                                         wire:model.lazy="note" placeholder=" "></textarea>
                                     <label for="note" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                                         >{{ __('Note') }}</label>
@@ -113,10 +122,11 @@
 
                                 <div class="mt-6 md:flex md:justify-between">
                                     <div class="flex items-center mb-6">
-                                        <input id="same_address" name="same_address" type="checkbox" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                            wire:model="same_address"  value=""
-                                        >
-                                        <label for="same_address" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Use as billing address') }}</label>
+                                        @if($shipping_address != $billing_address)
+                                        <button class="ml-2 text-sm font-medium text-gray-900 underline link dark:text-gray-300"
+                                            wire:click="copyAddress()"
+                                        >{{ __('Use as billing address') }}</button>
+                                        @endif
                                     </div>
 
                                     @auth
@@ -126,25 +136,25 @@
                                     @endauth
                                     
                                 </div>
-                                </div>
+                            </div>
                             </div>
                         </div>
 
                         <div class="relative border-b-2 border-gray-200">
 
                             <button type="button" class="w-full py-6 text-left"
-                                x-bind:disabled="same_address || addresses_confirmed"
+                                x-bind:disabled="addresses_confirmed"
                                 @click="selected !== 2 ? selected = 2 : selected = null">
                                 <div class="flex items-center justify-between">
                                     <span @class([
                                             'text-lg font-semibold text-gray-900',
-                                            'text-red-500' => $errors->has('billing_address.*'),
+                                            'text-red-500' => $errors->has('billing_address.*') || $errors->has('fiscal_code') || $errors->has('vat'),
                                         ])
                                     >
                                         {{ __('Billing Address') }}
                                     </span>
                                     <span
-                                        x-show="!same_address && !addresses_confirmed"
+                                        x-show="!addresses_confirmed"
                                     >
                                         <x-icons.plus/>
                                     </span>
@@ -156,7 +166,15 @@
                                     x-transition:enter.delay.200ms
                                     x-cloak
                                 > 
-                                    {!! $billing_address->label ?? $shipping_address->label !!}
+                                    <div>
+                                        {{ __('Fiscal Code')}}: {{ $fiscal_code }}
+                                    </div>
+                                    <div>
+                                        {{ __('VAT')}}: {{ $vat }}
+                                    </div>
+                                    <div class="mt-2">
+                                        {!! $billing_address->label ?? $shipping_address->label !!}
+                                    </div>
                                 </div>
                                 @endif
                             </button>
@@ -168,24 +186,26 @@
                                 <div class="p-6">
                                 <div class="grid xl:grid-cols-2 xl:gap-6">
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Full Name') }}" name="billing_address_full_name" wire:model.lazy="billing_address.full_name"/>
+                                        <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company') }}" name="billing_address_full_name" wire:model.lazy="billing_address.full_name"/>
+                                    </div>
+                                </div>
+                                <div class="grid xl:grid-cols-2 xl:gap-6">
+                                    <div class="relative z-0 w-full mb-6 group">
+                                        <x-input-floating label="{{ __('Fiscal Code') }}" name="fiscal_code" wire:model.lazy="fiscal_code"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Company') }}" name="billing_address_company" wire:model.lazy="billing_address.company"/>
+                                        <x-input-floating label="{{ __('VAT') }}" name="vat" wire:model.lazy="vat"/>
                                     </div>
                                 </div>
                                 <div class="relative z-0 w-full mb-6 group">
                                     <x-input-floating label="{{ __('Address') }}" name="billing_address_address" wire:model.lazy="billing_address.address"/>
-                                </div>
-                                <div class="relative z-0 w-full mb-6 group">
-                                    <x-input-floating label="{{ __('Address2') }}" name="billing_address_address2" wire:model.lazy="billing_address.address2"/>
                                 </div>
                                 <div class="grid xl:grid-cols-2 xl:gap-6">
                                     <div class="relative z-0 w-full mb-6 group">
                                         <x-input-floating label="{{ __('City') }}" name="billing_address_city" wire:model.lazy="billing_address.city"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Province') }}" name="billing_address_province" wire:model.lazy="billing_address.province"/>
+                                        <x-input-floating label="{{ __('Province') }}"  maxlength="2" name="billing_address_province" wire:model.lazy="billing_address.province"/>
                                     </div>
                                 </div>
                                 <div class="grid xl:grid-cols-2 xl:gap-6">

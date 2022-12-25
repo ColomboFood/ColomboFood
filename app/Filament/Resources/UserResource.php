@@ -52,13 +52,33 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\Group::make()
                     ->schema([
-                        Forms\Components\Toggle::make('is_admin')->label(__('Is Admin')),
-                    ])
-                    ->columnSpan(2),
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\TextInput::make('fiscal_code')->label(__('Fiscal Code')), 
+                                Forms\Components\TextInput::make('vat')->label(__('VAT')), 
+                                Forms\Components\TextInput::make('phone')->label(__('Phone Number'))
+                                    ->tel(), 
+                            ])->columns([
+                                'md' => 2,
+                            ]),  
+                    ])->columnSpan(2),
                 Forms\Components\Group::make()
                     ->schema([
-                        //
-                    ])->columnSpan(1),
+                        Forms\Components\Section::make(__('Settings'))
+                            ->schema([
+                                Forms\Components\Toggle::make('is_admin')->label(__('Is Admin'))
+                                    ->columnSpan('full'),
+                            ]),
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\Placeholder::make('created_at')->label(__('Created at'))
+                                    ->content(fn (?User $record): string => $record ? $record->created_at->format(config('custom.datetime_format')) : '-'),
+                                Forms\Components\Placeholder::make('updated_at')->label(__('Updated at'))
+                                    ->content(fn (?User $record): string => $record ? $record->updated_at->format(config('custom.datetime_format')) : '-'),
+                            ]),
+                    ])
+                    ->columnSpan(1),    
+
             ])
             ->columns([
                 'md' => 3,

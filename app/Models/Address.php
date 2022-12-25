@@ -14,9 +14,7 @@ class Address extends Model
         'email',
         'phone',
         'full_name',
-        'company',
         'address',
-        'address2',
         'city',
         'province',
         'country_region',
@@ -51,19 +49,10 @@ class Address extends Model
         $label=null;
         
         $label="$this->full_name";
-        if ($this->full_name && $this->company) {
-            $label.="($this->company)";
-        } elseif (!$this->full_name) {
-            $label.="$this->company";
-        }
 
         if(Str::length($label)) $label.="\n";
 
         $label.="$this->address";
-        if ($this->address2) {
-            $label.="($this->address2)";
-        }
-        $label.="";
 
         if(Str::length($label)) $label.="\n";
         $label.="$this->city";

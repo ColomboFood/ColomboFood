@@ -2,31 +2,30 @@
 
 namespace App\Http\Livewire\Order;
 
-use App\Models\Order;
-use App\Models\Coupon;
-use App\Models\Address;
 use Livewire\Component;
-use App\Models\OrderStatus;
-use App\Models\ShippingPrice;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\Livewire\WithCartTotals;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\{Order, OrderStatus, Address, ShippingPrice};
 
 class Create extends Component
 {
     use WithCartTotals;
 
+    public Order $order;
     public Address $shipping_address;
     public Address $billing_address;
-    public $same_address;
-    public $addresses_confirmed;
+    public $shipping_prices;
 
-    public Order $order;
+    public $same_address;
 
     public $email;
+    public $phone;
+    public $fiscal_code;
+    public $vat;
     public $note;
 
-    public $shipping_prices;
+    public $addresses_confirmed;
 
     protected $listeners = [
         'createOrder',
@@ -36,24 +35,24 @@ class Create extends Component
     {
         return [
             'email' => 'required|email'. ( auth()->user() ? '' : '|unique:users,email'),
-    
-            'shipping_address.full_name' => '',        
-            'shipping_address.company' => 'required_without:shipping_address.full_name',        
-            'shipping_address.address' => 'required',        
-            'shipping_address.address2' => '',        
+            'vat' => 'required|numeric|digits:11',
+            'fiscal_code' => 'nullable|required_without:vat|alpha_num|max:16',
+            'phone' => 'nullable|numeric|digits_between:10,13',
+            'note' => 'nullable|max:255',
+
+            'shipping_address.full_name' => 'required',             
+            'shipping_address.address' => 'required',              
             'shipping_address.city' => 'required',
-            'shipping_address.province' => 'required',
+            'shipping_address.province' => 'required|size:2',
             'shipping_address.country_region' => 'required',
             'shipping_address.postal_code' => 'required|min:5',
 
             'same_address' => '',
     
-            'billing_address.full_name' => 'exclude_if:same_address,true',        
-            'billing_address.company' => 'exclude_if:same_address,true|required_without:billing_address.full_name',        
-            'billing_address.address' => 'exclude_if:same_address,true|required',        
-            'billing_address.address2' => 'exclude_if:same_address,true|',        
+            'billing_address.full_name' => 'exclude_if:same_address,true',     
+            'billing_address.address' => 'exclude_if:same_address,true|required',   
             'billing_address.city' => 'exclude_if:same_address,true|required',
-            'billing_address.province' => 'exclude_if:same_address,true|required',
+            'billing_address.province' => 'exclude_if:same_address,true|required|size:2',
             'billing_address.country_region' => 'exclude_if:same_address,true|required',
             'billing_address.postal_code' => 'exclude_if:same_address,true|required|min:5',
 
@@ -77,11 +76,14 @@ class Create extends Component
 
         $this->addresses_confirmed = false;
 
-
-        $this->email =  session()->get('email') ? 
-            session()->get('email') : 
-            (Auth::user() ? Auth::user()->email : null);
-
+        $user = Auth::user();
+        if($user){
+            $this->email =  session()->get('email') ? session()->get('email') : $user->email;
+            $this->phone =  session()->get('phone') ? session()->get('phone') : $user->phone;
+            $this->fiscal_code =  session()->get('fiscal_code') ? session()->get('fiscal_code') : $user->fiscal_code;
+            $this->vat =  session()->get('vat') ? session()->get('vat') : $user->vat;
+        }
+        
         $this->shipping_prices = ShippingPrice::active()->get();
         if(!count($this->shipping_prices))
         {
@@ -99,11 +101,11 @@ class Create extends Component
             $this->shipping_address = session()->get('shipping_address');
             if(session()->get('billing_address')){
                 $this->billing_address = session()->get('billing_address');
-                $this->same_address = $this->shipping_address == $this->billing_address; 
+                //$this->same_address = $this->shipping_address == $this->billing_address && ($this->vat || $this->fiscal_code); 
             }
             else{
                 $this->billing_address = $this->shipping_address;
-                $this->same_address = true; 
+                //$this->same_address = true; 
             }
             $this->confirmAddresses();
         }
@@ -112,7 +114,7 @@ class Create extends Component
                 $this->shipping_address = Auth::user()->defaultAddress;
             }
             else $this->shipping_address = new Address();
-            $this->same_address = true; 
+            //$this->same_address = true; 
             $this->billing_address = $this->shipping_address;
             
             if((Auth::user() && Auth::user()->defaultAddress)){
@@ -145,9 +147,15 @@ class Create extends Component
     {
         $this->validate();
 
+        $this->fiscal_code = $this->fiscal_code ?? $this->vat;
+
         if($this->same_address) $this->billing_address = $this->shipping_address;
         
         session()->put('email', $this->email);
+        session()->put('phone', $this->phone);
+        session()->put('fiscal_code', $this->fiscal_code);
+        session()->put('vat', $this->vat);
+        session()->put('note', $this->note);
         session()->put('shipping_address', $this->shipping_address);
         session()->put('billing_address', $this->shipping_address);
 
@@ -157,22 +165,35 @@ class Create extends Component
 
     public function updateDefaultAddress()
     {
+        $validated = $this->validate([
+            'shipping_address.full_name' => 'required',             
+            'shipping_address.address' => 'required',              
+            'shipping_address.city' => 'required',
+            'shipping_address.province' => 'required|size:2',
+            'shipping_address.country_region' => 'required',
+            'shipping_address.postal_code' => 'required|min:5',
+            'phone' => 'nullable|numeric|digits_between:10,13',
+        ]);
+        
         $defaultAddress = Auth::user()->defaultAddress()->updateOrCreate([
             'user_id' => Auth::user()->id,
         ],[
-            'full_name' => $this->shipping_address->full_name,
-            'company' => $this->shipping_address->company,
-            'address' => $this->shipping_address->address,
-            'address2' => $this->shipping_address->address2,
-            'city' => $this->shipping_address->city,
-            'province' => $this->shipping_address->province,
-            'country_region' => $this->shipping_address->country_region,
-            'postal_code' => $this->shipping_address->postal_code,
+            'full_name' => $validated['shipping_address']['full_name'],
+            'address' => $validated['shipping_address']['address'],
+            'city' => $validated['shipping_address']['city'],
+            'province' => $validated['shipping_address']['province'],
+            'country_region' => $validated['shipping_address']['country_region'],
+            'postal_code' => $validated['shipping_address']['postal_code'],
             'default' => true,
+        ]);
+
+        $user = Auth::user()->update([
+            'phone' => $validated['phone']
         ]);
 
         if($defaultAddress)
         {
+            session()->put('shipping_address');
             $banner_message = __('banner_notifications.address.saved') ;
             $banner_style = 'success';
         }
@@ -186,6 +207,42 @@ class Create extends Component
             'message' => $banner_message,
             'style' => $banner_style,
         ]);
+    }
+
+    public function updateBillingInfo()
+    {
+        $validated = $this->validate([
+            'vat' => 'nullable|numeric|digits:11',
+            'fiscal_code' => 'nullable|required_with:vat|alpha_num|max:16',
+        ]);
+        
+        $user = Auth::user()->update([
+            'fiscal_code' => $validated['fiscal_code'],
+            'vat' => $validated['vat']
+        ]);
+
+        if($user)
+        {
+            session()->put('fiscal_code');
+            session()->put('vat');
+            $banner_message = __('banner_notifications.billing_info.saved') ;
+            $banner_style = 'success';
+        }
+        else
+        {
+            $banner_message = __('banner_notifications.billing_info.not_saved');
+            $banner_style = 'danger';
+        }
+        
+        $this->dispatchBrowserEvent('banner-message', [
+            'message' => $banner_message,
+            'style' => $banner_style,
+        ]);
+    }
+
+    public function copyAddress()
+    {
+        $this->billing_address = $this->shipping_address;
     }
 
     public function createOrder($payment_id, $gateway)
@@ -217,8 +274,10 @@ class Create extends Component
             ],[
                 'shipping_address' => $this->shipping_address->toJson(),
                 'billing_address' => $this->billing_address->toJson(),
+                'fiscal_code' => $this->fiscal_code ?? $this->vat,
+                'vat' => $this->vat,
                 'email' => $this->email,
-                //'phone' => $this->phone,
+                'phone' => $this->phone,
                 'note' => $this->note,
                 'subtotal' => $this->subtotal,
                 'tax'   => $this->tax,
@@ -254,6 +313,11 @@ class Create extends Component
                 'order_status_id' => $status_id,
             ]);
 
+            if(Auth::user()) {
+                if(!Auth::user()->fiscal_code) Auth::user()->update(['fiscal_code' => $this->fiscal_code]) ;
+                if(!Auth::user()->vat) Auth::user()->update(['vat' => $this->vat]) ;
+            }
+
             Cart::instance('default')->destroy();
             if(Auth::check())
                 Cart::instance('default')->erase(auth()->user()->email);
@@ -262,6 +326,10 @@ class Create extends Component
             session()->forget('shipping_address');
             session()->forget('billing_address');
             session()->forget('email');
+            session()->forget('phone');
+            session()->forget('fiscal_code');
+            session()->forget('vat');
+            session()->forget('note');
 
             if($gateway == 'paypal')
                 $this->order->setAsPaied();

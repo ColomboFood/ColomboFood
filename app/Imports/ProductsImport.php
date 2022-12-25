@@ -6,10 +6,19 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithUpserts;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithUpsertColumns;
 
-class ProductsImport implements ToModel, WithUpserts, WithUpsertColumns
+class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertColumns
 {
+    /**
+     * @return int
+     */
+    public function startRow(): int
+    {
+        return 2;
+    }
+
     /**
      * @return string|array
      */

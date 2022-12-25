@@ -66,6 +66,13 @@
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
+        <!-- Phone -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="phone" value="{{ __('Phone Number') }}" />
+            <x-input id="phone" type="text" class="block w-full mt-1" wire:model.defer="state.phone" />
+            <x-jet-input-error for="phone" class="mt-2" />
+        </div>
+
         <!-- VAT -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="vat" value="{{ __('VAT') }}" />
