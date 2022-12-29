@@ -131,10 +131,9 @@
                         <div class="flex-none w-full mt-auto mb-0">
                             <div class='flex justify-between'>
                                 <span>
-                                    {{-- @if( $product->defaultVariant()->exists() || $product->variants()->exists())
-                                    {{ $product->stock_status}}                                     
-                                    @endif --}}
-                                    {{ $product->stock_status }}
+                                    @if( !$product->defaultVariant()->exists() && !$product->variants()->exists())
+                                        {{ $product->stock_status}}                                     
+                                    @endif
                                 </span>
                                 <div class="relative flex flex-col">
                                     @if( $product->discount) 
