@@ -9,6 +9,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use App\Models\Scopes\NotHiddenScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
@@ -295,7 +296,10 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         //         $image = $this->defaultVariant->image : $image = asset('img/no_image.jpg');
         // }
 
-        return $this->hasImage() ? $this->getFirstMediaUrl('gallery', config('custom.use_watermark') ? 'watermarked' : 'default') : asset('img/no_image.jpg');
+        return $this->hasImage() ? $this->getFirstMediaUrl('gallery', config('custom.use_watermark') ? 'watermarked' : 'default') 
+            : 
+            ( Storage::exists('public/products/'.$this->sku.'.jpg') ? Storage::url('public/products/'.$this->sku.'.jpg') : asset('img/no_image.jpg') )
+        ;
     }
 
     public function getGalleryAttribute()

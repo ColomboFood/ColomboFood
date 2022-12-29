@@ -42,6 +42,7 @@ class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertCo
     */
     public function model(array $row)
     {
+
         return new Product([
             'sku'               => $row[0],
             'name'              => ucwords(strtolower($row[1])),
@@ -50,7 +51,7 @@ class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertCo
             'tax'               => $row[4] != config('cart.tax')*100 ? (float)$row[4]/100 : null,
             'original_price'    => (float) str_replace(',', '.', $row[5]),
             'selling_price'    => (float) str_replace(',', '.', $row[5]),
-            'quantity'          => $row[6] ?? rand(0,100),
+            'quantity'          => abs((int)$row[6]),
             'hidden'            => false,
         ]);
     }

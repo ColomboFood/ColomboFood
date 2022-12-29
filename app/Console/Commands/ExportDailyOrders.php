@@ -30,7 +30,7 @@ class ExportDailyOrders extends Command
     public function handle()
     {
         dump('Exporting daily orders...');
-        Excel::store(new OrderProductsExport(yesterday()), 'external/export/daily_orders-'.(today()->format('dmy')).'.xlsx', config('filesystems.default') , null, [
+        Excel::store(new OrderProductsExport(yesterday()), 'exportweb/export/daily_orders-'.(today()->format('dmy')).'.xlsx', config('filesystems.default') , null, [
             'visibility' => 'private',
         ]);
         dump('Orders exported');
