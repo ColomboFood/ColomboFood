@@ -311,7 +311,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label(__('Name'))
                     ->sortable()
-                    ->searchable(['name', 'slug']),
+                    ->searchable(['name', 'slug', 'sku']),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('image')->label(__('Image'))
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('orders_count')->label(__('Orders'))
