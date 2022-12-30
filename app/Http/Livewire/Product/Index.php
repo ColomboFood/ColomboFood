@@ -58,6 +58,11 @@ class Index extends Component
         $this->reset(['query', 'category', 'brand', 'collection', 'orderby']);
     }
 
+    public function gotoPage($page) { 
+        $this->setPage($page); 
+        $this->emit('goTop');
+    }
+
     public function isParentCategorySelected($menuCategory)
     {
         return $menuCategory->id == $this->category || $menuCategory->slug == $this->category ||

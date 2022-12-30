@@ -3,7 +3,13 @@
     </h2>
 </x-slot>
 
-<div class="flex justify-center py-8 mx-auto">
+<div class="flex justify-center py-8 mx-auto"
+    x-init="
+        $wire.on('goTop', () => { 
+            window.scrollTo({top:0}) 
+        })
+    "
+>
     <div class="flex flex-col w-full mx-auto md:space-x-10 md:flex-row md:inline-flex max-w-7xl sm:px-6 lg:px-8">
 
         <div class="flex flex-col w-full py-2 mb-2 space-x-2 md:w-64 md:mb-auto" aria-label="Sidebar">

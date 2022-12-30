@@ -30,7 +30,7 @@ class ImportProducts extends Command
     public function handle()
     {
         dump('Importing products...');
-        Excel::import(new ProductsImport, '/exportweb/import/articoliweb.csv');
+        Excel::import(new ProductsImport, '/data/import/articoliweb.csv');
         dump('Products imported');
         return Command::SUCCESS;
     }
