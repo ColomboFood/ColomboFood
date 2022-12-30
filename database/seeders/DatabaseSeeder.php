@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            OrderStatusesTableSeeder::class,
-            UsersTableSeeder::class,
-            ShippingPricesTableSeeder::class,
-            AttributesTableSeeder::class,
-        ]);
+        if(!App::environment('production'))
+        {
+            $this->call([
+                OrderStatusesTableSeeder::class,
+                UsersTableSeeder::class,
+                ShippingPricesTableSeeder::class,
+                AttributesTableSeeder::class,
+            ]);
+        }
+        else
+        {
+            $this->call([
+                OrderStatusesTableSeeder::class,
+                ShippingPricesTableSeeder::class,
+                AttributesTableSeeder::class,
+            ]);
+        }
+
     }
 }

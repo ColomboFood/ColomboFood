@@ -34,8 +34,8 @@ class CancelUnpaidOrders implements ShouldQueue
      */
     public function handle()
     {
-        $failed_status = OrderStatus::where('name','like','payment_failed')->first();
-        $cancelled_status = OrderStatus::where('name','like','cancelled')->first();
+        $failed_status = OrderStatus::where('name',insensitive_like(),'payment_failed')->first();
+        $cancelled_status = OrderStatus::where('name',insensitive_like(),'cancelled')->first();
         if($failed_status && $cancelled_status)
         {
             $orders = Order::where('order_status_id', $failed_status->id )

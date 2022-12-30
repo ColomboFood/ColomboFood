@@ -75,7 +75,7 @@ class Collection extends Model implements HasMedia
                         'categories',
                         fn ($query) =>
                         $query->where('categories.id',  (int) $filters['category'])
-                            ->orWhere('categories.slug', 'like', $filters['category'])
+                            ->orWhere('categories.slug', insensitive_like(), $filters['category'])
                     )
                 );
 
@@ -93,9 +93,9 @@ class Collection extends Model implements HasMedia
                 $query->when(
                     $filters['query'] ?? false,
                     fn ($query) =>
-                    $query->where('name', 'like', '%' . $filters['query'] . '%')
-                        ->orWhere('short_description', 'like', '%' . $filters['query'] . '%')
-                        ->orWhere('description', 'like', '%' . $filters['query'] . '%')
+                    $query->where('name', insensitive_like(), '%' . $filters['query'] . '%')
+                        ->orWhere('short_description', insensitive_like(), '%' . $filters['query'] . '%')
+                        ->orWhere('description', insensitive_like(), '%' . $filters['query'] . '%')
                 );
 
                 return $query;

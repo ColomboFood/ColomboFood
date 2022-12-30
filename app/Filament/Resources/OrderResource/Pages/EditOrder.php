@@ -23,7 +23,7 @@ class EditOrder extends EditRecord
         {
             $prearing= Action::make('preparing')->label(__('Prepare for Shipping'))
                 ->action(function (array $data): void {
-                    $status_id = \App\Models\OrderStatus::where('name', 'like','preparing')->first()->id;
+                    $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'preparing')->first()->id;
                     $this->record->status()->associate($status_id);
                     $this->record->save();
                     $this->record->history()->create([
@@ -38,7 +38,7 @@ class EditOrder extends EditRecord
         {
             $shipped= Action::make('shipped')->label(__('Set as Shipped'))
                 ->action(function (array $data): void {
-                    $status_id = \App\Models\OrderStatus::where('name', 'like','shipped')->first()->id;
+                    $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'shipped')->first()->id;
                     $this->record->status()->associate($status_id);
                     $this->record->tracking_number= $data['tracking_number'];
                     $this->record->save();
@@ -81,7 +81,7 @@ class EditOrder extends EditRecord
             $refunded= Action::make('refunded')->label(__('Set as Refunded'))
                 ->color('danger')
                 ->action(function (array $data): void {
-                    $status_id = \App\Models\OrderStatus::where('name', 'like','refunded')->first()->id;
+                    $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'refunded')->first()->id;
                     $this->record->status()->associate($status_id);
                     $this->record->save();
                     $this->record->history()->create([
