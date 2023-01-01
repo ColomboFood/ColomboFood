@@ -4,19 +4,19 @@
 
 <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        {{ $product->name }}
+        <a class="underline" href="{{ route('product.index') }}">{{ __('Shop') }}</a> / {{ $product->name }}
     </h2>
 </x-slot>
 
 <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
        
-        <section class="overflow-hidden text-gray-600 body-font">
+        <section class="overflow-hidden body-font">
             <div class="container px-5 py-12 mx-auto">
                 <div class="flex flex-wrap mx-auto">
 
                     {{-- Left Side --}}
-                    <div class="flex flex-col mx-auto md:w-1/2" wire:key='{{$product->id}}'
+                    <div class="flex flex-col mx-auto md:w-1/2 " wire:key='{{$product->id}}'
                         x-data="{
                                 curImage : '{{ $this->gallery[0]}}',
                                 show : true,
@@ -34,12 +34,12 @@
                             }"
                     >
 
-                        <div class="w-full h-64 mx-auto rounded lg:w-1/2 lg:h-96">
+                        <div class="w-full h-64 mx-auto overflow-hidden border-2 lg:h-96">
                             <a :href="curImage">
-                            <img alt="{{ $product->name }}" class="object-contain object-center h-full max-h-full m-auto transition-all ease-in cursor-zoom-in hover:scale-150"
-                                :src="curImage"
-                                x-transition.duration.500ms
-                                x-show = "show ">
+                                <img alt="{{ $product->name }}" class="object-contain object-center h-full max-h-full m-auto transition-all ease-in cursor-zoom-in hover:scale-150"
+                                    :src="curImage"
+                                    x-transition.duration.500ms
+                                    x-show = "show ">
                             </a>
                         </div>
                         @if(count($this->gallery) > 2)
@@ -61,13 +61,14 @@
                     {{-- Right Side --}}
                     <div class="w-full mt-12 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
                         
+                        {{-- Title Section --}}
                         @if($product->brand)
-                        <h2 class="text-sm tracking-widest text-gray-500 title-font">{{ $product->brand->name}}</h2>
+                        <div class="text-sm tracking-widest">{{ $product->brand->name}}</div>
                         @endif
 
-                        <h1 class="mb-1 text-3xl font-medium text-gray-900 title-font">{{ $product->name }}</h1>
-
-                        {{-- Title Section --}}
+                        <h1 class="mb-1 text-3xl">{{ $product->name }}</h1>
+                        <div class="mt-2">{{ $product->short_description }}</div>
+                        
                         <div class="flex mb-4">
                             @if($product->reviews->count())
                             <span class="flex items-center">
@@ -80,32 +81,11 @@
                                 <span class="ml-3 text-gray-600">{{$product->reviews->count()}} {{ __('Reviews')}}</span>
                             </span>
                             @endif
-                            {{-- <span class="flex py-2 pl-3 ml-3 border-l-2 border-gray-200 space-x-2s">
-                                <a class="text-gray-500">
-                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                                </svg>
-                                </a>
-                                <a class="text-gray-500">
-                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                                </svg>
-                                </a>
-                                <a class="text-gray-500">
-                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                                </svg>
-                                </a>
-                            </span> --}}
                         </div>
                         {{-- End Title Section --}}
-                    
-                        <p class="leading-relaxed">
-                            {!! $this->description !!}
-                        </p>
 
                         {{-- Details Section --}}
-                        <div class="flex items-center pb-5 mt-6 mb-5 border-b-2 border-gray-200">
+                        <div class="flex items-center mt-6 mb-6">
                             
                             @if( $this->shouldSelectVariantByImage() )
                                 <div class="flex flex-row space-x-4">
@@ -157,21 +137,25 @@
                         {{-- End Details Section --}}
 
                         <div class="flex">
-                            @if($product->discount)
-                            <span class="mr-2 text-2xl font-medium text-gray-600 line-through title-font">{{$product->taxed_original_price}}€</span>
-                            @endif
-                            <span class="text-2xl font-medium text-gray-900 title-font">{{$product->taxed_selling_price}}€</span>
+                            @auth
+                                @if($product->discount)
+                                <span class="mr-2 text-2xl font-medium text-gray-600 line-through">{{$product->taxed_original_price}}€</span>
+                                @endif
+                                <span class="text-2xl font-black text-gray-900">{{$product->taxed_selling_price}}€</span>
+                            @else
+                                <a href="{{ route('login') }}" class="flex px-6 py-2 text-white border-0 rounded bg-neutral-500 focus:outline-none hover:bg-neutral-600">
+                                    {{ __('Login to view price') }}
+                                </a>
+                            @endauth
                             @if($product->quantity && $product->quantity < config('custom.stock_threshold'))
                                 <span class="p-2 ml-4 text-red-500 rounded">{{ __('Low Stock') }}</span>
                             @endif
                         </div>
                         
-                        <div class="flex items-center pb-5 mt-6 mb-5 border-b-2 border-gray-100">
-                            
-
+                        <div class="flex items-center mt-6">
                             <div class="flex">
                                 @if($product->quantity)
-                                    <button class="flex px-6 py-2 ml-auto text-white border-0 rounded bg-primary-500 focus:outline-none hover:bg-primary-600"
+                                    <button class="flex px-6 py-2 ml-auto text-white border-0 rounded bg-secondary-500 focus:outline-none hover:bg-secondary-600"
                                         wire:click="addToCart"
                                     >{{ __('Add to cart') }}<x-icons.cart class="ml-1" /></button>
                                 @else
@@ -193,6 +177,17 @@
                                 </button>
                                 @endif
                             </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <div class="text-lg">{{ __('Description') }}:</div>
+                            <p class="text-gray-500">
+                                @if($this->description)
+                                    {!! $this->description !!}
+                                @else
+                                    {{ __('No description') }}
+                                @endif
+                            </p>
                         </div>
                         
                     </div>

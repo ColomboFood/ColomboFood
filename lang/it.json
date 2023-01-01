@@ -28,6 +28,7 @@
     "Products" : "Prodotti",
     "Short Description" : "Descrizione Breve",
     "Description" : "Descrizione",
+    "No description": "Nessuna descrizione",
     "Pricing" : "Pricing",
     "Original Price" : "Prezzo Originale",
     "Selling Price" : "Prezzo di vendita",
@@ -292,5 +293,7 @@
     "Days": "Giorni",
     "Day": "Giorno",
     "Avaiable From": "Disponibile Dal",
-    "Advance Sale": "Prevendita"
+    "Advance Sale": "Prevendita",
+
+    "Login to view price": "Accedi per vedere il prezzo"
 } 
