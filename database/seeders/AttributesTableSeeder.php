@@ -15,22 +15,31 @@ class AttributesTableSeeder extends Seeder
      */
     public function run()
     {
-        $colore = Attribute::create([
-            'name' => 'colore'
+        $kg = Attribute::create([
+            'name' => 'Kg'
         ]);
-        $values = ['Rosso','Blue','Verde','Giallo'];
+        $values = ['1','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.75','1.8','1.85','2','2.1','2.5','2.8','2.9','3','3.8','4'];
         foreach($values as $value)
         {
-            $colore->values()->create(['value' => $value]);
+            $kg->values()->create(['value' => $value]);
         }
 
-        $taglia = Attribute::create([
-            'name' => 'taglia'
+        $gr = Attribute::create([
+            'name' => 'Gr'
         ]);
-        $values = ['s','m','l','xl'];
+        $values = ['80','150','180','200','220','250','260','270','300','320','400','500','1000','1500','2000'];
         foreach($values as $value)
         {
-            $taglia->values()->create(['value' => $value]);
+            $gr->values()->create(['value' => $value]);
+        }
+
+        $pezzi = Attribute::create([
+            'name' => 'Pezzi'
+        ]);
+        $values = ['1','2','3','4','5','6','8','9','10','12','14','15','16','18','20','22','24','25','35','36','45','48','50','60'];
+        foreach($values as $value)
+        {
+            $pezzi->values()->create(['value' => $value]);
         }
     }
 }

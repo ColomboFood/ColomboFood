@@ -69,7 +69,7 @@ class Show extends Component
         }
         else
         {
-            if($this->product->defaultVariant()->exists())
+            if($this->product->defaultVariant()->exists() && $this->product->defaultVariant->hasImage())
             {
                 $gallery = $this->product->defaultVariant->gallery;
             }

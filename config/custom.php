@@ -22,7 +22,9 @@ return [
     'datenoyear_format' => 'j/n',
     'monthyear_format' => 'n/y',
 
+    'check_quantity' => true,
     'stock_threshold' => 3,
 
     'use_watermark' => false,
+
 ];

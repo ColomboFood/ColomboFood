@@ -229,18 +229,20 @@ class ProductResource extends Resource
                                     ->numeric()
                                     ->default(0),
                                 Forms\Components\TextInput::make('weight')->label(__('Weight'))
-                                    ->prefix('Kg')
-                                    ->mask(
-                                        fn (Forms\Components\TextInput\Mask $mask) => $mask
-                                            ->numeric()
-                                            ->decimalPlaces(2)
-                                            ->decimalSeparator('.')
-                                            ->mapToDecimalSeparator([',','.'])
-                                            ->thousandsSeparator(',')
-                                            ->maxValue(999999)
-                                            ->normalizeZeros()
-                                            ->padFractionalZeros()
-                                    ),
+                                    ->prefix('Gr')
+                                    // ->mask(
+                                    //     fn (Forms\Components\TextInput\Mask $mask) => $mask
+                                    //         ->numeric()
+                                    //         ->decimalPlaces(2)
+                                    //         ->decimalSeparator('.')
+                                    //         ->mapToDecimalSeparator([',','.'])
+                                    //         ->thousandsSeparator(',')
+                                    //         ->maxValue(999999)
+                                    //         ->normalizeZeros()
+                                    //         ->padFractionalZeros()
+                                    // )
+                                    ->numeric()
+                                    ->max(99999),
                                 Forms\Components\DatePicker::make('avaiable_from')->label(__('Avaiable From')),
                             ])
                             ->columns([

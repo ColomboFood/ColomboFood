@@ -16,7 +16,7 @@
 
             <div class="flex flex-col">
                 <div class="flex w-full">
-                    <x-input type="text" placeholder="Search…" wire:model.debounce.500ms="query" />
+                    <x-input type="text" placeholder="{{ __('Search...') }}" wire:model.debounce.500ms="query" />
                     <x-button>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -31,7 +31,7 @@
                 <div class="space-y-2">
                     <div class="mb-2 font-bold">{{ __('Categories') }}</div>
                     @foreach ($categories->where('parent_id', null) as $category1)
-                        <div class="ml-2"
+                        <div class="pl-2 text-sm"
                             x-data="{
                                 open: @js($openMenus->contains($category1->name))
                             }"
@@ -58,7 +58,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="ml-4"
+                            <div class="pl-4"
                                 x-show="open"
                             >
                                 @foreach ($categories->where('parent_id', $category1->id) as $category2)
@@ -73,48 +73,39 @@
                     @endforeach
                 </div>
 
+                @if($collections->count())
                 <div class="space-y-2">
                     <div class="mb-2 font-bold">{{ __('Collections') }}</div>
-                    @if($collections->count())
-                        <div class="flex flex-col p-5 border border-border-base">
-                            @foreach ($collections as $menuCollection)
-                                <label class="group flex items-center justify-between text-brand-dark text-sm md:text-15px cursor-pointer transition-all hover:text-opacity-80 border-b border-border-base py-3.5 last:border-b-0 last:pb-0 first:pt-0">
-                                    <span class="ltr:mr-3.5 rtl:ml-3.5 -mt-0.5">{{ $menuCollection->name }}
-                                    </span>
-                                    <input type="checkbox" class="form-checkbox text-yellow-100 w-[22px] h-[22px] border-2 border-border-four rounded-full cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-yellow-100 focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-yellow-100 hover:checked:bg-yellow-100"
-                                        wire:model="collection" value="{{ $menuCollection->slug }}"
-                                    >
-                                </label>
-                            @endforeach
-                        </div>
-                    @else
-                        <div>No collections</div>
-                    @endif
+                    <div class="flex flex-col px-2">
+                        @foreach ($collections as $menuCollection)
+                            <label class="flex items-center justify-between py-2 text-sm cursor-pointer group last:pb-0 first:pt-0">
+                                <span class="">{{ $menuCollection->name }}</span>
+                                <input type="checkbox" class="w-4 h-4 transition duration-300 ease-in-out border-2 cursor-pointer form-checkbox text-secondary-500 focus:ring-offset-0 hover:border-secondary-600 focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-secondary-600 hover:checked:bg-secondary-600"
+                                    wire:model="collection" value="{{ $menuCollection->slug }}">
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
+                @endif
 
+                @if($brands->count())
                 <div class="space-y-2">
                     <div class="mb-2 font-bold">{{ __('Brands') }}</div>
-                    @if($brands->count())
-                        <div class="flex flex-col p-5 border border-border-base">
-                            @foreach ($brands as $menuBrand)
-                                <label class="group flex items-center justify-between text-brand-dark text-sm md:text-15px cursor-pointer transition-all hover:text-opacity-80 border-b border-border-base py-3.5 last:border-b-0 last:pb-0 first:pt-0">
-                                    <span class="ltr:mr-3.5 rtl:ml-3.5 -mt-0.5">{{ $menuBrand->name }}
-                                    </span>
-                                    <input type="checkbox" class="form-checkbox text-yellow-100 w-[22px] h-[22px] border-2 border-border-four rounded-full cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-yellow-100 focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-yellow-100 hover:checked:bg-yellow-100"
-                                        wire:model="brand" value="{{ $menuBrand->slug }}"
-                                    >
-                                </label>
-                            @endforeach
-                        </div>
-                    @else
-                        <div>No brands</div>
-                    @endif
+                    <div class="flex flex-col px-2">
+                        @foreach ($brands as $menuBrand)
+                            <label class="group flex items-center justify-between text-sm cursor-pointer py-3.5 last:pb-0 first:pt-0">
+                                <span class="">{{ $menuBrand->name }}</span>
+                                <input type="checkbox" class="w-4 h-4 transition duration-300 ease-in-out border-2 cursor-pointer form-checkbox text-secondary-500 focus:ring-offset-0 hover:border-secondary-600 focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-secondary-600 hover:checked:bg-secondary-600"
+                                    wire:model="collection" value="{{ $menuBrand->slug }}">
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
+                @endif
 
-                <div class="">
-                    <x-jet-secondary-button wire:click="resetFilters">Reset filters</x-jet-secondary-button>
+                <div class="grid place-items-center">
+                    <x-neutral-button class="mt-4" wire:click="resetFilters">{{ __('Reset filters') }}</x-neutral-button>
                 </div>
-
 
             </div>
         </div>

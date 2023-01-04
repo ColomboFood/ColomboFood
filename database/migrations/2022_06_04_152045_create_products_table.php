@@ -29,7 +29,8 @@ return new class extends Migration
             $table->unsignedInteger('low_stock_threshold')->nullable();
             $table->boolean('featured')->default(false);
             $table->boolean('hidden')->default(false);
-            $table->decimal('weight',8,2)->nullable();
+            //$table->decimal('weight',8,2)->nullable();
+            $table->integer('weight')->nullable();
             $table->date('avaiable_from')->nullable();
             $table->softDeletes();
             $table->timestamps();

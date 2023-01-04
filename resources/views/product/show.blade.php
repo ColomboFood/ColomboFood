@@ -113,7 +113,7 @@
                                             <select class="py-2 pl-3 pr-10 text-base border border-gray-300 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500"
                                                 wire:model="selection.{{$id}}"
                                             >
-                                                @foreach ( $variantsAttributeValues->where('attribute.id',$id) as $attributeValue )
+                                                @foreach ( $variantsAttributeValues->where('attribute.id',$id)->sortBy('value') as $attributeValue )
                                                     <option 
                                                         class="@if(!$this->variantExists($id, $attributeValue->id)) text-gray-400 @endif"
                                                         value="{{$attributeValue->id}}">{{$attributeValue->value}}
