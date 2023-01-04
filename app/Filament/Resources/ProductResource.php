@@ -242,7 +242,7 @@ class ProductResource extends Resource
                                     //         ->padFractionalZeros()
                                     // )
                                     ->numeric()
-                                    ->max(99999),
+                                    ->maxValue(99999),
                                 Forms\Components\DatePicker::make('avaiable_from')->label(__('Avaiable From')),
                             ])
                             ->columns([
@@ -322,10 +322,12 @@ class ProductResource extends Resource
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('price')->label(__('Price'))
                     ->money('eur')
-                    ->sortable(['selling_price', 'original_price']),
+                    ->sortable(['selling_price', 'original_price'])
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('taxed_price')->label(__('Taxed Price'))
                     ->money('eur')
-                    ->sortable(['selling_price', 'original_price']),
+                    ->sortable(['selling_price', 'original_price'])
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('quantity')->label(__('Quantity'))
                     ->sortable(),
                 Tables\Columns\IconColumn::make('avaiable_from')->label(__('Avaiable From'))

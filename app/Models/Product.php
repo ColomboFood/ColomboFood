@@ -296,10 +296,10 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         //         $image = $this->defaultVariant->image : $image = asset('img/no_image.jpg');
         // }
 
+        // ( Storage::disk(config('media-library.disk_name'))->exists('data/import/immagini/'.$this->sku.'.jpg') ? Storage::disk(config('filesystem.default'))->url('data/import/immagini/'.$this->sku.'.jpg') : 
+
         return $this->hasImage() ? $this->getFirstMediaUrl('gallery', config('custom.use_watermark') ? 'watermarked' : 'default') 
-            : 
-            ( Storage::disk(config('media-library.disk_name'))->exists('data/import/immagini/'.$this->sku.'.jpg') ? Storage::disk(config('filesystem.default'))->url('data/import/immagini/'.$this->sku.'.jpg') : asset('img/no_image.jpg') )
-        ;
+            : asset('img/no_image.jpg');
     }
 
     public function getGalleryAttribute()

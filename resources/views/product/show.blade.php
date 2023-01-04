@@ -35,12 +35,21 @@
                     >
 
                         <div class="w-full h-64 mx-auto overflow-hidden border-2 lg:h-96">
-                            <a :href="curImage">
-                                <img alt="{{ $product->name }}" class="object-contain object-center h-full max-h-full m-auto transition-all ease-in cursor-zoom-in hover:scale-150"
+                            @if($product->hasImage())
+                                <a :href="curImage">
+                                    <img class="object-contain object-center h-full max-h-full m-auto transition-all ease-in cursor-zoom-in hover:scale-150"
+                                        alt="{{ $product->name }}"
+                                        :src="curImage"
+                                        x-transition.duration.500ms
+                                        x-show = "show ">
+                                </a>
+                            @else
+                                <img class="object-contain object-center h-full max-h-full m-auto"
+                                    alt="{{ $product->name }}"
                                     :src="curImage"
                                     x-transition.duration.500ms
                                     x-show = "show ">
-                            </a>
+                            @endif
                         </div>
                         @if(count($this->gallery) > 2)
                             <div class="inline-flex mx-auto mt-12 space-x-2">

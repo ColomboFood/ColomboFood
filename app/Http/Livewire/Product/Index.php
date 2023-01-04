@@ -55,12 +55,17 @@ class Index extends Component
 
     public function resetFilters()
     {
-        $this->reset(['query', 'category', 'brand', 'collection', 'orderby']);
+        $this->reset(['category', 'brand', 'collection', 'orderby']);
     }
 
     public function gotoPage($page) { 
         $this->setPage($page); 
         $this->emit('goTop');
+    }
+
+    public function isSetFilters()
+    {
+        return $this->category || $this->collection || $this->brand || $this->orderby;
     }
 
     public function isParentCategorySelected($menuCategory)

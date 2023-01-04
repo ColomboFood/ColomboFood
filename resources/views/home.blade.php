@@ -32,8 +32,14 @@
             @foreach ($featured_products as $product)
                 <div class="flex flex-col items-center justify-center p-2 h-80">
                     <div class="relative h-48 overflow-hidden group">
-                        <img class="object-cover h-full transition duration-500 transform group-hover:scale-90" src="{{ $product->image }}"/>
+                        <img @class([
+                                'object-cover h-full',
+                                'transition duration-500 transform group-hover:scale-90' => $product->hasImage()
+                            ])
+                            src="{{ $product->image }}"/>
+                        @if($product->hasImage())
                         <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
+                        @endif
                     </div>
                     <div class="text-base font-bold text-center">{{ $product->name }}</div>
                     <div>{{ $product->short_description }}</div>
