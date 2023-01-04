@@ -104,7 +104,7 @@
                 @endif
 
                 <div class="grid place-items-center">
-                    <x-neutral-button class="mt-4" wire:click="resetFilters">{{ __('Reset filters') }}</x-neutral-button>
+                    <x-secondary-button wire:click="resetFilters">{{ __('Clear filters') }}</x-secondary-button>
                 </div>
 
             </div>

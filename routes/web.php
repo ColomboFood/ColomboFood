@@ -32,6 +32,8 @@ Route::middleware([
 
     Route::get('/wishlist', App\Http\Livewire\Wishlist\Index::class )->name('wishlist.index');
 
+    Route::get('/shop/{product:slug}/login', fn(App\Models\Product $product) => redirect()->route('product.show', $product) )->name('product.login');
+    
     Route::get('/order/create', App\Http\Livewire\Order\Create::class )->name('order.create');
     Route::get('/order/{order:number}', [App\Http\Controllers\OrderController::class , 'show'] )->name('order.show');
     Route::get('/order/{order:number}/update', App\Http\Livewire\Order\Update::class )->name('order.update');

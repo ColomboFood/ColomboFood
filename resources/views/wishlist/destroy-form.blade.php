@@ -15,9 +15,9 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirmingWishlistDeletion')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('confirmingWishlistDeletion')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
             <x-danger-button class="ml-2" wire:click="delete" wire:loading.attr="disabled">
                 {{ __('Empty Wishlist') }}

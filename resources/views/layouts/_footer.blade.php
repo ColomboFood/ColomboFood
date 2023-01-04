@@ -1,4 +1,4 @@
-<footer class="text-gray-900 bg-neutral-50 body-font">
+<footer class="text-gray-900 bg-secondary-50 body-font">
 
     <div class="p-10 footer">
         <div>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="w-full pt-4 bg-neutral-50">
+    <div class="w-full pt-4 bg-secondary-50">
         <div class="container flex flex-col items-center justify-center px-5 py-2 mx-auto sm:flex-row">
 
             <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">

@@ -143,8 +143,8 @@
                                 @endif
                                 <span class="text-2xl font-black text-gray-900">{{$product->taxed_selling_price}}€</span>
                             @else
-                                <a href="{{ route('login') }}" class="flex px-6 py-2 text-white border-0 rounded bg-neutral-500 focus:outline-none hover:bg-neutral-600">
-                                    {{ __('Login to view price') }}
+                                <a href="{{ route('product.login', $product) }}">
+                                    <x-secondary-button>{{ __('Login to view price') }}</x-secondary-button>
                                 </a>
                             @endauth
                             @if($product->quantity && $product->quantity < config('custom.stock_threshold'))
@@ -155,9 +155,7 @@
                         <div class="flex items-center mt-6">
                             <div class="flex">
                                 @if($product->quantity)
-                                    <button class="flex px-6 py-2 ml-auto text-white border-0 rounded bg-secondary-500 focus:outline-none hover:bg-secondary-600"
-                                        wire:click="addToCart"
-                                    >{{ __('Add to cart') }}<x-icons.cart class="ml-1" /></button>
+                                    <x-button wire:click="addToCart">{{ __('Add to cart') }}<x-icons.cart class="ml-1" /></x-button>
                                 @else
                                     <button disabled class="flex px-6 py-2 ml-auto text-white bg-gray-500 border-0 rounded focus:outline-none"
                                     >{{ __('Out of Stock') }}</button>

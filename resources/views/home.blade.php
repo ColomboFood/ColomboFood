@@ -25,7 +25,7 @@
     </div>
     
     <div class="container mx-auto my-12">
-        <h2 class="text-2xl font-bold text-center">I nostri <span class="text-primary-500">Best Seller</span></h2>
+        <h2 class="text-2xl font-bold text-center">I nostri <span class="text-accent-500">Best Seller</span></h2>
     
         <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 
@@ -49,14 +49,14 @@
 
     <div class="container grid w-full gap-6 px-6 mx-auto my-12 md:grid-cols-2 lg:grid-cols-5">
         
-        <div class="flex items-center justify-center px-6 pt-6 pb-10 bg-warning-50 lg:col-span-2 bg-opacity-60">
+        <div class="flex items-center justify-center px-6 pt-6 pb-10 bg-neutral-50 lg:col-span-2 bg-opacity-60">
             <div class="flex flex-col">
                 <p>Cerchi un prodotto particolare che non trovi sul sito?</p>
                 <p>Scrivi a <a class="underline" href="mailto:info@info.it">info@colombofood.it</a></p>
             </div>
         </div>
 
-        <div class="flex flex-col px-4 py-10 bg-neutral-50 lg:flex-row lg:col-span-3 bg-opacity-60">
+        <div class="flex flex-col px-4 py-10 bg-secondary-50 lg:flex-row lg:col-span-3 bg-opacity-60">
             <div class="flex flex-col mb-12 text-center lg:mb-0 lg:ml-auto lg:mr-0">
                 <p>Consegna in tutta Italia!</p>
                 <a class="underline" href="">Guarda le tariffe</a>
@@ -94,7 +94,7 @@
         <div class="container flex flex-col w-full mx-auto my-12 md:h-96 md:flex-row">
             <div class="flex flex-col items-center w-full">
                 <div class="max-w-sm pt-4 pb-10 mr-12 text-right md:pt-0 md:pb-0 md:my-auto">
-                    <p class="text-3xl font-bold text-primary-500">Da oggi puoi ritirare direttamente nel nostro magazzino!</p>
+                    <p class="text-3xl font-bold text-accent-500">Da oggi puoi ritirare direttamente nel nostro magazzino!</p>
                     <p class="mt-2">
                         Organizza il tuo ritiro chiamandoci al
                         <span class="inline-block">+39 02 392 835 39</span>

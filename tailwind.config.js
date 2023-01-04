@@ -17,19 +17,7 @@ module.exports = {
                 serif: ['RoxboroughCF', 'serif'],
             },
             colors: {
-                primary: {// scarlet
-                    "50": "#FFCABE",
-                    "100": "#FFA995",
-                    "200": "#FF876C",
-                    "300": "#FF6644",
-                    "400": "#FF441B",
-                    "500": "#F12C00",
-                    "600": "#C62602",
-                    "700": "#9C1F03",
-                    "800": "#731804",
-                    "900": "#4B1003"
-                },
-                secondary: {// froly
+                primary: {// froly
                     '50': '#FFFFFF',
                     '100': '#FFFFFF',
                     '200': '#FEEBEB',
@@ -41,7 +29,7 @@ module.exports = {
                     '800': '#B90C12',
                     '900': '#85090D'
                 },
-                neutral: {// botticelli
+                secondary: {// botticelli
                     "50": "#DCE4EE",
                     "100": "#C1CFE0",
                     "200": "#A8BAD1",
@@ -52,6 +40,18 @@ module.exports = {
                     "700": "#445468",
                     "800": "#36404E",
                     "900": "#262D35"
+                },
+                accent: {// scarlet
+                    "50": "#FFCABE",
+                    "100": "#FFA995",
+                    "200": "#FF876C",
+                    "300": "#FF6644",
+                    "400": "#FF441B",
+                    "500": "#F12C00",
+                    "600": "#C62602",
+                    "700": "#9C1F03",
+                    "800": "#731804",
+                    "900": "#4B1003"
                 },
                 gray: { // black-haze
                     "50": "#E9EBEB",
@@ -65,9 +65,7 @@ module.exports = {
                     "800": "#474747",
                     "900": "#323232"
                 },
-                danger: colors.red,
-                success: colors.green,
-                warning: {// bleach-white
+                neutral: {// bleach-white
                     "50": "#FEEDD7",
                     "100": "#FCDBB0",
                     "200": "#FAC98A",
@@ -79,6 +77,9 @@ module.exports = {
                     "800": "#804F0F",
                     "900": "#5A380C"
                 },
+                danger: colors.red,
+                success: colors.green,
+                warning: colors.yellow,
             },
             animation: {
                 shine: "shine 1s",

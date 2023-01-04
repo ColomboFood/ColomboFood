@@ -89,17 +89,17 @@
                                 @endif
                                 @if($order->canBeEdited())
                                     <form class="w-full" action="{{ route('order.update', $order ) }}" method="GET">
-                                        <x-jet-secondary-button type="submit" class="justify-center w-full"
-                                        >{{__('Edit') }}</x-jet-secondary-button>
+                                        <x-secondary-button type="submit" class="justify-center w-full"
+                                        >{{__('Edit') }}</x-secondary-button>
                                     </form>
                                 @endif
                                 @if($order->canBeInvoiced())
                                     <form class="w-full" action="{{ route('invoice.show', $order ) }}" method="GET">
-                                        <x-jet-secondary-button type="submit" class="justify-center w-full"
+                                        <x-secondary-button type="submit" class="justify-center w-full"
                                         >
                                             {{ __('Invoice') }}
                                             <x-icons.document-download class="w-4 h-4"/>
-                                        </x-jet-secondary-button>
+                                        </x-secondary-button>
                                     </form>
                                 @endif
                                 @if($order->canBeDeleted())
