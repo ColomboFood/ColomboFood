@@ -55,7 +55,8 @@ class Index extends Component
 
     public function resetFilters()
     {
-        $this->reset(['category', 'brand', 'collection', 'orderby']);
+        $this->reset(['query', 'category', 'brand', 'collection', 'orderby']);
+        $this->setOpenMenus();
     }
 
     public function gotoPage($page) { 
@@ -65,7 +66,7 @@ class Index extends Component
 
     public function isSetFilters()
     {
-        return $this->category || $this->collection || $this->brand || $this->orderby;
+        return $this->query ||$this->category || $this->collection || $this->brand || $this->orderby;
     }
 
     public function isParentCategorySelected($menuCategory)

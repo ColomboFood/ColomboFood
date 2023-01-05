@@ -77,7 +77,7 @@
                             <span class="">{{ $menuBrand->name }}</span>
                             <input type="checkbox"
                                 class="w-4 h-4 transition duration-300 ease-in-out border-2 cursor-pointer form-checkbox text-primary-500 focus:ring-offset-0 hover:border-primary-600 focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-primary-500"
-                                wire:model="collection" value="{{ $menuBrand->slug }}">
+                                wire:model="brand" value="{{ $menuBrand->slug }}">
                         </label>
                     @endforeach
                 </div>

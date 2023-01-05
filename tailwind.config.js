@@ -95,13 +95,5 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
-        require('daisyui'),
     ],
-
-    daisyui: {
-        logs: false,
-        themes: [
-            "bumblebee",
-        ],
-    },
 };

@@ -147,10 +147,10 @@
 
                         <div class="flex">
                             @auth
-                                @if($product->discount)
-                                <span class="mr-2 text-2xl font-medium text-gray-600 line-through">{{$product->taxed_original_price}}€</span>
-                                @endif
                                 <span class="text-2xl font-black text-gray-900">{{$product->taxed_selling_price}}€</span>
+                                @if($product->discount)
+                                <span class="ml-2 text-2xl font-medium text-gray-600 line-through">{{$product->taxed_original_price}}€</span>
+                                @endif
                             @else
                                 <a href="{{ route('product.login', $product) }}">
                                     <x-secondary-button>{{ __('Login to view price') }}</x-secondary-button>

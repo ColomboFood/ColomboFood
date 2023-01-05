@@ -1,20 +1,20 @@
-<footer class="text-gray-900 bg-secondary-50 body-font">
+<footer class="text-gray-900 bg-secondary-50">
 
-    <div class="p-10 footer">
-        <div>
-            <span class="footer-title">Sitemap</span>
-            <a class="link link-hover">Home</a>
-            <a class="link link-hover">Negozio</a>
-            <a class="link link-hover">Chi Siamo</a>
+    <div class="grid w-full grid-flow-row p-10 text-sm leading-5 sm:grid-flow-col place-items-start gap-y-10 gap-x-2">
+        <div class="grid gap-2 place-items-start">
+            <span class="mb-2 font-bold uppercase opacity-50">Sitemap</span>
+            <a class="cursor-pointer hover:underline">Home</a>
+            <a class="cursor-pointer hover:underline">Negozio</a>
+            <a class="cursor-pointer hover:underline">Chi Siamo</a>
         </div>
-        <div>
-            <span class="footer-title">Legal</span>
-            <a class="link link-hover">Politica di Reso</a>
-            <a class="link link-hover">Privacy Policy</a>
-            <a class="link link-hover">Impostazioni Cookie</a>
+        <div class="grid gap-2 place-items-start">
+            <span class="mb-2 font-bold uppercase opacity-50">Legal</span>
+            <a class="cursor-pointer hover:underline">Politica di Reso</a>
+            <a class="cursor-pointer hover:underline">Privacy Policy</a>
+            <a class="cursor-pointer hover:underline">Impostazioni Cookie</a>
         </div>
-        <div>
-            <span class="footer-title">Social</span>
+        <div class="grid gap-2 place-items-start">
+            <span class="mb-2 font-bold uppercase opacity-50">Social</span>
             <div class="grid grid-flow-col gap-4">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">

@@ -14,51 +14,60 @@
 
         @include('product._filters-bar')
 
-        <div class="w-full overflow-hidden bg-white shadow-xl sm:rounded-lg">
+        <div class="w-full overflow-hidden">
 
+            @if(count($products))
             <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach ($products as $product)
                     <a  href="{{ route('product.show', $product) }}">
-                    <div class="flex flex-col items-center justify-center p-2 h-80">
-                        <div class="relative h-48 overflow-hidden group">
-                            <img @class([
-                                    'object-cover h-full',
-                                    'transition duration-500 transform group-hover:scale-90' => $product->hasImage()
-                                ])
-                                src="{{ $product->image }}" />
-                            @if($product->hasImage())
-                                <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
-                            @endif
-                        </div>
-                        <div class="text-base font-bold text-center">{{ $product->name }}</div>
-                        <div>{{ $product->short_description }}</div>
-                        <div class="flex-none w-full mt-auto mb-0">
-                            <div class='flex justify-between'>
-                                <span>
-                                    @if( !$product->defaultVariant()->exists() && !$product->variants()->exists())
-                                        {{ $product->stock_status}}                                     
-                                    @endif
-                                </span>
-                                <div class="relative flex flex-col">
-                                    @if( $product->discount) 
-                                        <span class="absolute ml-4 text-base text-gray-900 line-through -right-2 -top-4 dark:text-white">
-                                            {{ $product->taxed_original_price }}€
-                                        </span>
-                                    @endif
-                                    <span class='font-bold'>
-                                        @auth
-                                        {{ $product->taxed_price }}€
-                                        @else
-                                        <div class="tooltip tooltip-top" data-tip="Registrati per vedere i prezzi">
+                        <div @class([
+                                'flex flex-col items-center justify-center p-2',
+                                'h-64' => !Auth::check(),
+                                'h-80' => Auth::check()
+                            ])
+                        >
+
+                            <div class="relative h-48 overflow-hidden group">
+                                <img @class([
+                                        'object-cover h-full',
+                                        'transition duration-500 transform group-hover:scale-90' => $product->hasImage()
+                                    ])
+                                    src="{{ $product->image }}" />
+                                @if($product->hasImage())
+                                    <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
+                                @endif
+                            </div>
+
+                            <div class="mt-1 text-base font-bold text-center">{{ $product->name }}</div>
+                            <div class="text-gray-600">{{ $product->short_description }} 200gr</div>
+                            
+                            @auth
+                            <div class="flex-none w-full mt-auto mb-0">
+                                <div class='flex justify-center mt-1'>
+                                    {{-- <span>
+                                        @if( !$product->defaultVariant()->exists() && !$product->variants()->exists())
+                                            {{ $product->stock_status}}                                     
+                                        @endif
+                                    </span> --}}
+                                    <div class="relative flex">
+                                        <span class='font-black'>
+                                            @auth
+                                            {{ $product->taxed_price }}€
+                                            @else
                                             <span>--.--€</span>
-                                        </div>
-                                        @endauth
-                                    </span>
+                                            @endauth
+                                        </span>
+                                        @if($product->discount) 
+                                            <span class="ml-1 text-sm text-gray-600 line-through">
+                                                {{ $product->taxed_original_price }}€
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
+                            @endauth
                             
                         </div>
-                    </div>
                     </a>
                 @endforeach
             </div>
@@ -66,6 +75,17 @@
             <div class="m-2">
                 {{ $products->links() }}
             </div>
+            @else
+                <div class="grid h-64 place-items-center">
+                    <p class="font-semibold text-gray-600">
+                        @if($query)
+                            {{ __('No results for') . " \"${query}\"" }}
+                        @else
+                            {{ __('No results') }}
+                        @endif
+                    </p>
+                </div>
+            @endif
 
         </div>
 
