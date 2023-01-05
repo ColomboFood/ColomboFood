@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="grid xl:grid-cols-2 xl:gap-6">
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company')) }}" name="shipping_address_full_name" wire:model.lazy="shipping_address.full_name"/>
+                                        <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company') }}" name="shipping_address_full_name" wire:model.lazy="shipping_address.full_name"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
                                         <x-input-floating label="{{ __('Phone Number') }}" name="phone" wire:model.lazy="phone"/>

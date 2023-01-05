@@ -1,7 +1,7 @@
-<x-slot name="header">
+{{-- <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800" id="breadcrumb">
     </h2>
-</x-slot>
+</x-slot> --}}
 
 <div class="flex justify-center py-8 mx-auto"
     x-init="
@@ -10,14 +10,14 @@
         })
     "
 >
-    <div class="flex flex-col w-full mx-auto md:space-x-10 md:flex-row md:inline-flex max-w-7xl sm:px-6 lg:px-8">
+    <div class="flex flex-col w-full mx-auto lg:space-x-4 lg:flex-row lg:inline-flex max-w-7xl sm:px-6 lg:px-8">
 
         @include('product._filters-bar')
 
         <div class="w-full overflow-hidden">
 
             @if(count($products))
-            <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
                 @foreach ($products as $product)
                     <a  href="{{ route('product.show', $product) }}">
                         <div @class([

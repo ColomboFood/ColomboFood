@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="fixed z-50 w-full h-16 bg-white border-b border-white">
     <!-- Primary Navigation Menu -->
-    <div class="container px-6 mx-auto">
+    <div class="px-6 mx-auto xl:container">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
