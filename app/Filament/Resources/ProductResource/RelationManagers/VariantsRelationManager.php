@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProductResource\RelationManagers;
 
+use App\Models\Product;
 use Closure;
 use Filament\Forms;
 use Filament\Tables;
@@ -58,7 +59,7 @@ class VariantsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                //Tables\Actions\AssociateAction::make()->preloadRecordSelect(),
+                Tables\Actions\AssociateAction::make(),
             ])
             ->actions([
                 Tables\Actions\DissociateAction::make(),

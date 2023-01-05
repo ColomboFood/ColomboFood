@@ -2,10 +2,10 @@
     @if($reviews->count())
     <section class="text-gray-600 body-font">
         <div class="flex flex-col w-full text-center">
-            <h1 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">{{__('Reviews')}}</h1>
+            <h1 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">{{trans_choice('Review',2)}}</h1>
         </div>
 
-        <div class="container flex flex-wrap w-full py-12 mx-auto">
+        <div class="container flex flex-wrap w-full pb-12 mx-auto">
             
             <div class="flex flex-wrap w-full">
                 @foreach($reviews as $review)
@@ -49,10 +49,10 @@
 
     @can('create',[App\Models\Review::class,$product])
     <section class="relative text-gray-600 body-font">
-        <div class="w-full px-8 py-12 mx-auto bg-white md:px-0">
+        <div class="w-full px-8 pb-12 mx-auto bg-white md:px-0">
             <div class="flex flex-col w-full text-center">
                 <h1 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">
-                {{__('Leave a Review')}}
+                {{__('Leave a Review')}} 
                 </h1>
             </div>
             <div class="w-full mx-auto md:w-1/2">

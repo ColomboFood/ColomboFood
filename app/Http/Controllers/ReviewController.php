@@ -42,8 +42,8 @@ class ReviewController extends Controller
             'description' => 'nullable|max:500',
         ]);
 
-        if($product->defaultVariant)
-            $product = $product->defaultVariant;
+        // if($product->defaultVariant)
+        //     $product = $product->defaultVariant;
 
         $product->reviews()->create([
             'user_id' => auth()->user()->id,

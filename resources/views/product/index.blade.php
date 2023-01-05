@@ -17,13 +17,11 @@
         <div class="w-full overflow-hidden">
 
             @if(count($products))
-            <div class="grid mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+            <div class="grid mx-6 my-12 gap-x-6 gap-y-12 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
                 @foreach ($products as $product)
                     <a  href="{{ route('product.show', $product) }}">
                         <div @class([
-                                'flex flex-col items-center justify-center p-2',
-                                'h-64' => !Auth::check(),
-                                'h-80' => Auth::check()
+                                'flex flex-col items-center justify-center p-2 h-full',
                             ])
                         >
 
@@ -42,26 +40,22 @@
                             <div class="text-gray-600">{{ $product->short_description }} 200gr</div>
                             
                             @auth
-                            <div class="flex-none w-full mt-auto mb-0">
-                                <div class='flex justify-center mt-1'>
+                            <div class="flex-none w-full pt-2 mt-auto mb-0">
+                                <div class="flex justify-center mt-1">
                                     {{-- <span>
                                         @if( !$product->defaultVariant()->exists() && !$product->variants()->exists())
                                             {{ $product->stock_status}}                                     
                                         @endif
                                     </span> --}}
-                                    <div class="relative flex">
-                                        <span class='font-black'>
-                                            @auth
+                                    <div class="relative w-full">
+                                        <x-button class="w-full">
                                             {{ $product->taxed_price }}€
-                                            @else
-                                            <span>--.--€</span>
-                                            @endauth
-                                        </span>
-                                        @if($product->discount) 
-                                            <span class="ml-1 text-sm text-gray-600 line-through">
-                                                {{ $product->taxed_original_price }}€
-                                            </span>
-                                        @endif
+                                            @if($product->discount) 
+                                                <span class="ml-1 text-white text-opacity-80 line-through">
+                                                    {{ $product->taxed_original_price }}€
+                                                </span>
+                                            @endif
+                                        </x-button>
                                     </div>
                                 </div>
                             </div>

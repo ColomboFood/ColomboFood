@@ -52,7 +52,7 @@
                             @endif
                         </div>
                         @if(count($this->gallery) > 2)
-                            <div class="inline-flex mx-auto mt-12 space-x-2">
+                            <div class="inline-flex mt-4 space-x-2">
                             @foreach ($this->gallery as $image )
                                 <div class="border cursor-pointer"
                                     @click="changeImage('{{ $image }}')"
@@ -68,26 +68,29 @@
                     {{-- End Left Side --}}
 
                     {{-- Right Side --}}
-                    <div class="w-full mt-12 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
+                    <div class="w-full mt-12 lg:w-1/2 lg:pl-10 lg:pb-6 lg:mt-0">
                         
                         {{-- Title Section --}}
-                        @if($product->brand)
-                        <div class="text-sm tracking-widest">{{ $product->brand->name}}</div>
-                        @endif
-
                         <h1 class="mb-1 text-3xl">{{ $product->name }}</h1>
                         <div class="mt-2">{{ $product->short_description }}</div>
+
+                        @if($product->brand)
+                            <div class="text-sm tracking-widest space-x-2">
+                                <img class="inline-flex h-6 w-6" src="{{ $product->brand->logo }}"/>
+                                {{ $product->brand->name }}
+                            </div>
+                        @endif
                         
                         <div class="flex mb-4">
                             @if($product->reviews->count())
                             <span class="flex items-center">
-                                @for ($i = 1; $i <= $this->avg_rating; $i++) 
+                                @for ($i = 1; $i <= $this->product->avg_rating; $i++) 
                                     <x-icons.star/>  
                                 @endfor
-                                @for ($i = 5; $i > $this->avg_rating; $i--) 
+                                @for ($i = 5; $i > $this->product->avg_rating; $i--) 
                                     <x-icons.star-empty/>  
                                 @endfor
-                                <span class="ml-3 text-gray-600">{{$product->reviews->count()}} {{ __('Reviews')}}</span>
+                                <span class="ml-3 text-gray-600">{{$reviews->count()}} {{ trans_choice('Review',$reviews->count())}}</span>
                             </span>
                             @endif
                         </div>
@@ -171,40 +174,43 @@
                                 @endif
 
                                 @if(!$this->wishlistContains($product))
-                                <button class="inline-flex items-center justify-center w-10 h-10 p-0 ml-4 text-gray-500 bg-gray-200 border-0 rounded-full"
+                                <button class="inline-flex items-center justify-center w-10 h-10 p-0 ml-4 text-gray-500  border-0 rounded-full"
                                     wire:click="addToWishlist"
                                 >
-                                    <x-icons.heart filled="false"/>
+                                    <x-icons.heart class="h-10 w-10" filled="false"/>
                                 </button>
                                 @else
-                                <button class="inline-flex items-center justify-center w-10 h-10 p-0 ml-4 text-gray-500 bg-gray-200 border-0 rounded-full"
+                                <button class="inline-flex items-center justify-center w-10 h-10 p-0 ml-4 text-gray-500  border-0 rounded-full"
                                     wire:click="removeFromWishlist"
                                 >
-                                    <x-icons.heart filled="true"/>
+                                    <x-icons.heart class="h-10 w-10" filled="true"/>
                                 </button>
                                 @endif
                             </div>
-                        </div>
-
-                        <div class="mt-6">
-                            <div class="text-lg">{{ __('Description') }}:</div>
-                            <p class="text-gray-500">
-                                @if($this->description)
-                                    {!! $this->description !!}
-                                @else
-                                    {{ __('No description') }}
-                                @endif
-                            </p>
                         </div>
                         
                     </div>
                     {{-- End Right Side --}}
                     
                 </div>
+
+                <div class="mt-12">
+                    <div class="text-lg">{{ __('Description') }}:</div>
+                    <div class="text-gray-500 prose max-w-none">
+                        @if($this->description)
+                            {!! $this->description !!}
+                        @else
+                            {{ __('No description') }}
+                        @endif
+                    </div>
+                </div>
+
+                <x-divider />
+                
             </div>
         </section>
 
-        <livewire:product.reviews :product='$product'/>
+        <livewire:product.reviews key="{{$product->id}}" :product='$product'/>
 
         </div>
     </div>

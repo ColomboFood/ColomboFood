@@ -280,7 +280,9 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
 
     public function getAvgRatingAttribute()
     {
-        return $this->reviews()->avg('rating') ? round($this->reviews()->avg('rating'), 1) : null;
+        $defaultVariant = $this->variant_id ?  $this->defaultVariant : $this;
+        $avg = Review::where('product_id', $defaultVariant->id)->orWhereIn('product_id',$defaultVariant->variants()->pluck('id'))->avg('rating');
+        return $avg ? round($avg, 1) : null;
     }
 
     public function getImageAttribute()
@@ -299,7 +301,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         // ( Storage::disk(config('media-library.disk_name'))->exists('data/import/immagini/'.$this->sku.'.jpg') ? Storage::disk(config('filesystem.default'))->url('data/import/immagini/'.$this->sku.'.jpg') : 
 
         return $this->hasImage() ? $this->getFirstMediaUrl('gallery', config('custom.use_watermark') ? 'watermarked' : 'default') 
-            : asset('img/no_image.jpg');
+            : asset('img/no_image.webp');
     }
 
     public function getGalleryAttribute()
@@ -337,6 +339,15 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         return Attribute::make(
             set: function ($value) {
                 return number_format($value, 2);
+            },
+        );
+    }
+
+    protected function variantId(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value, $attributes) {
+                return $value == $attributes['id'] ? null : $value;
             },
         );
     }

@@ -42,7 +42,7 @@
         <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 
             @foreach ($featured_products as $product)
-                <div class="flex flex-col items-center justify-center p-2 h-80">
+                <div class="flex flex-col items-center justify-center p-2 last:hidden last:md:flex h-full">
                     <div class="relative h-48 overflow-hidden group">
                         <img @class([
                                 'object-cover h-full',
@@ -53,9 +53,9 @@
                         <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
                         @endif
                     </div>
-                    <div class="text-base font-bold text-center">{{ $product->name }}</div>
+                    <div class="text-base font-bold text-center mt-1">{{ $product->name }}</div>
                     <div>{{ $product->short_description }}</div>
-                    <form action="{{ route('product.show', $product) }}" method="GET" class="flex-none w-full mt-auto mb-0">
+                    <form action="{{ route('product.show', $product) }}" method="GET" class="flex-none w-full mb-0 mt-auto pt-12">
                         <x-button class="justify-center w-full">Scopri</x-button>
                     </form action="" method="get">
                 </div>
@@ -95,7 +95,7 @@
                     <p class="text-3xl font-bold">Hai la partita Iva?</p>
                     <p class="mt-6">
                         ColomboFood ha studiato una serie di offerte dedicate e personalizzate rivolte ai commercianti,
-                        proprietari di bar, panetterie o piccole attività, che hanno delle esigenze particolari.
+                        proprietari di bar, panetterie o piccole attività.
                     </p>
                     <p class="mt-6 font-bold">
                         Perchè a volte avere la Partita Iva può essere un vantaggio!

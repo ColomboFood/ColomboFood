@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Product;
 
+use App\Models\Review;
 use App\Models\Product;
 use Livewire\Component;
 use App\Traits\Livewire\WithShoppingLists;
@@ -90,17 +91,6 @@ class Show extends Component
         return $description;
     }
 
-    public function getAvgRatingProperty()
-    {
-        return $this->product->variant_id == null || $this->product->variant_id == $this->id ? 
-                    $this->product->avg_rating : $this->product->defaultVariant->avg_rating;
-    }
-
-    public function getReviewsProperty()
-    {
-        return $this->product->defaultVaraint ? $this->product->defaultVariant->reviews : $this->product->reviews;
-    }
-
     public function shouldSelectVariantByImage()
     {
         return ($this->product->defaultVariant || $this->product->variants()->count()) 
@@ -115,6 +105,17 @@ class Show extends Component
 
     public function render()
     {
-        return view('product.show');
+        $related_products = Product::when( !$this->product->variant_id, fn($query) => 
+                $query->where('id', $this->product->id)
+                    ->orWhere('variant_id', $this->product->id)
+            )
+            ->when( $this->product->variant_id, fn($query) =>
+                $query->where('id', $this->product->variant_id)
+                    ->orWhere('variant_id', $this->product->variant_id)
+            )->get();
+
+        return view('product.show',[
+            'reviews' => Review::whereIn('product_id', $related_products->pluck('id'))
+        ]);
     }
 }
