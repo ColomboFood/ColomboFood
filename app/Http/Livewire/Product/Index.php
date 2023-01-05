@@ -64,6 +64,16 @@ class Index extends Component
         $this->emit('goTop');
     }
 
+    public function previousPage($page) { 
+        $this->setPage($page); 
+        $this->emit('goTop');
+    }
+
+    public function nextPage($page) { 
+        $this->setPage($page); 
+        $this->emit('goTop');
+    }
+
     public function isSetFilters()
     {
         return $this->query ||$this->category || $this->collection || $this->brand || $this->orderby;

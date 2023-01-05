@@ -63,7 +63,7 @@
                             </x-dropdown-link>
 
                             <x-dropdown-link href="{{ route('order.index') }}">
-                                {{ __('Orders') }}
+                                {{ __('My Orders') }}
                             </x-dropdown-link>
 
                             @if(Auth::user()->canAccessFilament())
@@ -176,9 +176,6 @@
             <x-dropdown-link href="{{ route('wishlist.index') }}">
                 {{ __('Wishlist') }}
                 <x-wishlist-counter class="inline-block w-5 h-5 text-xs text-center bg-yellow-300 rounded-full"/>
-            </x-dropdown-link>
-            <x-dropdown-link href="{{ route('home') }}">
-                {{ __('Home') }}
             </x-dropdown-link>
             <x-dropdown-link href="{{ route('product.index') }}">
                 {{ __('Shop') }}

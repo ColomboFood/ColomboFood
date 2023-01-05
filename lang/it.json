@@ -53,6 +53,7 @@
 
     "Order" : "Ordine",
     "Orders" : "Ordini",
+    "My Orders" : "Cronologia Ordini",
     "Status" : "Stato",
     "Number": "Numero",
     "Tracking Number" : "Codice Spedizione",
@@ -253,6 +254,7 @@
     "Show more" : "Altro",
     "Show" : "Mostra",
     "Hide" : "Nascondi",
+    "Filters" : "Filtri",
     "Clear filters" : "Azzera filtri",
     "All Categories" : "Tutte le Categorie",
     "result" : "risultato",

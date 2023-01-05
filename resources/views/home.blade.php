@@ -77,7 +77,7 @@
         <div class="flex flex-col px-4 py-10 bg-secondary-50 lg:flex-row lg:col-span-3 bg-opacity-60">
             <div class="flex flex-col mb-12 text-center lg:mb-0 lg:ml-auto lg:mr-0">
                 <p>Consegna in tutta Italia!</p>
-                <a class="underline" href="">Guarda le tariffe</a>
+                <a class="underline max-w-max mx-auto" href="">Guarda le tariffe</a>
             </div>
             <img class="h-32 mx-auto -mb-10 lg:ml-auto lg:mr-12" src="/img/camioncino.png" />
         </div>
