@@ -10,8 +10,13 @@
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">Legal</span>
             <a class="cursor-pointer hover:underline">Politica di Reso</a>
-            <a class="cursor-pointer hover:underline">Privacy Policy</a>
-            <a class="cursor-pointer hover:underline">Impostazioni Cookie</a>
+            <a href="https://www.iubenda.com/privacy-policy/77646933" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy ">
+                Privacy Policy
+            </a>
+            <script type="text/javascript">
+                (function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);
+            </script>
+            {{-- <a class="cursor-pointer hover:underline">Impostazioni Cookie</a> --}}
         </div>
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">Social</span>

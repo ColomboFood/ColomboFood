@@ -16,8 +16,8 @@
 
     @if (config('services.google.analytics'))
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics') }}"></script>
-        <script>
+        <script class="_iub_cs_activate" type="text/plain" async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics') }}"></script>
+        <script class="_iub_cs_activate" type="text/plain">
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
@@ -43,5 +43,11 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     @stack('styles')
+
+    <script type="text/javascript">
+        var _iub = _iub || [];
+        _iub.csConfiguration = {"consentOnContinuedBrowsing":false,"floatingPreferencesButtonDisplay":"bottom-right","invalidateConsentWithoutLog":true,"lang":"en","perPurposeConsent":true,"siteId":2927796,"whitelabel":false,"cookiePolicyId":77646933, "banner":{ "acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#010436","acceptButtonDisplay":true,"backgroundColor":"#FBF6EF","backgroundOverlay":true,"brandBackgroundColor":"#FBF6EF","brandTextColor":"#010436","closeButtonRejects":true,"customizeButtonCaptionColor":"#010436","customizeButtonColor":"#E1DDD7","customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"logo":"https://www.colombofood.it/img/marchio.png","position":"bottom","theme":"autumn-neutral","textColor":"#010436" }};
+    </script>
+    <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
 
 </head>

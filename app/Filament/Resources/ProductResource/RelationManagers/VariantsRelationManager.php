@@ -59,7 +59,8 @@ class VariantsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\AssociateAction::make(),
+                Tables\Actions\AssociateAction::make()
+                    ->recordSelectOptionsQuery(fn (Builder $query) => $query->whereDoesntHave('variants')),
             ])
             ->actions([
                 Tables\Actions\DissociateAction::make(),
