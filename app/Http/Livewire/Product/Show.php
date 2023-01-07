@@ -16,10 +16,15 @@ class Show extends Component
     public $variantsAttributeSets;
     public $attributes;
     public $selection;
+    public $tab = 0;
+
+    protected $queryString = [
+        'tab' => ['except' => 0]
+    ];
 
     public function mount($product)
     {
-        if(!$this->product = Product::whereSlug($product)->first())
+        if(!$this->product = Product::with(['defaultVariant','variants','attributeValues'])->whereSlug($product)->first())
         {
             session()->flash('flash.banner', __('banner_notifications.product.not_found') );
             session()->flash('flash.bannerStyle', 'danger');

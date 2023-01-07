@@ -25,7 +25,7 @@
                             <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
                         </x-jet-nav-link>
                         <x-jet-nav-link class="relative" href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
-                            <x-icons.heart red="false"/>
+                            <x-icons.heart red="false" filled="false"/>
                             <x-wishlist-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
                         </x-jet-nav-link>
                     </div>

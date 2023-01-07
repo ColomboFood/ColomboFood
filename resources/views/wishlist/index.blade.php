@@ -67,6 +67,7 @@
                                     @foreach( $content as $rowId=>$item )
                                         <livewire:wishlist.item-row 
                                             :item="collect($item)"
+                                            key="{{$rowId}}"
                                         />
                                     @endforeach
                                 </div>

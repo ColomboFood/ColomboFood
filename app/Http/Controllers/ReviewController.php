@@ -52,7 +52,9 @@ class ReviewController extends Controller
             'approved' => config('custom.reviews.approved_by_default') ?? false,
         ]);
 
-        return redirect()->route('product.show', compact('product'));
+        $tab = 1;
+
+        return redirect()->route('product.show', compact('product','tab'));
     }
 
     /**

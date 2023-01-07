@@ -7,8 +7,8 @@
   $class="inline w-6 h-6 stroke-2 "
     .($red == "true" ? "stroke-red-500" : "stroke-current" )
     ." "; 
-  if($red == "true") $class.=(($filled == "true") ? 'fill-red-500' : 'fill-red-100');
-  else $class.=" fill-none";
+  if($red == "true") $class.=(($filled == "true") ? 'fill-red-500' : 'fill-none');
+  else $class.=(($filled == "true") ? 'fill-current' : 'fill-none');
 @endphp
 
 <svg xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge([
