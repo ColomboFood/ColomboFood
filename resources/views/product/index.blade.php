@@ -17,7 +17,7 @@
         <div class="w-full overflow-hidden">
 
             @if(count($products))
-            <div class="grid mx-6 my-12 gap-x-6 gap-y-12 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 md:grid-cols-3 xl:grid-cols-4">
                 @foreach ($products as $product)
                     <a  href="{{ route('product.show', $product) }}">
                         <div @class([
@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="mt-1 text-base font-bold text-center">{{ $product->name }}</div>
-                            <div class="text-gray-600">{{ $product->short_description }} 200gr</div>
+                            <div class="text-gray-600">{{ $product->short_description }}</div>
                             
                             @auth
                             <div class="flex-none w-full pt-2 mt-auto mb-0">
@@ -51,7 +51,7 @@
                                         <x-button class="w-full">
                                             {{ $product->taxed_price }}€
                                             @if($product->discount) 
-                                                <span class="ml-1 text-white text-opacity-80 line-through">
+                                                <span class="ml-1 text-white line-through text-opacity-80">
                                                     {{ $product->taxed_original_price }}€
                                                 </span>
                                             @endif
