@@ -42,23 +42,26 @@
         <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 
             @foreach ($featured_products as $product)
-                <a href="{{ route('product.show', $product) }}">
-                <div class="flex flex-col items-center h-full p-2 last:hidden last:md:flex">
-                    <div class="relative h-48 overflow-hidden group">
-                        <img @class([
-                                'object-cover h-full',
-                                'transition duration-500 transform group-hover:scale-90' => $product->hasImage()
-                            ])
-                            src="{{ $product->image }}"/>
-                        @if($product->hasImage())
-                            <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
-                        @endif
-                    </div>
-                    <div class="mt-1 text-base font-bold text-center">{{ $product->name }}</div>
-                    <div>{{ $product->short_description }}</div>
-                    <form action="{{ route('product.show', $product) }}" method="GET" class="flex-none w-full pt-12 mt-auto mb-0">
-                        <x-button class="justify-center w-full">Scopri</x-button>
-                    </form action="" method="get">
+                <div class="last:hidden last:md:flex">
+                    <a href="{{ route('product.show', $product) }}">
+                        <div class="flex flex-col items-center h-full p-2">
+                            <div class="relative h-48 overflow-hidden group">
+                                <img @class([
+                                        'object-cover h-full',
+                                        'transition duration-500 transform group-hover:scale-90' => $product->hasImage()
+                                    ])
+                                    src="{{ $product->image }}"/>
+                                @if($product->hasImage())
+                                    <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
+                                @endif
+                            </div>
+                            <div class="mt-1 text-base font-bold text-center">{{ $product->name }}</div>
+                            <div>{{ $product->short_description }}</div>
+                            <form action="{{ route('product.show', $product) }}" method="GET" class="flex-none w-full pt-12 mt-auto mb-0">
+                                <x-button class="justify-center w-full">Scopri</x-button>
+                            </form>
+                        </div>
+                    </a>
                 </div>
                 </a>
             @endforeach
