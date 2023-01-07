@@ -60,7 +60,7 @@
 
                                 
                                 @if($shipping_address->label)
-                                <div class="flex items-center p-2"
+                                <div class="flex flex-col justify-center p-2"
                                     x-show="selected != 1"
                                     x-transition:enter.delay.200ms
                                     x-cloak
@@ -161,7 +161,7 @@
                                 </div>
                                                                   
                                 @if( ($same_address && $shipping_address->label) || $billing_address->label)  
-                                <div class="flex items-center p-2"
+                                <div class="flex flex-col justify-center p-2"
                                     x-show="selected != 2"
                                     x-transition:enter.delay.200ms
                                     x-cloak
