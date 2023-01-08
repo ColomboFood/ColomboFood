@@ -43,8 +43,8 @@
 
             @foreach ($featured_products as $product)
                 <div class="last:hidden last:md:flex">
-                    <a href="{{ route('product.show', $product) }}">
-                        <div class="flex flex-col items-center h-full p-2">
+                    <a class="block w-full h-full" href="{{ route('product.show', $product) }}">
+                        <div class="flex flex-col items-center w-full h-full p-2">
                             <div class="relative h-48 overflow-hidden group">
                                 <img @class([
                                         'object-cover h-full',

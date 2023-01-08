@@ -1,19 +1,21 @@
-<div class="relative flex flex-wrap items-center mb-6 md:mb-3">
+<div class="relative flex flex-wrap items-center mb-12">
 
     <div class="flex flex-col w-full mb-6 sm:flex-row md:w-2/4 md:mb-0 sm:space-x-6">
-
         <div class="relative w-full md:w-1/2">
             <a href="{{ route('product.show', $product) }}">
-                <div class="flex items-start justify-center w-full h-40 p-2 md:justify-start">
+                <div class="flex items-start justify-center w-full h-40 md:justify-start">
                     <img class="object-contain object-top h-full aspect-video" src="{{ $product->image }}" alt="{{ $product->name }}">
                 </div>
             </a>
-            <x-icons.trash class="absolute w-5 h-5 p-1 leading-none text-center text-gray-500 rounded-full shadow-xl cursor-pointer hover:text-gray-900 hover:bg-secondary-100 bg-secondary-50 top-2 left-2"
+            <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center text-gray-500 rounded-full shadow-xl cursor-pointer hover:text-gray-900 hover:bg-secondary-100 bg-secondary-50 -top-1 -left-2"
                 wire:click.prevent="removeFromWishlist({{ $product->id }})"
-            />
+                title="{{ __('shopping_cart.remove.wishlist') }}"
+            >
+                <x-icons.trash class="w-full h-full"/>
+            </div>
         </div>
 
-        <div class="w-full mt-6 md:w-1/2 md:mt-0">
+        <div class="w-full mt-6 md:w-1/2 sm:mt-0">
             <a href="{{ route('product.show', $product) }}">
                 <div class="font-bold"
                 >{{ $product->name }}</div>
@@ -34,7 +36,6 @@
                 </div>
             @endif
         </div>
-
     </div>
 
     {{-- <div class="w-full px-4 text-center md:w-1/5">
@@ -76,4 +77,5 @@
             {{ __('shopping_cart.move.cart') }}<x-icons.cart class="ml-1" />
         </x-button>
     </div>
+
 </div>

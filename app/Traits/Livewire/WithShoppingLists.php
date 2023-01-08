@@ -18,12 +18,13 @@ trait WithShoppingLists
      * 
      **/
 
-    public function addToCart()
+    public function addToCart(?Product $product)
     {
-        if (config('custom.skip_quantity_checks') || $this->product->quantity)
+        $product = $product->id ? $product : $this->product;
+        if (config('custom.skip_quantity_checks') || $product->quantity)
         {
-            $item =Cart::instance($this->cartInstance)->add($this->product, 1);
-            if($this->product->tax) Cart::instance($this->cartInstance)->setTax($item->rowId, $this->product->tax);
+            $item =Cart::instance($this->cartInstance)->add($product, 1);
+            if($product->tax) Cart::instance($this->cartInstance)->setTax($item->rowId, $product->tax);
             $this->persist($this->cartInstance);
             $this->notifyCart();
             $this->notifyBanner(__('shopping_cart.added.cart'));
@@ -34,10 +35,11 @@ trait WithShoppingLists
         }
     }
 
-    public function addToWishlist()
+    public function addToWishlist(?Product $product)
     {
-        if (!$this->wishlistContains($this->product)) {
-            Cart::instance($this->wishlistInstance)->add($this->product, 1);
+        $product = $product->id ? $product : $this->product;
+        if (!$this->wishlistContains($product)) {
+            Cart::instance($this->wishlistInstance)->add($product, 1);
             $this->persist($this->wishlistInstance);
             $this->notifyWishlist();
             $this->notifyBanner(__('shopping_cart.added.wishlist'));

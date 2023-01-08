@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -11,6 +12,13 @@ use Maatwebsite\Excel\Concerns\WithUpsertColumns;
 
 class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertColumns
 {
+    private $categories;
+
+    public function __construct()
+    {
+        $this->categories = Category::all();
+    }
+
     /**
      * @return int
      */

@@ -22,11 +22,11 @@
                     <div class="space-x-2">
                         <x-jet-nav-link class="relative" href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
                             <x-icons.cart/>
-                            <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
+                            <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
                         </x-jet-nav-link>
                         <x-jet-nav-link class="relative" href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
                             <x-icons.heart red="false" filled="false"/>
-                            <x-wishlist-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs text-center bg-yellow-300 rounded-full"/>
+                            <x-wishlist-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
                         </x-jet-nav-link>
                     </div>
 
@@ -171,11 +171,11 @@
         <div class="px-4 pt-2 pb-1 space-y-1 border-t border-secondary-50">
             <x-dropdown-link href="{{ route('cart.index') }}">
                 {{ __('Cart') }}
-                <x-cart-counter class="inline-block w-5 h-5 text-xs text-center bg-yellow-300 rounded-full"/>
+                <x-cart-counter class="inline-block w-5 h-5 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
             </x-dropdown-link>
             <x-dropdown-link href="{{ route('wishlist.index') }}">
                 {{ __('Wishlist') }}
-                <x-wishlist-counter class="inline-block w-5 h-5 text-xs text-center bg-yellow-300 rounded-full"/>
+                <x-wishlist-counter class="inline-block w-5 h-5 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
             </x-dropdown-link>
             <x-dropdown-link href="{{ route('product.index') }}">
                 {{ __('Shop') }}

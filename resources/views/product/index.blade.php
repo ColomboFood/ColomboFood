@@ -19,9 +19,9 @@
             @if(count($products))
             <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 md:grid-cols-3 xl:grid-cols-4">
                 @foreach ($products as $product)
-                    <a  href="{{ route('product.show', $product) }}">
+                    <a class="block w-full h-full" href="{{ route('product.show', $product) }}">
                         <div @class([
-                            'flex flex-col items-center p-2 h-full',
+                            'flex flex-col items-center p-2 h-full w-full',
                             ])
                         >
 
