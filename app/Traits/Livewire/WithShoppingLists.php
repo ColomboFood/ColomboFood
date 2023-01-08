@@ -20,7 +20,7 @@ trait WithShoppingLists
 
     public function addToCart()
     {
-        if ($this->product->quantity)
+        if (config('custom.skip_quantity_checks') || $this->product->quantity)
         {
             $item =Cart::instance($this->cartInstance)->add($this->product, 1);
             if($this->product->tax) Cart::instance($this->cartInstance)->setTax($item->rowId, $this->product->tax);
@@ -54,7 +54,7 @@ trait WithShoppingLists
     public function updateCartProductQty($rowId, $qty)
     {
         $newQty=Cart::instance($this->cartInstance)->get($rowId)->qty;
-        if (Cart::instance($this->cartInstance)->get($rowId)->model->quantity >= $qty)
+        if (config('custom.skip_quantity_checks') || Cart::instance($this->cartInstance)->get($rowId)->model->quantity >= $qty)
         {
             Cart::instance($this->cartInstance)->update($rowId, $qty);
             $newQty = $qty;
@@ -82,7 +82,7 @@ trait WithShoppingLists
 
     public function moveToCart(Product $product)
     {
-        if ($product->quantity) {
+        if (config('custom.skip_quantity_checks') || $product->quantity) {
             $item = Cart::instance($this->cartInstance)->add($product, 1);
             if($product->tax) Cart::instance($this->cartInstance)->setTax($item->rowId, $product->tax);
             $this->removeFromWishlist($product);

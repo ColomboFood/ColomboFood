@@ -56,9 +56,9 @@
                                 @endif
                             </div>
                             <div class="mt-1 text-base font-bold text-center">{{ $product->name }}</div>
-                            <div>{{ $product->short_description }}</div>
+                            <div class="text-gray-500">{{ $product->short_description }}</div>
                             <form action="{{ route('product.show', $product) }}" method="GET" class="flex-none w-full pt-12 mt-auto mb-0">
-                                <x-button class="justify-center w-full">Scopri</x-button>
+                                <x-button class="justify-center w-full">{{ __('See more') }}</x-button>
                             </form>
                         </div>
                     </a>
@@ -145,7 +145,7 @@
             <img class="hidden h-24 my-auto ml-12 mr-auto sm:block" 
                 src="/img/logos/pane_quotidiano.png" 
             />
-        <!/div>
+        </div>
     </div>
 
 </x-app-layout>

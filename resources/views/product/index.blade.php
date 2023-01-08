@@ -3,13 +3,13 @@
     </h2>
 </x-slot> --}}
 
-<div class="flex justify-center py-8 mx-auto"
+<div class="py-8 mx-auto max-w-7xl"
     x-init="
         $wire.on('goTop', () => { 
             window.scrollTo({top:0}) 
         })
     "
->
+>    
     <div class="flex flex-col w-full mx-auto lg:space-x-4 lg:flex-row lg:inline-flex max-w-7xl sm:px-6 lg:px-8">
 
         @include('product._filters-bar')
@@ -21,7 +21,7 @@
                 @foreach ($products as $product)
                     <a  href="{{ route('product.show', $product) }}">
                         <div @class([
-                                'flex flex-col items-center justify-center p-2 h-full',
+                            'flex flex-col items-center p-2 h-full',
                             ])
                         >
 

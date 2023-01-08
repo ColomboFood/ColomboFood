@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Product;
 
+use App\Models\AttributeValue;
 use App\Models\Review;
 use App\Models\Product;
 use Livewire\Component;
@@ -106,6 +107,11 @@ class Show extends Component
     {
         return ($this->product->defaultVariant || $this->product->variants()->count()) 
                 && $this->variantsAttributeSets;
+    }
+
+    public function getAttributeValueLabel($attributeName, $value)
+    {
+        return AttributeValue::getLabel($attributeName, $value);
     }
 
     public function render()

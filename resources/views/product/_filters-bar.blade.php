@@ -44,7 +44,7 @@
 
         <div class="flex flex-col">
             <div class="flex">
-                <x-input class="w-full lg:w-36" type="text" placeholder="{{ __('Search...') }}"
+                <x-input class="w-full" type="text" placeholder="{{ __('Search...') }}"
                     wire:model.debounce.500ms="query" />
                 <x-button class="">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="w-48 p-2 mt-4 space-y-6">
+        <div class="p-2 mt-4 space-y-6 ">
             @if ($categories->count())
                 <div class="space-y-2">
                     <div class="mb-2 font-bold">{{ __('Categories') }}</div>

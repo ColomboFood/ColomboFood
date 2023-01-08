@@ -11,7 +11,7 @@
 <div class="container px-5 py-12 mx-auto">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
        
-        <section class="overflow-hidden body-font">
+        <section class="overflow-hidden">
             <div class="py-12">
                 <div class="flex flex-wrap mx-auto">
 
@@ -37,7 +37,7 @@
                         <div class="w-full h-64 mx-auto overflow-hidden border-2 lg:h-96">
                             @if($product->hasImage())
                                 <a :href="curImage">
-                                    <img class="object-contain object-center h-full max-h-full m-auto transition-all ease-in cursor-zoom-in hover:scale-150"
+                                    <img class="object-contain object-center h-full max-h-full m-auto transition-all duration-300 ease-in cursor-zoom-in hover:scale-125"
                                         alt="{{ $product->name }}"
                                         :src="curImage"
                                         x-transition.duration.500ms
@@ -88,7 +88,7 @@
                         {{-- Details Section --}}
                         <div class="flex flex-col py-2 space-y-2">
                             
-                            @if( $this->shouldSelectVariantByImage() )
+                            {{-- @if( $this->shouldSelectVariantByImage() )
                                 <div class="flex flex-row space-x-4">
                                     @if($product->defaultVariant? $product->defaultVariant->hasImage() : $product->hasImage())
                                     <a href="{{ route('product.show', $product->defaultVariant? $product->defaultVariant : $product) }}" class="px-1 border rounded-lg">
@@ -103,13 +103,13 @@
                                     @endif
                                     @endforeach
                                 </div>
-                            @endif
+                            @endif --}}
                             
                             @if( $this->shouldSelectVariantByAttribute() )
+                                <div class="">{{ __('Avaiable variants') }}:</div>
                                 @foreach($attributes as $id=>$name)
                                     @if($product->attributeValues->pluck('attribute_id')->contains($id))
-                                        <div class="">
-                                            <div class="">{{$name}}</div>
+                                        <div class="py-1">
                                             <div class="relative flex space-x-1">
                                                 @foreach ( $variantsAttributeValues->where('attribute.id',$id)->sortBy('value') as $attributeValue )
                                                     <label @class([
@@ -117,7 +117,7 @@
                                                         'text-gray-500' => !$this->variantExists($id, $attributeValue->id),
                                                         'border-primary-500' => $this->selection[$id] == $attributeValue->id
                                                     ])>
-                                                        {{$attributeValue->value}}
+                                                        {{ $this->getAttributeValueLabel($name, $attributeValue->value) }}
                                                         <input type="radio" class="hidden"
                                                             wire:model="selection.{{$id}}"
                                                             value="{{$attributeValue->id}}"
@@ -133,7 +133,7 @@
                         {{-- End Details Section --}}
                         
                         {{-- Actions --}}
-                        <div class="pt-2 mt-auto mb-0 space-y-2">
+                        <div class="space-y-2 md:pb-28">
 
                             @auth
                                 <div class="flex py-6">

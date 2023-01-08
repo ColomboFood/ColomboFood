@@ -236,6 +236,7 @@
     "Set As Default Variant": "Imposta Come Variante Principale",
     "Default Variant": "Variante Principale",
     "Variants updated": "Varianti aggiornate",
+    "Avaiable variants": "Varianti disponibili",
 
     "Attribute" : "Attributo",
     "Attributes" : "Attributi",
@@ -297,5 +298,9 @@
     "Avaiable From": "Disponibile Dal",
     "Advance Sale": "Prevendita",
 
-    "Login to view price": "Accedi per vedere il prezzo"
+    "See more": "Scopri",
+    "Login to view price": "Accedi per vedere il prezzo",
+    "Haven't found anything, yet?": "Non hai ancora trovato articoli che ti interessano?",
+    "To Shop": "Al Negozio",
+    "Random Product": "Articolo casuale"
 } 

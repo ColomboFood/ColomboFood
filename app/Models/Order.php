@@ -227,8 +227,7 @@ class Order extends Model
 
     public function restock()
     {
-        foreach($this->products as $product)
-        {
+        foreach ($this->products as $product) {
             $product->quantity += $product->pivot->quantity;
             $product->save();
         }
