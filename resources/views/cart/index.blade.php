@@ -25,7 +25,7 @@
                 <div class="w-full text-center lg:w-3/6">
                     <span class="">{{ __('Description') }}</span>
                 </div>
-                <div class="w-full text-center lg:w-1/6">
+                <div class="w-full text-left lg:w-1/6">
                     {{ __('Price') }}
                 </div>
                 <div class="w-full text-center lg:w-1/6">

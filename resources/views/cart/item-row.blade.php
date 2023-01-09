@@ -59,20 +59,23 @@
         wire:model.lazy="item.qty"
     >
         <div class="flex text-gray-500 border border-secondary-300 flex-nowrap focus-within:border-secondary-300 focus-within:ring focus-within:ring-secondary-200 focus-within:ring-opacity-50">
-            <button class="grid grow place-items-center text-secondary-500 "
+            <button class="grid grow place-items-center text-secondary-500 disabled:opacity-80"
                 @click="decrease($event)"
+                x-bind:disabled="modified"
             >
                 <x-icons.minus class=""/>
             </button>
-            <input class="w-16 px-2 py-4 font-semibold text-center text-gray-900 border-none lg:text-right focus:ring-transparent focus:outline-none"
+            <input class="w-16 px-2 py-4 font-semibold text-center text-gray-900 border-none lg:text-right focus:ring-transparent focus:outline-none disabled:opacity-80"
                 type="number" 
                 value="{{$item['qty']}}"
-                @change.stop="validate"
+                @change.stop="modified = true; validate();"
                 @input.stop=""
                 x-ref="inputNumber"
+                x-bind:disabled="modified"
             >
-            <button class="grid grow place-items-center text-secondary-500 "
+            <button class="grid grow place-items-center text-secondary-500 disabled:opacity-80"
                 @click="increase($event)"
+                x-bind:disabled="modified"
             >
                 <x-icons.plus/>
             </button>
@@ -101,23 +104,27 @@
                         if(this.$refs.inputNumber.value > this.max)
                             this.$refs.inputNumber.value = this.max;
                         this.$dispatch('input', this.$refs.inputNumber.value);
-                        this.modified = false;
                         this.itemQty = this.$refs.inputNumber.value;
                     },
                     increase(event){
-                        if(this.max == null || this.$refs.inputNumber.value<this.max)
+                        if(!this.modified)
                         {
-                            this.$refs.inputNumber.value++;
-                            this.modified = true;
-                            this.validate();
+                            if(this.max == null || this.$refs.inputNumber.value<this.max)
+                            {
+                                this.$refs.inputNumber.value++;
+                                this.modified = true;
+                                this.validate();
+                            }
                         }
                     },
                     decrease(event){
-                        if(this.min == null || this.$refs.inputNumber.value>this.min)
-                        {
-                            this.$refs.inputNumber.value--;
-                            this.modified = true;
-                            this.validate();
+                        if(!this.modified){
+                            if(this.min == null || this.$refs.inputNumber.value>this.min)
+                            {
+                                this.$refs.inputNumber.value--;
+                                this.modified = true;
+                                this.validate();
+                            }
                         }
                     },
 

@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="p-2 mt-4 space-y-6 ">
+        <div class="w-full p-2 mt-4 space-y-6">
             @if ($categories->count())
                 <div class="space-y-2">
                     <div class="mb-2 font-bold">{{ __('Categories') }}</div>
