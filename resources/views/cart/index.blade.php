@@ -1,13 +1,10 @@
-{{-- <x-slot name="header">
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        {{ __('Cart') }}
-    </h2>
-</x-slot> --}}
-
-<div class="px-6 py-8 mx-auto max-w-7xl lg:px-8">
+<x-slot name="header">
     <h1 class="mb-4 text-3xl font-bold">
         {{ __('Cart') }}
     </h1>
+</x-slot>
+
+<div class="px-6 py-8 mx-auto max-w-7xl lg:px-8">
     <div class="mb-12 text-gray-500">
         {!! trans_choice('shopping_cart.cart.count', $count) !!}
     </div>
@@ -83,9 +80,9 @@
                     @if(!count($invalid_quantity_row_ids))
                     <form action="{{ route('order.create') }}" method="GET">
                     @csrf
-                        <x-secondary-button class="w-full py-4 text-base">
+                        <x-button class="w-full py-4 text-base">
                             {{ __('Checkout') }}
-                        </x-secondary-button>
+                        </x-button>
                     </form>
                     @endif
                 </x-slot>

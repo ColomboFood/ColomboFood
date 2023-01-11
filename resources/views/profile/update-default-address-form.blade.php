@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile default address used for shipping and billing.') }}
+        {{ __('Update your account\'s profile default address used for shipping.') }}
         <span>
         </span>
     </x-slot>
@@ -42,7 +42,7 @@
         <!-- Postal Code -->
         <div class="col-span-6 sm:col-span-2">
             <x-jet-label for="postal_code" value="{{ __('Postal Code') }}" />
-            <x-input id="postal_code" type="text" class="block w-full mt-1" wire:model.defer="address.postal_code" autocomplete="postal_code" />
+            <x-input id="postal_code" type="text" maxlength="5" class="block w-full mt-1" wire:model.defer="address.postal_code" autocomplete="postal_code" />
             <x-jet-input-error for="address.postal_code" class="mt-2" />
         </div>
         

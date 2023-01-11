@@ -20,6 +20,7 @@ return [
     ],
 
     'order_statuses' => [
+        'draft' => 'Draft',
         'cancelled' => 'cancelled',
         'completed' => 'Completed',
         'disputed' => 'Disputed',

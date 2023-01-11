@@ -16,10 +16,18 @@
             @if(!$this->wishlistContains($product))
                 <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center rounded-full shadow-xl cursor-pointer text-primary-500 hover:text-primary-600 hover:bg-primary-100 bg-primary-50 -top-1 -right-2"
                     title="{{ __('shopping_cart.add.wishlist') }}"
-                    wire:click.prevent="addToWishlist({{ $product }})"
+                    wire:click.prevent="addToWishlist({{ $product->id }})"
                 >
                     <x-icons.heart class="w-full h-full"
-                        filled="{{$this->wishlistContains($product)}}"
+                        filled="false"
+                    />
+                </div>
+            @else
+                <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center rounded-full shadow-xl cursor-pointer text-primary-500 hover:text-primary-600 hover:bg-primary-100 bg-primary-50 -top-1 -right-2"
+                    title="{{ __('shopping_cart.remove.wishlist') }}"
+                    wire:click.prevent="removeFromWishlist({{ $product->id }})"
+                >
+                    <x-icons.heart class="w-full h-full"
                     />
                 </div>
             @endif
@@ -55,34 +63,32 @@
     </div>
 
     <div class="order-2 w-full mt-6 text-center md:order-1 md:mt-0 md:w-3/12 lg:w-2/12"
-        x-data="quantityInput(@entangle('item.qty'))"
-        wire:model.lazy="item.qty"
+        x-data="quantityInput({{$item['qty']}})"
     >
-        <div class="flex text-gray-500 border border-secondary-300 flex-nowrap focus-within:border-secondary-300 focus-within:ring focus-within:ring-secondary-200 focus-within:ring-opacity-50">
-            <button class="grid grow place-items-center text-secondary-500 disabled:opacity-80"
-                @click="decrease($event)"
-                x-bind:disabled="modified"
+        <div class="flex text-gray-500 border border-secondary-300 flex-nowrap focus-within:border-secondary-300 focus-within:ring focus-within:ring-secondary-200 focus-within:ring-opacity-50"
+            wire:model.lazy="item.qty"
+        >
+            <button class="grid grow place-items-center text-secondary-500 disabled:opacity-50"
+                @click.debounce="decrease"
             >
-                <x-icons.minus class=""/>
+                <x-icons.minus/>
             </button>
-            <input class="w-16 px-2 py-4 font-semibold text-center text-gray-900 border-none lg:text-right focus:ring-transparent focus:outline-none disabled:opacity-80"
-                type="number" 
-                value="{{$item['qty']}}"
-                @change.stop="modified = true; validate();"
+            <input class="appearance-none w-16 px-2 py-4 font-semibold text-center text-gray-900 border-none lg:text-right focus:ring-transparent focus:outline-none disabled:opacity-50"
+                type="number"
+                @change="validate"
                 @input.stop=""
                 x-ref="inputNumber"
-                x-bind:disabled="modified"
+                value="{{$item['qty']}}"
             >
-            <button class="grid grow place-items-center text-secondary-500 disabled:opacity-80"
-                @click="increase($event)"
-                x-bind:disabled="modified"
+            <button class="grid grow place-items-center text-secondary-500 disabled:opacity-50"
+                @click.debounce="increase"
             >
                 <x-icons.plus/>
             </button>
         </div>
     </div>
 
-    <div class="order-1 w-full px-4 mt-6 text-center md:order-2 nd:text-right md:mt-0 md:w-3/12 lg:w-2/12">
+    <div class="order-1 w-full px-4 md:px-0 md:pl-4 mt-6 text-center md:order-2 md:text-right md:mt-0 md:w-3/12 lg:w-2/12">
         <div class="text-lg font-black text-gray-900">
             {{ $product->pricePerQuantity($item['qty']!='' ? $item['qty'] : 1, $product->taxed_price) }}€
         </div>
@@ -95,35 +101,33 @@
             document.addEventListener('alpine:init', () => {
                 Alpine.data('quantityInput', ( itemQty = 0 ) => ({
                     itemQty : itemQty,
-                    modified : false,
                     min: 1,
                     max: 99,
                     validate(){
-                        if(!this.$refs.inputNumber.value ||  this.$refs.inputNumber.value<this.min || isNaN( this.$refs.inputNumber.value))
-                            this.$refs.inputNumber.value = this.min;
-                        if(this.$refs.inputNumber.value > this.max)
-                            this.$refs.inputNumber.value = this.max;
-                        this.$dispatch('input', this.$refs.inputNumber.value);
-                        this.itemQty = this.$refs.inputNumber.value;
+                        if(this.$refs.inputNumber){
+                            if(!this.$refs.inputNumber.value ||  this.$refs.inputNumber.value<this.min || isNaN( this.$refs.inputNumber.value))
+                                this.$refs.inputNumber.value = this.min;
+                            if(this.$refs.inputNumber.value > this.max)
+                                this.$refs.inputNumber.value = this.max;
+                            //this.$dispatch('change', this.$refs.inputNumber.value);
+                            this.itemQty = this.$refs.inputNumber.value;
+                        }
                     },
-                    increase(event){
-                        if(!this.modified)
-                        {
+                    increase(){
+                        if(this.$refs.inputNumber){
                             if(this.max == null || this.$refs.inputNumber.value<this.max)
                             {
                                 this.$refs.inputNumber.value++;
-                                this.modified = true;
-                                this.validate();
+                                this.$dispatch('change', this.$refs.inputNumber.value);
                             }
                         }
                     },
-                    decrease(event){
-                        if(!this.modified){
+                    decrease(){
+                        if(this.$refs.inputNumber){
                             if(this.min == null || this.$refs.inputNumber.value>this.min)
                             {
                                 this.$refs.inputNumber.value--;
-                                this.modified = true;
-                                this.validate();
+                                this.$dispatch('change', this.$refs.inputNumber.value);
                             }
                         }
                     },

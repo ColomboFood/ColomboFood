@@ -2,6 +2,7 @@
 
 namespace App\Traits\Livewire;
 
+use Throwable;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -206,10 +207,30 @@ trait WithShoppingLists
     public function persist($instance)
     {
         if(Auth::check()) {
-            Cart::instance($instance)->erase(Auth::user()->email);
-            Cart::instance($instance)->store(Auth::user()->email);
-            Cart::instance($instance)->restore(Auth::user()->email);
-            Cart::instance($instance)->store(Auth::user()->email);
+            try{
+                Cart::instance($instance)->erase(Auth::user()->email);
+            }
+            catch(Throwable $e){
+
+            }
+            try{
+                Cart::instance($instance)->store(Auth::user()->email);
+            }
+            catch(Throwable $e){
+                
+            }
+            try{
+                Cart::instance($instance)->restore(Auth::user()->email);
+            }
+            catch(Throwable $e){
+                
+            }
+            try{
+                Cart::instance($instance)->store(Auth::user()->email);
+            }
+            catch(Throwable $e){
+                
+            }
         }
     }
 
@@ -235,6 +256,30 @@ trait WithShoppingLists
         return Cart::instance($instance)->search(function ($item, $row) use ($product) {
             return $item->id === $product->id;
         })->isNotEmpty();
-    } 
+    }
+
+    public function areCartProductsAvaiable()
+    {
+        $avaiable = true;
+        if (!config('custom.skip_quantity_checks')) {
+            foreach (Cart::instance($this->cartInstance)->content() as $key=>$item) {
+                if ($item->model->quantity < $item->qty) {
+                    $avaiable = false;
+                }
+            }
+        }
+        return $avaiable;
+    }
+
+    public function maxAvaiableFrom()
+    {
+        $max_avaiable_from = null;
+        foreach(Cart::instance($this->cartInstance)->content() as $key=>$item)
+        {
+            if($item->model->avaiable_from > $max_avaiable_from && $item->model->avaiable_from > today()) 
+                $max_avaiable_from = $item->model->avaiable_from;
+        }
+        return $max_avaiable_from;
+    }
 
 }

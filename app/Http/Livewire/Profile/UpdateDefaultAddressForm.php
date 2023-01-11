@@ -17,7 +17,7 @@ class UpdateDefaultAddressForm extends Component
         'address.city' => 'required',
         'address.province' => 'required|size:2',
         'address.country_region' => 'required',
-        'address.postal_code' => 'required|min:5',
+        'address.postal_code' => 'required|min:5|max:5',
     ];
 
     protected $listeners = ['defaultAddressDeleted' => 'defaultAddressDeleted'];

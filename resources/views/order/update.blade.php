@@ -109,7 +109,7 @@
                                         <x-input-floating label="{{ __('Country/Region') }}" name="shipping_address_country_region" wire:model.lazy="shipping_address.country_region"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Postal Code') }}" name="shipping_address_postal_code" wire:model.lazy="shipping_address.postal_code"/>
+                                        <x-input-floating label="{{ __('Postal Code') }}" maxlength="5" name="shipping_address_postal_code" wire:model.lazy="shipping_address.postal_code"/>
                                     </div>
                                 </div>
 
@@ -213,7 +213,7 @@
                                         <x-input-floating label="{{ __('Country/Region') }}" name="billing_address_country_region" wire:model.lazy="billing_address.country_region"/>
                                     </div>
                                     <div class="relative z-0 w-full mb-6 group">
-                                        <x-input-floating label="{{ __('Postal Code') }}" name="billing_address_postal_code" wire:model.lazy="billing_address.postal_code"/>
+                                        <x-input-floating label="{{ __('Postal Code') }}" maxlength="5" name="billing_address_postal_code" wire:model.lazy="billing_address.postal_code"/>
                                     </div>
                                 </div>
                                 </div>

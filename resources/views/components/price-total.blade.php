@@ -1,10 +1,10 @@
-<div class="px-6 py-12 space-y-5 text-white bg-primary-500">
+<div class="px-6 py-12 space-y-5 text-white bg-secondary-500">
 
     <div class="mb-2 text-3xl font-bold">{{ isset($heading) ? $heading :  __('Total') }}</div>
 
     <div class="flex items-center justify-between">
         <span class="">{{ __('Subtotal') }}</span>
-        <span class="text-xl font-bold">{{ $subtotal }}€</span>
+        <span class="text-xl font-bold">{{ number_format($subtotal,2) }}€</span>
     </div>
 
     @if($coupon)
@@ -14,7 +14,7 @@
     </div>
     <div class="flex items-center justify-between">
         <span class=""></span>
-        <span class="text-xl font-bold">{{ $discountedSubtotal }}€</span>
+        <span class="text-xl font-bold">{{ number_format($discountedSubtotal, 2) }}€</span>
     </div>
     @endif
     
@@ -23,7 +23,7 @@
         <span class="">
             {{ __('Tax') }}
         </span>
-        <span class="text-xl font-bold">{{ $tax }}€</span>
+        <span class="text-xl font-bold">{{ number_format($tax, 2) }}€</span>
     </div>
     @endif
 
@@ -32,7 +32,7 @@
         <span class="">
             {{ __('Shipping') }} : {{ $shipping->name }}
         </span>
-        <span class="text-xl font-bold">{{ $shippingPrice }}€</span>
+        <span class="text-xl font-bold">{{ number_format($shippingPrice, 2) }}€</span>
     </div>
     @endif
 
@@ -46,13 +46,15 @@
         <span class="text-xl font-bold">-</span>
     </div> --}}
 
-    <div class="flex items-center justify-between pt-8 pb-12 border-t border-primary-100">
+    <div class="flex items-center justify-between pt-8 pb-6 border-t border-white">
         <span class="text-xl font-bold">{{ __('Total') }}</span>
-        <span class="text-xl font-bold">{{ $total }}€</span>
+        <span class="text-xl font-bold">{{ number_format( $total, 2) }}€</span>
     </div>
 
     @if(isset($actions))
-        {{ $actions }}
+        <div class="pt-6">
+            {{ $actions }}
+        </div>
     @endif
 
 </div>

@@ -14,6 +14,18 @@ class Order extends Model
     protected $fillable = [
         'shipping_address',
         'billing_address',
+        'shipping_address_full_name',
+        'shipping_address_address',
+        'shipping_address_city',
+        'shipping_address_province',
+        'shipping_address_country_region',
+        'shipping_address_postal_code',
+        'billing_address_full_name',
+        'billing_address_address',
+        'billing_address_city',
+        'billing_address_province',
+        'billing_address_country_region',
+        'billing_address_postal_code',
         'fiscal_code',
         'vat',
         'note',
@@ -58,6 +70,13 @@ class Order extends Model
         'total'      => 'decimal:2',
         'shipping_price' => 'decimal:2',
     ];
+
+    public function scopePlaced($query)
+    {
+        $excluded_statuses = [ 'draft' ];
+        
+        $query->whereDoesntHave('status', fn($query) => $query->whereIn('name', $excluded_statuses) );
+    }
 
     public function status()
     {
@@ -152,10 +171,10 @@ class Order extends Model
         switch(strtolower($status))
         {
             case('payment_failed'):
-                $can = $this->status->name == 'pending';
+                $can = $this->status->name == 'pending' || $this->status->name == 'draft';
                 break;
             case('paied'):
-                $can = $this->status->name == 'pending';
+                $can = $this->status->name == 'pending' || $this->status->name == 'draft';
                 break;
             case('preparing'):
                 $can = $this->status->name == 'paied';
@@ -186,14 +205,14 @@ class Order extends Model
 
     public function canBePaied()
     {
-        $payable_statuses = OrderStatus::whereIn('name',['payment_failed'])->get();
+        $payable_statuses = OrderStatus::whereIn('name',['payment_failed','draft'])->get();
 
         return $payable_statuses->contains($this->status);
     }
 
     public function canBeEdited()
     {
-        $editabled_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied'])->get();
+        $editabled_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied','draft'])->get();
 
         return $editabled_statuses->contains($this->status);
     }
@@ -227,9 +246,11 @@ class Order extends Model
 
     public function restock()
     {
-        foreach ($this->products as $product) {
-            $product->quantity += $product->pivot->quantity;
-            $product->save();
+        if(config('custom.skip_quantity_checks')) {
+            foreach ($this->products as $product) {
+                $product->quantity += $product->pivot->quantity;
+                $product->save();
+            }
         }
 
         if($this->coupon)

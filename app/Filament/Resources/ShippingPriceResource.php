@@ -65,6 +65,17 @@ class ShippingPriceResource extends Resource
                                             ->thousandsSeparator(',')
                                             ->maxValue(999999)
                                     ),
+                                Forms\Components\TextInput::make('min_price')->label(__('Minimum Price'))
+                                    ->prefix('€')
+                                    ->mask(
+                                        fn (Forms\Components\TextInput\Mask $mask) => $mask
+                                            ->numeric()
+                                            ->decimalPlaces(2)
+                                            ->decimalSeparator('.')
+                                            ->mapToDecimalSeparator([',', '.'])
+                                            ->thousandsSeparator(',')
+                                            ->maxValue(999999)
+                                    ),
                                 Forms\Components\TextInput::make('description')->label(__('Description'))
                                     ->columnSpan('full'),
                                 Forms\Components\Fieldset::make('delivery_time')->label(__('Delivery Time'))

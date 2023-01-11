@@ -33,7 +33,7 @@ class OrdersChart extends LineChartWidget
     {
         $activeFilter = $this->filter;
 
-        $excluded_statuses = [ 'payment_failed', 'refunded', 'cancelled' ];
+        $excluded_statuses = [ 'draft', 'payment_failed', 'refunded', 'cancelled' ];
 
         switch($activeFilter)
         {

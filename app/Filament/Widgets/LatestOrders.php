@@ -24,7 +24,7 @@ class LatestOrders extends BaseWidget
 
     protected function getTableQuery(): Builder
     {
-        return Order::query()->latest('updated_at')->limit(50);
+        return Order::placed()->latest('updated_at')->limit(50);
     }
 
     protected function getTableRecordUrlUsing(): Closure

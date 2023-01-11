@@ -3,9 +3,9 @@
 </x-slot>
 
 <x-slot name="header">
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
+    <div class="text-xl font-semibold leading-tight">
         <a class="underline" href="{{ route('product.index') }}">{{ __('Shop') }}</a> / <span class="text-gray-500">{{ $product->name }}</span>
-    </h2>
+    </div>
 </x-slot>
 
 <div class="container px-5 py-12 mx-auto">
@@ -195,7 +195,7 @@
                         'opacity-80' : tab != 0
                     }"
                     x-on:click="tab=0"
-                >{{ __('Details') }}</div>
+                >{{ __('Description') }}</div>
                 <div class="pb-4 transition ease-in-out border-b-2 cursor-pointer hover:border-primary-500"
                     :class="{ 
                         'opacity-100 border-primary-500' : tab == 1,

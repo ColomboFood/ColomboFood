@@ -153,8 +153,9 @@ class OrderResource extends Resource
                                             ])
                                             ->columnSpan('full'),
 
-                                        Forms\Components\RichEditor::make('billing_label')->label(__('Billing Label'))
+                                        Forms\Components\RichEditor::make('billing_label')->label(__('Billing Address'))
                                             ->columnSpan('full'),
+    
                                     ])
                                     ->columns([
                                         'md' => 2
@@ -178,6 +179,10 @@ class OrderResource extends Resource
                                 Forms\Components\TextInput::make('email')->label(__('Email'))
                                     ->email(),
                                 Forms\Components\TextInput::make('phone')->label(__('Telefono')),
+
+                                Forms\Components\TextInput::make('fiscal_code')->label(__('Fiscal Code')),
+                                
+                                Forms\Components\TextInput::make('vat')->label(__('VAT')),
                             ]),
                         Forms\Components\Card::make()
                             ->schema([

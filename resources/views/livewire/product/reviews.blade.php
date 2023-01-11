@@ -87,12 +87,11 @@
                     </div>
                 </div>
 
-                <div class="w-full" x-data="{ value : '',  max_chars : 500 }"
-                    >
-                    <x-textarea class="w-full h-32 text-sm resize-none"
+                <div class="w-full" x-data="{ value : '',  max_chars : 500 }">
+                    <textarea class="w-full h-32 text-sm border-gray-300 shadow-sm resize-none focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                         id="description" name="description" x-bind:maxlength="max_chars" 
                         x-model="value"
-                    ></x-textarea>
+                    ></textarea>
                     <p class="text-xs"
                         :class="(value.length < max_chars) ? 'text-gray-600' : 'text-red-500'"
                     >

@@ -1,11 +1,10 @@
 <div class="w-full">
-    <div class="mt-1">
-        <x-button class="justify-center rounded-[4px] w-full text-md py-4" wire:click="confirmPayment" wire:loading.attr="disabled">
-            {{ __('Complete Payment') }}
-        </x-button>
-    </div>
 
-    <div class="mt-1"
+    <x-button class="w-full py-4 text-base" wire:click="confirmPayment" wire:loading.attr="disabled">
+        {{ __('Complete Payment') }}
+    </x-button>
+
+    {{-- <div class="mt-1"
         wire:ignore
         x-data="{
             total : {{ $total }}
@@ -27,6 +26,7 @@
                             color:  'gold',
                             shape:  'rect',
                             label:  'pay',
+                            height: 52
                         },
 
                         createOrder: (data, actions) => {
@@ -74,7 +74,7 @@
                         },
 
                         onError: function (err) {
-                            console.log('qualcosa non torna :'+err);
+                            console.log('PayPal payment error :'+err);
                         },
                         
                     })
@@ -92,7 +92,7 @@
         "
     >
         <div id="paypal-buttons" class="relative z-0 w-full"></div>
-    </div>
+    </div> --}}
 
     @if($gateway=='stripe' && $intent)
     <!-- Delete User Confirmation Modal -->
@@ -121,7 +121,7 @@
                                 this.errorMessage = error.message;
                                 @this.set('submitDisabled', false);
                             } else {
-                                console.log('qualcosa non torna');
+                                console.log('Stripe unexpected error');
                             }
                         }
                     }"

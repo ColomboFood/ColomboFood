@@ -36,7 +36,8 @@ class CancelUnpaidOrders implements ShouldQueue
     {
         $failed_status = OrderStatus::where('name',insensitive_like(),'payment_failed')->first();
         $cancelled_status = OrderStatus::where('name',insensitive_like(),'cancelled')->first();
-        if($failed_status && $cancelled_status)
+        $draft_status = OrderStatus::where('name',insensitive_like(),'draft')->first();
+        if($failed_status && $cancelled_status && $draft_status)
         {
             $orders = Order::where('order_status_id', $failed_status->id )
                 ->whereDate('updated_at', '<=' , Carbon::now()->sub('days',2))->get();
@@ -49,6 +50,9 @@ class CancelUnpaidOrders implements ShouldQueue
                 ]);
                 $order->restock();
             }
+
+            $orders = Order::where('order_status_id', $draft_status->id)
+                ->whereDate('updated_at', '<=', Carbon::now()->sub('days',7)->delete());
         }
         else
         {

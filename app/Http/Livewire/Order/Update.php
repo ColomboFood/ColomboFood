@@ -43,7 +43,7 @@ class Update extends Component
             'shipping_address.city' => 'required',
             'shipping_address.province' => 'required|size:2',
             'shipping_address.country_region' => 'required',
-            'shipping_address.postal_code' => 'required|min:5',
+            'shipping_address.postal_code' => 'required|min:5|max:5',
 
             'same_address' => '',
     
@@ -52,7 +52,7 @@ class Update extends Component
             'billing_address.city' => 'exclude_if:same_address,true|required',
             'billing_address.province' => 'exclude_if:same_address,true|required|size:2',
             'billing_address.country_region' => 'exclude_if:same_address,true|required',
-            'billing_address.postal_code' => 'exclude_if:same_address,true|required|min:5',
+            'billing_address.postal_code' => 'exclude_if:same_address,true|required|min:5|max:5',
         ];
     }
     
@@ -81,7 +81,7 @@ class Update extends Component
             'shipping_address.city' => 'required',
             'shipping_address.province' => 'required|size:2',
             'shipping_address.country_region' => 'required',
-            'shipping_address.postal_code' => 'required|min:5',
+            'shipping_address.postal_code' => 'required|min:5|max:5',
             'phone' => 'nullable|numeric|digits_between:10,13',
         ]);
         

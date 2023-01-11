@@ -129,7 +129,7 @@
 
             @if ($this->isSetFilters())
                 <div class="grid place-items-center">
-                    <x-secondary-button wire:click="resetFilters">{{ __('Clear filters') }}</x-secondary-button>
+                    <x-secondary-button class="w-full" wire:click="resetFilters">{{ __('Clear filters') }}</x-secondary-button>
                 </div>
             @endif
 

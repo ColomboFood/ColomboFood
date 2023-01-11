@@ -16,6 +16,7 @@ class OrderStatusesTableSeeder extends Seeder
     public function run()
     {
         $statuses = [
+            'draft',
             'pending',
             'payment_failed',
             'paied',

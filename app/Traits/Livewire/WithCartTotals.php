@@ -77,20 +77,19 @@ trait WithCartTotals
     {
         $this->coupon_code = $this->coupon_code ?? session()->get('coupon');
         $this->coupon = Coupon::where('code',$this->coupon_code)->first();
-        
+
+        $this->subtotal = Cart::instance('default')->subtotal(null,null,'');
         if ($this->coupon) {
-            $this->subtotal = Cart::instance('default')->subtotal(null,null,'');
             $this->discounted_subtotal = round( (float) $this->subtotal - $this->coupon->discount(Cart::instance('default')->subtotal(null,null,'')) , 2);
             $tax_total = 0;
             foreach(Cart::instance('default')->content() as $item)
             {
-                $tax_total += round( ( $item->price - round($this->coupon->discount($item->price),2) ) * $item->taxRate/100 , 2 );
+                $tax_total += round( ( $item->price - round($this->coupon->discount($item->price),2) ) * $item->qty * $item->taxRate/100 , 2 );
             }
             $this->tax = round( $tax_total , 2);
             $this->total = round( $this->discounted_subtotal + $this->tax, 2);
         }
-        else{
-            $this->subtotal = Cart::instance('default')->subtotal(null,null,'');
+        else {
             $this->tax = Cart::instance('default')->tax();
             $this->total = Cart::instance('default')->total(null,null,'');
         }

@@ -171,7 +171,9 @@ return [
         'city' => 'Città',
         'province' => 'Provincia',
         'country_region' => 'Paese',
-        'postal_code' => 'Codice Postale'
+        'postal_code' => 'Codice Postale',
+        'vat' => 'Partita IVA',
+        'fiscal_code' => 'Codice Fiscale'
     ],
 
     /*

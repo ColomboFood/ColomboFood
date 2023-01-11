@@ -16,7 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Auth::user()->orders()->with('products')->latest()->paginate(10);
+        $orders = Auth::user()->orders()->with(['products','status'])
+            ->whereHas('status', fn($query) => $query->where('order_statuses.name','!=','draft'))
+            ->orderBy('id','desc')->paginate(10);
 
         return view('order.index', compact('orders'));
     }

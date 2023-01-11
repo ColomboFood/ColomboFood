@@ -48,9 +48,17 @@
                             <div class="relative h-48 overflow-hidden group">
                                 <img @class([
                                         'object-cover h-full',
-                                        'transition duration-500 transform group-hover:scale-90' => $product->hasImage()
+                                        'transition transform duration-200 group-hover:scale-90' => $product->hasImage(),
+                                        'translate-x-0 group-hover:translate-x-full' => count($product->gallery)>1
                                     ])
-                                    src="{{ $product->image }}"/>
+                                    src="{{ $product->image }}" />
+                                @if(count($product->gallery)>1)
+                                    <img @class([
+                                            'object-cover h-full absolute inset-0',
+                                            'transition transform duration-200 group-hover:translate-x-0 -translate-x-full' => $product->hasImage()
+                                        ])
+                                        src="{{ $product->gallery[1] }}" />
+                                @endif
                                 @if($product->hasImage())
                                     <div class="absolute top-0 block w-1/2 h-full transform -skew-x-12 -inset-full z-5 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
                                 @endif

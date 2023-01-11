@@ -195,6 +195,12 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         return $this->belongsToMany(Order::class)->withPivot('price', 'quantity', 'discount');
     }
 
+    public function paidOrders()
+    {
+        $validStatuses = OrderStatus::whereIn('name',['paied','completed'])->get()->pluck('id');
+        return $this->belongsToMany(Order::class)->whereIn('order_status_id', $validStatuses)->withPivot('price', 'quantity', 'discount');
+    }
+
     public function variants()
     {
         return $this->hasMany(Product::class, 'variant_id');

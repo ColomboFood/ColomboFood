@@ -1,17 +1,13 @@
-{{-- <x-slot name="header">
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        {{ __('Wishlist') }}
-    </h2>
-</x-slot> --}}
-
-<div class="px-6 py-8 mx-auto max-w-7xl lg:px-8">
+<x-slot name="header">
     <h1 class="mb-4 text-3xl font-bold">
         {{ __('Wishlist') }}
     </h1>
+</x-slot>
+
+<div class="px-6 py-8 mx-auto max-w-7xl lg:px-8">
     <div class="mb-12 text-gray-500">
         {!! trans_choice('shopping_cart.wishlist.count', $count) !!}
     </div>
-
     @if ($count)
         <div class="flex flex-wrap items-center w-full">
             <div class="hidden w-full mb-6 font-bold lg:flex">

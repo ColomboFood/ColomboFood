@@ -73,7 +73,7 @@
     "Prepare for Shipping" : "Segna come In Lavorazione",
     "History" : "Cronologia",
     "Order Update" : "Aggiornamento Ordine",
-    "Note" : "Nota",
+    "Note" : "Note",
 
     "Coupons" : "Coupon",
     "Coupon Code" : "Codice Coupon",
@@ -163,6 +163,7 @@
     "Select A New Photo" : "Scegli una nuova immagine",
     "Remove Photo" : "Rimuovi Foto",
     "Update your account's profile default address used for shipping and billing." : "Aggiorna il tuo indirizzo di default per le spedizioni e la fatturazione.",
+    "Update your account's profile default address used for shipping." : "Aggiorna il tuo indirizzo di default per le spedizioni.",
     "Are you sure you want to delete your default address?" : "Sei sicuro di voler cancellare il tuo indirizzo di default?",
     "Photo" : "Foto",
     "Update Password" : "Gestione Password",
@@ -211,7 +212,7 @@
     "Whoops! Something went wrong." : "Alcune informazioni non sono state inserite correttamente.",
 
     "Complete Payment" : "Completa Pagamento",
-    "Invalid Coupon" : "Coupon Non Valido",
+    "Invalid Coupon" : "Coupon non valido",
     "Coupon Already Redeemed" : "Coupon già riscattato",
     "Expired Coupon" : "Coupon Scaduto",
     "Required minimum total of" : "Serve una spesa minima di",
