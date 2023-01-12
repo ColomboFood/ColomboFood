@@ -64,13 +64,13 @@ class Index extends Component
         $this->emit('goTop');
     }
 
-    public function previousPage($page) { 
-        $this->setPage($page); 
+    public function previousPage($pageName) { 
+        $this->gotoPage(max($this->paginators[$pageName] - 1, 1), $pageName); 
         $this->emit('goTop');
     }
 
-    public function nextPage($page) { 
-        $this->setPage($page); 
+    public function nextPage($pageName) { 
+        $this->setPage($this->paginators[$pageName] + 1, $pageName);
         $this->emit('goTop');
     }
 
