@@ -1,5 +1,5 @@
 <div>
-    <div class="mt-5">
+    <div class="">
         <x-danger-button wire:click="$toggle('confirmingCartDeletion')" wire:loading.attr="disabled">
             {{ __('Empty') }}
         </x-danger-button>

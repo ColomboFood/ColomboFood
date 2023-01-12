@@ -22,5 +22,5 @@ return [
     'remove.cart' => 'Rimuovi dal carrello',
     'add.wishlist' => 'Aggiungi alla wishlist',
     'add.cart' => 'Aggiungi al carrello',
-    'checkout.min_price' => 'Acquisto minimo :price',
+    'checkout.min_price' => 'Spesa minima :price',
 ];

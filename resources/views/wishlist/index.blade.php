@@ -48,9 +48,14 @@
         </div>
     @endif
 
-    @if ($count)
-        <div class="flex items-center justify-end px-4 py-3 text-right bg-gray-50 sm:px-6">
+    {{-- @if($count)
+        <div class="flex items-center justify-between px-4 py-3 text-right bg-gray-50 sm:px-6">
+            <div>
+                <a href="{{ route('product.index') }}">
+                    <x-button class="w-full">{{ __('To Shop') }}</x-button>
+                </a>
+            </div>
             @livewire('wishlist.destroy-form')
         </div>
-    @endif
+    @endif --}}
 </div>

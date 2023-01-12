@@ -3,22 +3,24 @@
     <div class="w-full h-[32rem] bg-cover bg-right-bottom"
         style="background-image: url('/img/homebanner.png')"
     >
-        <div class="container pt-24 mx-auto lg:pt-32">
-            <div class="w-full px-6 py-4 mx-auto bg-white sm:px-2 sm:w-96 md:p-auto bg-opacity-80 md:bg-opacity-0 md:ml-6 lg:ml-20 lg:w-96">
-                <x-jet-application-logo class="w-full"/>
-                {{-- <x-algolia-autocomplete class="w-full mt-6"/> --}}
-                <form method="GET" action="{{ route('product.index') }}">
-                    <div class="flex items-center w-full pr-2 mt-6 transition focus-within:border-primary-500 focus-within:border-b-2">
-                        <input class="flex-1 bg-transparent border-transparent peer focus:border-transparent focus:ring focus:ring-transparent"
-                            type="text" name="query" placeholder="{{ __('Search...') }}"
-                        />
-                        <button type="submit" class="transition duration-300 opacity-50 hover:opacity-100 peer-focus:opacity-100">
-                            <svg class="w-5 h-5 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
+        <div class="pt-24 mx-auto lg:container lg:pt-32">
+            <div class="w-full px-6 py-4 mx-auto text-center bg-white lg:text-left lg:px-2 lg:w-96 lg:p-auto bg-opacity-80 lg:bg-opacity-0 lg:ml-20">
+                <div class="mx-auto max-w-max">
+                    <x-jet-application-logo class="mx-auto lg:w-full max-h-28 lg:max-h-none"/>
+                    {{-- <x-algolia-autocomplete class="w-full mt-6"/> --}}
+                    <form method="GET" action="{{ route('product.index') }}">
+                        <div class="flex items-center w-full pr-2 mt-6 transition focus-within:border-primary-500 focus-within:border-b-2">
+                            <input class="flex-1 bg-transparent border-transparent peer focus:border-transparent focus:ring focus:ring-transparent"
+                                type="text" name="query" placeholder="{{ __('Search...') }}"
+                            />
+                            <button type="submit" class="transition duration-300 opacity-50 hover:opacity-100 peer-focus:opacity-100">
+                                <svg class="w-5 h-5 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -138,7 +138,9 @@
     "Invoice Number": "Numero Ricevuta",
 
     "Confirm Addresses" : "Conferma Indirizzi",
-    "Update Addresses" : "Aggiorna Indirizzi",
+    "Edit Addresses" : "Modifica Indirizzi",
+    "Confirm Order" : "Conferma Ordine",
+    "Edit Order" : "Modifica Ordine",
     "Check" : "Controlla",
     "Shipping Address" : "Indirizzo di spedizione",
     "Billing Address" : "Indirizzo di fatturazione",
@@ -298,10 +300,12 @@
     "Day": "Giorno",
     "Avaiable From": "Disponibile Dal",
     "Advance Sale": "Prevendita",
+    "Minimum Price": "Spesa minima",
 
     "See more": "Scopri",
     "Login to view price": "Accedi per vedere il prezzo",
     "Haven't found anything, yet?": "Non hai ancora trovato articoli che ti interessano?",
     "To Shop": "Al Negozio",
-    "Random Product": "Articolo casuale"
+    "Random Product": "Articolo casuale",
+    "Back to Shop": "Torna al Negozio"
 } 

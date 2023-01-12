@@ -1,5 +1,5 @@
 <div>
-    <div class="mt-5">
+    <div class="">
         <x-danger-button class="h-6 px-1 py-1" wire:click="$toggle('confirmingReviewDeletion')" wire:loading.attr="disabled">
             <x-icons.trash class="h-full"/>
         </x-danger-button>

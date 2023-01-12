@@ -25,6 +25,7 @@ class Create extends Component
     public $shipping_price;
     public $addresses_confirmed;
     public $cartContent;
+    public $shownStep;
 
     protected function rules(){
         return [
@@ -75,17 +76,40 @@ class Create extends Component
             $this->redirect(route('cart.index'));
         }
 
-        $this->cartContent = Cart::instance('default')->content();
+        $this->cartContent = Cart::instance('default')->content()->map(function($item){
+            return collect([
+                'id' => $item->id,
+                'name' => $item->name,
+                'price' => $item->price,
+                'qty' => $item->qty,
+                'pricePerQuantity' => $item->model->pricePerQuantity($item->qty!='' ? $item->qty : 1, $item->model->taxed_price)
+            ]);
+        });
         $this->order = new Order();
         $this->addresses_confirmed = false;
         $this->retrieveData();
         $this->refreshTotals();
+        $this->setShownStep();
     }  
 
     public function updatedShippingPriceId($value)
     {
         $this->shipping_price = $this->shipping_prices->where('id',$value)->first();
         session()->put('shipping_price', $this->shipping_price->id);
+    }
+
+    public function setShownStep()
+    {
+        $step = 1;
+        if($this->shipping_address != new Address() && $this->shipping_address == Auth::user()?->defaultAddress)
+        {
+            $step = 2;
+        }
+        if($step = 2 && $this->billing_address != new Address() && $this->billing_address == Auth::user()?->defaultAddress)
+        {
+            $step = 3;
+        }
+        $this->shownStep = $step;
     }
 
     public function updatePrices()
@@ -236,7 +260,7 @@ class Create extends Component
         $this->billing_address = $this->shipping_address;
     }
 
-    public function confirmAddresses()
+    public function confirmOrder()
     {
         $this->validate();
 
@@ -252,6 +276,18 @@ class Create extends Component
             ],[
                 'shipping_address' => $this->shipping_address->toJson(),
                 'billing_address' => $this->billing_address->toJson(),
+                'shipping_address_full_name' => $this->shipping_address->full_name,
+                'shipping_address_address' => $this->shipping_address->address,
+                'shipping_address_city' => $this->shipping_address->city,
+                'shipping_address_province' => $this->shipping_address->province,
+                'shipping_address_country_region' => $this->shipping_address->country_region,
+                'shipping_address_postal_code' => $this->shipping_address->postal_code,
+                'billing_address_full_name' => $this->billing_address->full_name,
+                'billing_address_address' => $this->billing_address->address,
+                'billing_address_city' => $this->billing_address->city,
+                'billing_address_province' => $this->billing_address->province,
+                'billing_address_country_region' => $this->billing_address->country_region,
+                'billing_address_postal_code' => $this->billing_address->postal_code,
                 'fiscal_code' => $this->fiscal_code,
                 'vat' => $this->vat,
                 'email' => $this->email,
@@ -275,32 +311,12 @@ class Create extends Component
                     'price' => $item['price'],
                     'quantity' => $item['qty'],
                 ];
-                // if(config('custom.skip_quantity_checks')) {
-                //     $product=\App\Models\Product::find($item->id);
-                //     $product->quantity = ($product->quantity >$item->qty) ? $product->quantity-$item->qty : 0;
-                //     $product->save();
-                // }
             }
             $this->order->products()->sync($pivots);
-
-            // if($this->coupon)
-            // {
-            //     $this->coupon->redemptions++;
-            //     $this->coupon->save();
-            // }
 
             $this->order->history()->create([
                 'order_status_id' => $status_id,
             ]);
-
-            // Cart::instance('default')->destroy();
-            // if(Auth::check())
-            //     Cart::instance('default')->erase(auth()->user()->email);
-            // session()->forget('coupon');
-            // $this->deleteData();
-
-            // if($gateway == 'paypal')
-            //     $this->order->setAsPaied();
         }
 
         $this->addresses_confirmed = true;
@@ -353,15 +369,6 @@ class Create extends Component
    
     public function render()
     {
-        // if($this->addresses_confirmed && Auth::check() && 
-        //     Auth::user()->defaultAddress && 
-        //     Auth::user()->defaultBillingAddress &&
-        //     (Auth::user()->fiscale_code || Auth::user()->vat)
-        // )
-        // {
-        //     $this->confirmAddresses();
-        // }
-
         return view('order.create');
     }
 }

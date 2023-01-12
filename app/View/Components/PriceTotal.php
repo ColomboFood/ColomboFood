@@ -15,13 +15,14 @@ class PriceTotal extends Component
     public $coupon;
     public $shipping;
     public $shippingPrice;
+    public $products;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($subtotal, $discountedSubtotal, $tax, $total, $coupon, $shipping = null, $shippingPrice = null, $heading = null)
+    public function __construct($subtotal, $discountedSubtotal, $tax, $total, $coupon, $shipping = null, $shippingPrice = null, $heading = null, $products = null)
     {
         $this->heading = $heading;
         $this->subtotal = $subtotal;
@@ -31,6 +32,7 @@ class PriceTotal extends Component
         $this->coupon = $coupon;
         $this->shipping = $shipping;
         $this->shippingPrice = $shippingPrice;
+        $this->products = $products;
     }
 
     /**

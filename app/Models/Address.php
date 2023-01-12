@@ -55,7 +55,7 @@ class Address extends Model
         if(Str::length($label)) $label.="\n";
         $label.="$this->city";
         if($this->province)
-            $label.=" ($this->province)";
+            $label.=" (".strtoupper($this->province).")";
         if($this->postal_code && ($this->city || $this->province))
             $label.=", ";
         $label.="$this->postal_code";

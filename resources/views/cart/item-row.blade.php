@@ -7,14 +7,8 @@
                     <img class="object-contain object-top h-full aspect-video" src="{{ $product->image }}" alt="{{ $product->name }}">
                 </div>
             </a>
-            <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center text-gray-500 rounded-full shadow-xl cursor-pointer hover:text-gray-900 hover:bg-secondary-100 bg-secondary-50 -top-1 -left-2"
-                wire:click.prevent="removeFromCart({{ $product->id }})"
-                title="{{ __('shopping_cart.remove.cart') }}"
-            >
-                <x-icons.trash class="w-full h-full"/>
-            </div>
             @if(!$this->wishlistContains($product))
-                <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center rounded-full shadow-xl cursor-pointer text-primary-500 hover:text-primary-600 hover:bg-primary-100 bg-primary-50 -top-1 -right-2"
+                <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center rounded-full shadow-xl cursor-pointer text-primary-500 hover:text-primary-600 hover:bg-primary-100 bg-primary-50 -top-1 -left-2"
                     title="{{ __('shopping_cart.add.wishlist') }}"
                     wire:click.prevent="addToWishlist({{ $product->id }})"
                 >
@@ -23,7 +17,7 @@
                     />
                 </div>
             @else
-                <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center rounded-full shadow-xl cursor-pointer text-primary-500 hover:text-primary-600 hover:bg-primary-100 bg-primary-50 -top-1 -right-2"
+                <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center rounded-full shadow-xl cursor-pointer text-primary-500 hover:text-primary-600 hover:bg-primary-100 bg-primary-50 -top-1 -left-2"
                     title="{{ __('shopping_cart.remove.wishlist') }}"
                     wire:click.prevent="removeFromWishlist({{ $product->id }})"
                 >
@@ -73,7 +67,7 @@
             >
                 <x-icons.minus/>
             </button>
-            <input class="appearance-none w-16 px-2 py-4 font-semibold text-center text-gray-900 border-none lg:text-right focus:ring-transparent focus:outline-none disabled:opacity-50"
+            <input class="w-16 px-2 py-4 font-semibold text-center text-gray-900 border-none appearance-none lg:text-right focus:ring-transparent focus:outline-none disabled:opacity-50"
                 type="number"
                 @change="validate"
                 @input.stop=""
@@ -88,10 +82,16 @@
         </div>
     </div>
 
-    <div class="order-1 w-full px-4 md:px-0 md:pl-4 mt-6 text-center md:order-2 md:text-right md:mt-0 md:w-3/12 lg:w-2/12">
+    <div class="order-1 w-full px-4 mt-6 text-center md:px-0 md:pl-4 md:order-2 md:text-right md:mt-0 md:w-3/12 lg:w-2/12">
         <div class="text-lg font-black text-gray-900">
             {{ $product->pricePerQuantity($item['qty']!='' ? $item['qty'] : 1, $product->taxed_price) }}€
         </div>
+    </div>
+    <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center text-gray-500 rounded-full shadow-xl cursor-pointer hover:text-gray-900 hover:bg-secondary-100 bg-secondary-50 -top-1 -right-2"
+        wire:click.prevent="removeFromCart({{ $product->id }})"
+        title="{{ __('shopping_cart.remove.cart') }}"
+    >
+        <x-icons.trash class="w-full h-full"/>
     </div>
 </div>
 

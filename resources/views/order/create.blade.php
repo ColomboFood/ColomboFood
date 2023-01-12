@@ -3,10 +3,12 @@
         $step = 1;
     elseif($errors->has('billing_address.*') || $errors->has('fiscal_code') || $errors->has('vat'))
         $step = 2;
-    elseif($errors->has('shippin_price.*'))
+    elseif($errors->has('shipping_price.*'))
         $step = 3;
+    elseif($errors->has('coupon.*'))
+        $step = 4;
     else
-        $step = 1;
+        $step = $shownStep;
 @endphp
 
 <x-slot name="seo">
@@ -63,7 +65,7 @@
                     </div>
 
                     @if($shipping_address->label)
-                    <div class="flex flex-col justify-center text-left py-2 text-gray-500 text-sm"
+                    <div class="flex flex-col justify-center py-2 text-sm text-left text-gray-500"
                         x-show="selected != 1"
                         x-transition:enter.delay.200ms
                         x-cloak
@@ -144,7 +146,7 @@
                 </div>
             </div>
 
-            <div class="relative border-b-2 border-gray-200">
+            <div class="relative border-b border-gray-200">
                 <button class="w-full py-6"
                     x-bind:disabled="addresses_confirmed"
                     @click="selected !== 2 ? selected = 2 : selected = null">
@@ -163,7 +165,7 @@
                     </div>
                                                         
                     @if($billing_address->label)  
-                    <div class="flex flex-col justify-center text-left py-2 text-gray-500 text-sm"
+                    <div class="flex flex-col justify-center py-2 text-sm text-left text-gray-500"
                         x-show="selected != 2"
                         x-transition:enter.delay.200ms
                         x-cloak
@@ -240,7 +242,7 @@
                 </div>
             </div>
             
-            <div class="relative border-b-2 border-gray-200">
+            <div class="relative border-b border-gray-200">
                 <button class="w-full py-6"
                     x-bind:disabled="addresses_confirmed"
                     @click="selected != 3 ? selected = 3 : selected = null">
@@ -278,7 +280,7 @@
                     x-bind:style="selected == 3 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''"
                 >
                     @if(!$addresses_confirmed)	
-                    <div class="py-6 grid lg:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center px-2">
+                    <div class="grid gap-2 px-2 py-6 lg:grid-cols-2 xl:grid-cols-3 place-items-center">
                         @foreach($shipping_prices as $option)
                             <input class="hidden" type="radio"
                                 x-ref="shipping{{$option->id}}" 
@@ -291,9 +293,9 @@
                                 ])
                                 x-on:click="$refs.shipping{{$option->id}}.click()"
                             >
-                                <div class="mb-2 font-semibold text-sm">{{ $option->name }}</div>
-                                <div class="text-gray-500 text-sm">{{ $option->description }}</div>
-                                <div class="mt-2 text-right font-black">{{ $option->price }}€</div>
+                                <div class="mb-2 text-sm font-semibold">{{ $option->name }}</div>
+                                <div class="text-sm text-gray-500">{{ $option->description }}</div>
+                                <div class="mt-2 font-black text-right">{{ $option->price }}€</div>
                             </div>
                         @endforeach
                     </div>
@@ -301,7 +303,7 @@
                 </div>
             </div>
 
-            <div class="relative border-b-2 border-gray-200">
+            <div class="relative border-b border-gray-200">
                 <button class="w-full py-6"
                     x-bind:disabled="addresses_confirmed"
                     @click="selected !== 4 ? selected = 4 : selected = null">
@@ -380,21 +382,22 @@
                 :coupon="$coupon"
                 :shipping="$shipping_price"
                 :shipping-price="optional($shipping_price)->price"
+                :products="$cartContent"
             >
                 <x-slot:actions>
                     @if($addresses_confirmed)
                         @if($shipping_price->min_price <= $total)
                             <livewire:checkout :total="$total+$shipping_price->price" :key="$shipping_price->id"/>
                         @else
-                            <div class="w-full py-4 text-base text-center cursor-pointer bg-danger-500">
+                            <div class="w-full px-2 py-4 text-base text-center cursor-pointer bg-danger-500">
                                 {{ trans_choice('shopping_cart.checkout.min_price', null, [ 'price' => number_format($shipping_price->min_price,2).'€' ]) }}
                             </div>
                         @endif
                     @else
-                        <x-secondary-button ghost="true" class="w-full py-4 text-base" wire:click.prevent='confirmAddresses'
-                        >{{ __('Confirm Addresses') }}</x-secondary-button>
+                        <x-secondary-button ghost="true" class="w-full py-4 text-base" wire:click.prevent='confirmOrder'
+                        >{{ __('Confirm Order') }}</x-secondary-button>
                         @error('*')
-                            <p class="bg-red-50 text-danger-500 mt-2 w-full text-center">{{ __('Whoops! Something went wrong.') }}</p>
+                            <p class="w-full px-2 py-2 mt-2 text-center bg-red-50 text-danger-500">{{ __('Whoops! Something went wrong.') }}</p>
                         @enderror
                     @endif
                 </x-slot>

@@ -85,6 +85,12 @@
                         </x-button>
                     </form>
                     @endif
+                    <div class="mt-2 text-center">
+                        <a href="{{ route('product.index') }}">
+                            <x-secondary-button ghost="true" class="w-full py-4 text-base"
+                            >{{ __('Back to Shop') }}</x-secondary-button>
+                        </a>
+                    </div>
                 </x-slot>
             </x-price-total>
         </div>
@@ -108,9 +114,14 @@
         </div>
     @endif
         
-    @if($count)
-        <div class="flex items-center justify-end px-4 py-3 text-right bg-gray-50 sm:px-6">
+    {{-- @if($count)
+        <div class="flex items-center justify-between px-4 py-3 text-right bg-gray-50 sm:px-6">
+            <div>
+                <a href="{{ route('product.index') }}">
+                    <x-button class="w-full">{{ __('To Shop') }}</x-button>
+                </a>
+            </div>
             @livewire('cart.destroy-form')
         </div>
-    @endif
+    @endif --}}
 </div>

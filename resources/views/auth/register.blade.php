@@ -29,8 +29,8 @@
                 <x-input id="password_confirmation" class="block w-full mt-1" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div class="mt-4">
-                <x-google-auth-button register/>
+            <div class="py-2 mt-4 border-t border-gray-200">
+                <x-google-auth-button class="w-full" register/>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -50,7 +50,7 @@
                 </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-between mt-4">
                 <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
