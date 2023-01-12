@@ -55,8 +55,8 @@ class Show extends Component
     public function updatedSelection($value)
     {
         $product = Product::where(fn($query) => $query->where('variant_id',$this->variant_id)->orWhere('id',$this->variant_id))
-                        ->withCount(['attributeValues' => fn($query) => $query->whereIn('id',$this->selection)])
-                        ->having('attribute_values_count','=',count($this->selection))->first();
+                        ->withCount(['attributeValues' => fn($query) => $query->whereIn('id',$this->selection)])->get();
+        $product = $product->where('attribute_values_count','=',count($this->selection))->first();
         if(!$product)
             $product = Product::where(fn($query) => $query->where('variant_id',$this->variant_id)->orWhere('id',$this->variant_id))
                         ->whereHas('attributeValues', fn($query) => $query->where('id',$value))->first();

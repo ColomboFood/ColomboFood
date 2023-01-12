@@ -22,12 +22,12 @@ class CategoriesTableSeeder extends Seeder
         Category::create([
             'name' => 'Primi piatti',
             'parent_id' => $gastronomia->id,
-            'featured' => true
+            'featured' => false
         ]);
         Category::create([
             'name' => 'Secondi piatti',
             'parent_id' => $gastronomia->id,
-            'featured' => true
+            'featured' => false
         ]);
         $pasta = Category::create([
             'name' => 'Pasta fresca',
@@ -40,7 +40,7 @@ class CategoriesTableSeeder extends Seeder
         Category::create([
             'name' => 'Torte',
             'parent_id' => $pasticceria->id,
-            'featured' => true
+            'featured' => false
         ]);
         
     }

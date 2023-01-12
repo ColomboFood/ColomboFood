@@ -1,4 +1,12 @@
-<div class="px-6 py-12 space-y-5 text-white bg-secondary-500">
+@props([
+    'theme' => 'secondary'
+])
+
+<div @class([
+    'px-6 py-12 space-y-5 text-white',
+    'bg-secondary-500' => $theme == 'secondary',
+    'bg-primary-500' => $theme == 'primary'
+])>
 
     <div class="mb-2 text-3xl font-bold">{{ isset($heading) ? $heading :  __('Total') }}</div>
 

@@ -59,7 +59,7 @@ class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertCo
             'original_price'    => (float) str_replace(',', '.', $row[5]),
             'selling_price'    => (float) str_replace(',', '.', $row[5]),
             'quantity'          => (int)$row[6] > 0 ? (int)$row[6] : 0,
-            'hidden'            => false,
+            'hidden'            => true,
         ]);
     }
 }
