@@ -159,6 +159,15 @@ class Order extends Model
         );
     }
 
+    protected function fiscalCode(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return strtoupper($value);
+            },
+        );
+    }
+
     public function getInvoiceSerialNumberAttribute($value)
     {
         return $this->invoice_sequence ? str_pad($this->invoice_sequence, config('invoices.serial_number.sequence_padding') , '0', STR_PAD_LEFT) 

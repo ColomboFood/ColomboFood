@@ -86,7 +86,7 @@
                     @if(!$addresses_confirmed)
                     <div class="py-6 space-y-2">
                         <x-input-floating @class(['hidden' => Auth::check()]) label="{{ __('Email') }}" name="shipping_address_email" wire:model.lazy="email"/>
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company') }}" name="shipping_address_full_name" wire:model.lazy="shipping_address.full_name"/>
                                 <x-jet-input-error class="mb-4" for="shipping_address.full_name"/>
@@ -100,7 +100,7 @@
                             <x-input-floating label="{{ __('Address') }}" name="shipping_address_address" wire:model.lazy="shipping_address.address"/>
                             <x-jet-input-error class="mb-4" for="shipping_address.address"/>
                         </div>
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('City') }}" name="shipping_address_city" wire:model.lazy="shipping_address.city"/>
                                 <x-jet-input-error class="mb-4" for="shipping_address.city"/>
@@ -110,7 +110,7 @@
                                 <x-jet-input-error class="mb-4" for="shipping_address.province"/>
                             </div>
                         </div>
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('Country/Region') }}" name="shipping_address_country_region" wire:model.lazy="shipping_address.country_region"/>
                                 <x-jet-input-error class="mb-4" for="shipping_address.country_region"/>
@@ -121,7 +121,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="mt-2">
                             <x-textarea label="{{ __('Note') }}" resize="none" name="note" rows="4" maxlength="255" wire:model.lazy="note"></x-textarea>
                             <x-jet-input-error class="mb-4" for="note"/>
                         </div>
@@ -136,8 +136,8 @@
                             </div>
 
                             @auth
-                                <x-button wire:click.prevent='updateDefaultShippingAddress'
-                                >{{ __('Save as default') }}</x-button>
+                                <x-secondary-button wire:click.prevent='updateDefaultShippingAddress'
+                                >{{ __('Save as default') }}</x-secondary-button>
                             @endauth
                             
                         </div>
@@ -189,13 +189,13 @@
                 >
                     @if(!$addresses_confirmed)
                     <div class="py-6 space-y-2">
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company') }}" name="billing_address_full_name" wire:model.lazy="billing_address.full_name"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.full_name"/>
                             </div>
                         </div>
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('Fiscal Code') }}" name="fiscal_code" wire:model.lazy="fiscal_code"/>
                                 <x-jet-input-error class="mb-4" for="fiscal_code"/>
@@ -210,7 +210,7 @@
                                 <x-input-floating label="{{ __('Address') }}" name="billing_address_address" wire:model.lazy="billing_address.address"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.address"/>
                             </div>                        </div>
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('City') }}" name="billing_address_city" wire:model.lazy="billing_address.city"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.city"/>
@@ -220,7 +220,7 @@
                                 <x-jet-input-error class="mb-4" for="billing_address.province"/>
                             </div>
                         </div>
-                        <div class="grid xl:grid-cols-2 xl:gap-6">
+                        <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('Country/Region') }}" name="billing_address_country_region" wire:model.lazy="billing_address.country_region"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.country_region"/>
@@ -233,8 +233,8 @@
 
                         <div class="mt-6 md:flex md:justify-end">
                             @auth
-                                <x-button wire:click.prevent='updateDefaultBillingAddress'
-                                >{{ __('Save as default') }}</x-button>
+                                <x-secondary-button wire:click.prevent='updateDefaultBillingAddress'
+                                >{{ __('Save as default') }}</x-secondary-button>
                             @endauth
                         </div>
                     </div>
@@ -357,8 +357,8 @@
                             <x-secondary-button wire:click="removeCoupon"
                             ><x-icons.x/></x-secondary-button>
                             @else
-                            <x-button wire:click="checkCoupon('{{ $coupon_code }}')"
-                            >{{ __('Check') }}</x-button>
+                            <x-secondary-button wire:click="checkCoupon('{{ $coupon_code }}')"
+                            >{{ __('Check') }}</x-secondary-button>
                             @endif
                         </div>
                     </div>
@@ -394,10 +394,10 @@
                             </div>
                         @endif
                     @else
-                        <x-secondary-button ghost="true" class="w-full py-4 text-base" wire:click.prevent='confirmOrder'
-                        >{{ __('Confirm Order') }}</x-secondary-button>
+                        <x-button class="w-full py-4 text-base" wire:click.prevent='confirmOrder'
+                        >{{ __('Confirm Order') }}</x-button>
                         @error('*')
-                            <p class="w-full px-2 py-2 mt-2 text-center bg-red-50 text-danger-500">{{ __('Whoops! Something went wrong.') }}</p>
+                            <p class="w-full px-2 py-2 mt-4 text-sm text-center bg-red-50 text-danger-500">{{ __('Whoops! Something went wrong.') }}</p>
                         @enderror
                     @endif
                 </x-slot>

@@ -104,10 +104,11 @@ class Create extends Component
         if($this->shipping_address != new Address() && $this->shipping_address == Auth::user()?->defaultAddress)
         {
             $step = 2;
+            
         }
-        if($step = 2 && $this->billing_address != new Address() && $this->billing_address == Auth::user()?->defaultAddress)
+        if($step == 2 && $this->billing_address != new Address() && $this->billing_address == Auth::user()?->updateDefaultBillingAddress)
         {
-            $step = 3;
+            $step = 3;      
         }
         $this->shownStep = $step;
     }

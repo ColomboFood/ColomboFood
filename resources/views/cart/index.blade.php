@@ -48,7 +48,7 @@
                 >{{ __('Apply Coupon Code') }}:</div>
                 <div class="flex flex-nowrap">
                     <x-input @class([
-                            "disabled:bg-gray-50 py-4 text-base font-bold placeholder-gray-500",
+                            "disabled:bg-gray-50 py-2 text-base font-bold placeholder-gray-500",
                             "text-danger-500" => $coupon_error
                         ]) type="text" 
                         placeholder="{{ __('Coupon Code') }}"
@@ -58,11 +58,11 @@
                         x-on:input="$event.target.value=$event.target.value.toUpperCase()"
                     ></x-input>
                     @if($coupon)
-                    <x-secondary-button class="py-4 text-base" wire:click="removeCoupon"
+                    <x-secondary-button class="py-2 text-base" wire:click="removeCoupon"
                     ><x-icons.x/></x-secondary-button>
                     @else
-                    <x-button class="py-4 text-base" wire:click="checkCoupon('{{ $coupon_code }}')"
-                    >{{ __('Check') }}</x-button>
+                    <x-secondary-button class="py-2 text-base" wire:click="checkCoupon('{{ $coupon_code }}')"
+                    >{{ __('Check') }}</x-secondary-button>
                     @endif
                 </div>
             </div>
@@ -85,10 +85,9 @@
                         </x-button>
                     </form>
                     @endif
-                    <div class="mt-2 text-center">
-                        <a href="{{ route('product.index') }}">
-                            <x-secondary-button ghost="true" class="w-full py-4 text-base"
-                            >{{ __('Back to Shop') }}</x-secondary-button>
+                    <div class="mt-6 text-center">
+                        <a class="underline" href="{{ route('product.index') }}">
+                            {{ __('Back to Shop') }}
                         </a>
                     </div>
                 </x-slot>

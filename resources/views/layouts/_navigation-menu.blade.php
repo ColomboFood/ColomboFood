@@ -11,24 +11,31 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="container hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="container hidden space-x-4 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
                         {{ __('Shop') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="#" :active="false">
+                        {{ __('About Us') }}
                     </x-jet-nav-link>
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <div class="space-x-2">
-                        <x-jet-nav-link class="relative" href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
+                <div class="flex h-full space-x-3">
+                    <x-jet-nav-link href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
+                        <div class="relative w-6 h-6">
                             <x-icons.cart/>
-                            <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
-                        </x-jet-nav-link>
-                        <x-jet-nav-link class="relative" href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
+                            <x-cart-counter class="absolute w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full -top-1 -right-1 bg-primary-500"/>
+                        </div>
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
+                        <div class="relative w-6 h-6">
                             <x-icons.heart red="false" filled="false"/>
-                            <x-wishlist-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
-                        </x-jet-nav-link>
-                    </div>
+                            <x-wishlist-counter class="absolute w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full -top-1 -right-1 bg-primary-500"/>
+                        </div>
+                    </x-jet-nav-link>
+                </div>
 
                 <!-- Settings Dropdown -->
                 <div class="relative ml-3">
@@ -36,12 +43,12 @@
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                <button class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-secondary-400">
+                                <button class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-primary-500">
                                     <img class="object-cover rounded-full w-9 h-9" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
+                                    <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-semibold leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
                                         {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -53,9 +60,19 @@
                         </x-slot>
 
                         <x-slot name="content">
+
+                            @if(Auth::user()->canAccessFilament())
+                                <div class="block px-4 py-2 text-xs text-gray-500">
+                                    {{ __('Admin') }}
+                                </div>
+                                <x-dropdown-link href="{{ route('filament.pages.dashboard') }}">
+                                    {{ __('Admin Panel') }}
+                                </x-dropdown-link>
+                            @endif
+
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                            <div class="block px-4 py-2 text-xs text-gray-500">
+                                {{ __('Menu') }}
                             </div>
                             
                             <x-dropdown-link href="{{ route('profile.show') }}">
@@ -66,15 +83,8 @@
                                 {{ __('My Orders') }}
                             </x-dropdown-link>
 
-                            @if(Auth::user()->canAccessFilament())
-                                <x-dropdown-link href="{{ route('filament.pages.dashboard') }}">
-                                    {{ __('Admin Panel') }}
-                                </x-dropdown-link>
-                            @endif
-
                             <div class="border-t border-secondary-50"></div>
-
-                            <!-- Authentication -->
+                            
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
@@ -97,8 +107,13 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="flex items-center -mr-2 sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
+            <div class="flex items-center -mr-2 space-x-2 sm:hidden">
+                <x-jet-nav-link class="relative" href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
+                    <x-icons.cart/>
+                    <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
+                </x-jet-nav-link>
+
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-gray-500 transition hover:text-gray-900 focus:outline-none focus:text-gray-900">
                     <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -109,77 +124,82 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="absolute inset-x-0 z-50 hidden overflow-y-scroll bg-white sm:hidden"
+    <div class="absolute inset-x-0 z-10 overflow-y-auto bg-white shadow-md sm:hidden"
+        x-show="open"
+        x-cloak
+        x-transition:enter="transition transform ease-out origin-top duration-200"
+        x-transition:enter-start="opacity-50"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition transform ease-in origin-top duration-100"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
         style="max-height: calc(100vh - 4rem);"
     >
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-3">
-            <div class="flex items-center px-4">
+            <div class="flex items-center px-4 pb-1">
                 @auth
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <div class="mr-3 shrink-0">
+                        <a href="{{ route('profile.show') }}" class="mr-3 shrink-0">
                             <img class="object-cover rounded-full w-9 h-9" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                        </div>
+                        </a>
                     @endif
 
                     <div>
-                        <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
-                        <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
+                        <div>
+                            <a href="{{ route('profile.show') }}" class="text-base font-semibold">{{ Auth::user()->name }}</a>
+                        </div>
+                        <div class="flex space-x-2">
+                            <div>
+                                <a class="text-sm font-semibold text-gray-500 underline" href="{{ route('profile.show') }}">
+                                    {{ __('Profile') }}
+                                </a>
+                            </div>
+                            @if(Auth::user()->canAccessFilament())
+                                <div>
+                                    <a class="text-sm font-semibold text-gray-500 underline" href="{{ route('filament.pages.dashboard') }}">
+                                        {{ __('Admin Panel') }}
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                            
                     </div>
-                @else
-                    <div class="flex flex-col text-base font-medium text-gray-800">
+                @endauth
+            </div>
+
+            <div class="px-4 pt-2 pb-1 space-y-1 border-t border-secondary-50">
+                @auth
+                    <x-dropdown-link href="{{ route('wishlist.index') }}">
+                        {{ __('Wishlist') }}
+                        <x-wishlist-counter class="inline-block w-5 h-5 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
+                    </x-dropdown-link>
+                    <x-dropdown-link href="{{ route('order.index') }}">
+                            {{ __('My Orders') }}
+                    </x-dropdown-link>
+                @endauth
+                <x-dropdown-link href="{{ route('product.index') }}">
+                    {{ __('Shop') }}
+                </x-dropdown-link>
+                <div class="pt-2 pb-1 space-y-1 border-t border-secondary-50">
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+                                <x-dropdown-link href="{{ route('logout') }}"
+                                            @click.prevent="$root.submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                        </form>
+                    @else
                         <x-dropdown-link href="{{ route('login') }}">
                                 {{ __('Login') }}
                         </x-dropdown-link>
                         <x-dropdown-link href="{{ route('register') }}">
                                 {{ __('Register') }}
                         </x-dropdown-link>
-                    </div>
-                @endauth
+                    @endauth
+                </div>
             </div>
-
-            @auth
-            <div class="px-4 pt-2 pb-1 space-y-1 border-t border-secondary-50">
-                @if(Auth::user()->canAccessFilament())
-                <x-dropdown-link href="{{ route('filament.pages.dashboard') }}">
-                    {{ __('Admin Panel') }}
-                </x-dropdown-link>
-                @endif
-
-                <!-- Account Management -->
-                <x-dropdown-link href="{{ route('profile.show') }}">
-                    {{ __('Profile') }}
-                </x-dropdown-link>
-
-                <x-dropdown-link href="{{ route('order.index') }}">
-                        {{ __('Orders') }}
-                </x-dropdown-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
-
-                    <x-dropdown-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
-                    </x-dropdown-link>
-                </form>
-            </div>
-            @endauth
-        </div>
-
-        <div class="px-4 pt-2 pb-1 space-y-1 border-t border-secondary-50">
-            <x-dropdown-link href="{{ route('cart.index') }}">
-                {{ __('Cart') }}
-                <x-cart-counter class="inline-block w-5 h-5 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
-            </x-dropdown-link>
-            <x-dropdown-link href="{{ route('wishlist.index') }}">
-                {{ __('Wishlist') }}
-                <x-wishlist-counter class="inline-block w-5 h-5 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
-            </x-dropdown-link>
-            <x-dropdown-link href="{{ route('product.index') }}">
-                {{ __('Shop') }}
-            </x-dropdown-link>
         </div>
     </div>
 </nav>

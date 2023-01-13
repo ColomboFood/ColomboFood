@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Address extends Model
@@ -37,6 +38,15 @@ class Address extends Model
         return $this->belongsTo(User::class);
     }
 
+    protected function province(): Attribute
+    {
+        return Attribute::make(
+            set: function ($value) {
+                return strtoupper($value);
+            },
+        );
+    }
+
     /**
      * 
      *      Print with {!!  !!}
@@ -55,7 +65,7 @@ class Address extends Model
         if(Str::length($label)) $label.="\n";
         $label.="$this->city";
         if($this->province)
-            $label.=" (".strtoupper($this->province).")";
+            $label.=" (".$this->province.")";
         if($this->postal_code && ($this->city || $this->province))
             $label.=", ";
         $label.="$this->postal_code";

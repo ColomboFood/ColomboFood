@@ -63,7 +63,7 @@
             wire:model.lazy="item.qty"
         >
             <button class="grid grow place-items-center text-secondary-500 disabled:opacity-50"
-                @click.debounce="decrease"
+                @click.debounce.200ms="decrease"
             >
                 <x-icons.minus/>
             </button>
@@ -75,7 +75,7 @@
                 value="{{$item['qty']}}"
             >
             <button class="grid grow place-items-center text-secondary-500 disabled:opacity-50"
-                @click.debounce="increase"
+                @click.debounce.200ms="increase"
             >
                 <x-icons.plus/>
             </button>
