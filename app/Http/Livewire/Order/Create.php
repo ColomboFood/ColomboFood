@@ -40,8 +40,8 @@ class Create extends Component
             'shipping_address.postal_code' => 'required|min:5|max:5',
             'note' => 'nullable|max:255',
 
-            'vat' => 'required|numeric|digits:11',
-            'fiscal_code' => 'nullable|required_without:vat|alpha_num|max:16',
+            'vat' => 'nullable|numeric|required_without:fiscal_code|digits:11',
+            'fiscal_code' => 'nullable|required_without:vat|alpha_num|min:11|max:16',
             'billing_address.full_name' => 'required',
             'billing_address.address' => 'required',
             'billing_address.city' => 'required',
@@ -56,7 +56,7 @@ class Create extends Component
     }
 
     protected $listeners = [
-        'createOrder',
+        'placeOrder',
     ];
 
     public function mount()
@@ -98,19 +98,35 @@ class Create extends Component
         session()->put('shipping_price', $this->shipping_price->id);
     }
 
+    public function updateShippingAddressProvince($value)
+    {
+        $this->shipping_price->province = strtoupper($value);
+    }
+
+    public function updateBillingAddressProvince($value)
+    {
+        $this->billing_address->province = strtoupper($value);
+    }
+
     public function setShownStep()
     {
         $step = 1;
-        if($this->shipping_address != new Address() && $this->shipping_address == Auth::user()?->defaultAddress)
-        {
-            $step = 2;
-            
-        }
-        if($step == 2 && $this->billing_address != new Address() && $this->billing_address == Auth::user()?->updateDefaultBillingAddress)
-        {
-            $step = 3;      
-        }
+        if( $this->shippingInfoIsDefault() )  $step = 2;
+        if($step == 2 && $this->billingInfoIsDefault()) $step = 3;      
         $this->shownStep = $step;
+    }
+
+    public function shippingInfoIsDefault()
+    {
+        return $this->shipping_address != new Address() && 
+            Auth::user()?->defaultAddress && $this->shipping_address->sameAddress(Auth::user()->defaultAddress);
+    }
+
+    public function billingInfoIsDefault()
+    {
+        return $this->billing_address != new Address() 
+            && Auth::user()->defaultBillingAddress && $this->billing_address->sameAddress(Auth::user()->defaultBillingAddress) 
+            &&  (Auth::user()?->vat == $this->vat || Auth::user()?->fiscal_code == $this->fiscal_code);
     }
 
     public function updatePrices()
@@ -190,7 +206,7 @@ class Create extends Component
             'postal_code' => $validated['shipping_address']['postal_code'],
             'default' => true,
         ]);
-
+        
         if($defaultAddress && $user)
         {
             $banner_message = __('banner_notifications.address.saved') ;
@@ -211,8 +227,8 @@ class Create extends Component
     public function updateDefaultBillingAddress()
     {
         $validated = $this->validate([
-            'vat' => 'nullable|numeric|digits:11',
-            'fiscal_code' => 'nullable|required_without:vat|alpha_num|max:16',
+            'vat' => 'nullable|numeric|required_without:fiscal_code|digits:11',
+            'fiscal_code' => 'nullable|required_without:vat|alpha_num|min:11|max:16',
             'billing_address.full_name' => 'required',
             'billing_address.address' => 'required',
             'billing_address.city' => 'required',
@@ -261,7 +277,7 @@ class Create extends Component
         $this->billing_address = $this->shipping_address;
     }
 
-    public function confirmOrder()
+    public function createOrder()
     {
         $this->validate();
 
@@ -321,10 +337,10 @@ class Create extends Component
         }
 
         $this->addresses_confirmed = true;
-        $this->emit('addressesConfirmed');
+        $this->emit('orderCreated');
     }
 
-    public function createOrder($payment_id, $gateway)
+    public function placeOrder($payment_id, $gateway)
     {
         $validated = $this->validate();
 
@@ -364,7 +380,7 @@ class Create extends Component
             if($gateway == 'paypal')
                 $this->order->setAsPaied();
 
-            $this->emit('orderCreated');
+            $this->emit('orderPlaced');
         }
     }
    

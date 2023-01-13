@@ -26,13 +26,13 @@
                     <x-jet-nav-link href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
                         <div class="relative w-6 h-6">
                             <x-icons.cart/>
-                            <x-cart-counter class="absolute w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full -top-1 -right-1 bg-primary-500"/>
+                            <x-cart-counter class="absolute w-4 h-4 ml-1 text-[0.5rem] leading-4 font-medium text-center text-white rounded-full -top-1 -right-1 bg-primary-500"/>
                         </div>
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('wishlist.index') }}" :active="request()->routeIs('wishlist.index')">
                         <div class="relative w-6 h-6">
                             <x-icons.heart red="false" filled="false"/>
-                            <x-wishlist-counter class="absolute w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full -top-1 -right-1 bg-primary-500"/>
+                            <x-wishlist-counter class="absolute w-4 h-4 ml-1 text-[0.5rem] leading-4 font-medium text-center text-white rounded-full -top-1 -right-1 bg-primary-500"/>
                         </div>
                     </x-jet-nav-link>
                 </div>
@@ -110,7 +110,7 @@
             <div class="flex items-center -mr-2 space-x-2 sm:hidden">
                 <x-jet-nav-link class="relative" href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
                     <x-icons.cart/>
-                    <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
+                    <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-[0.5rem] leading-4 font-medium text-center text-white rounded-full bg-primary-500"/>
                 </x-jet-nav-link>
 
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-gray-500 transition hover:text-gray-900 focus:outline-none focus:text-gray-900">
@@ -172,7 +172,7 @@
                 @auth
                     <x-dropdown-link href="{{ route('wishlist.index') }}">
                         {{ __('Wishlist') }}
-                        <x-wishlist-counter class="inline-block w-5 h-5 text-xs font-semibold text-center text-white rounded-full bg-primary-500"/>
+                        <x-wishlist-counter class="inline-block w-4 h-4 text-[0.5rem] leading-4 font-medium text-center text-white rounded-full bg-primary-500"/>
                     </x-dropdown-link>
                     <x-dropdown-link href="{{ route('order.index') }}">
                             {{ __('My Orders') }}

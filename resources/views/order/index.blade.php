@@ -17,7 +17,7 @@
                             
                             <div class="flex-none w-full md:w-2/3">
                                 <span class="absolute flex items-center justify-center w-6 h-6 rounded-full text-primary-600 dark:text-primary-400 bg-primary-200 -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900">
-                                    <x-icons.bag class="w-3 h-3"/>    
+                                    <x-icons.cube class="w-4 h-4"/>    
                                 </span>
                                 <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white"
                                 >

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
 use App\Models\Coupon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ class Checkout extends Component
 {
     public $update;
 
+    public Order $order;
     public $intent;
     public $confirmingPayment;
     public $total;
@@ -19,19 +21,19 @@ class Checkout extends Component
     public $gateway;
 
     protected $listeners = [
-        'orderCreated',
+        'orderPlaced',
         'orderUpdated',
     ];
 
-    public function mount($total, $update = false)
+    public function mount(Order $order, $update = false)
     {
         $this->update = $update;
-        $this->total = $total;
+        $this->total = $order->total;
         $this->confirmingPayment = false;
         $this->submitDisabled = false;
     }
 
-    public function orderCreated()
+    public function orderPlaced()
     {
         $this->emit('paymentConfirmed');
     }
@@ -46,7 +48,10 @@ class Checkout extends Component
         $this->confirmingPayment = true;
         $this->gateway = 'stripe';
 
-        $metadata = array();
+        $metadata = [
+            'order_id' => $this->order->id,
+            'order_number' => $this->order->number
+        ];
 
         $this->intent = Stripe::paymentIntents()->create([
             'amount' => $this->total,
@@ -64,7 +69,7 @@ class Checkout extends Component
         if($this->update)
             $this->emit('updateOrder',$this->intent['id'],$this->gateway);
         else
-            $this->emit('createOrder',$this->intent['id'],$this->gateway);
+            $this->emit('placeOrder',$this->intent['id'],$this->gateway);
     }
 
     public function redirectToSuccess()

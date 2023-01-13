@@ -102,7 +102,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function defaultAddress()
     {
-        return $this->hasOne(Address::class)->where('default',1)->latest();
+        return $this->hasOne(Address::class)->where('default',1)->where('billing',false)->latest();
     }
 
     public function defaultBillingAddress()

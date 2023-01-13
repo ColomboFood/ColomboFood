@@ -23,7 +23,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:12288'],
             'vat' => ['nullable', 'numeric', 'digits:11'],
-            'fiscal_code' => ['nullable', 'required_with:vat' ,'alpha_num', 'max:16'],
+            'fiscal_code' => ['nullable','alpha_num','min:11','max:16'],
             'phone' => ['nullable','numeric', 'digits_between:10,13'],
         ])->validateWithBag('updateProfileInformation');
 

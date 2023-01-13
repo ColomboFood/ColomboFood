@@ -26,7 +26,7 @@
                             addresses_confirmed : @entangle('addresses_confirmed'),
                         }"
                         x-init="
-                            Livewire.on('addressesConfirmed', () => {
+                            Livewire.on('orderCreated', () => {
                                 if(selected != 4)
                                     selected = null;
                             });

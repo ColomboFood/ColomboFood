@@ -47,6 +47,16 @@ class Address extends Model
         );
     }
 
+    public function sameAddress($otherAddress)
+    {
+        return $this->full_name == $otherAddress->full_name &&
+            $this->address == $otherAddress->address &&
+            $this->city == $otherAddress->city &&
+            $this->province == $otherAddress->province &&
+            $this->postal_code == $otherAddress->postal_code &&
+            $this->country_region == $otherAddress->country_region;
+    }
+
     /**
      * 
      *      Print with {!!  !!}

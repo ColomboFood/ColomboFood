@@ -39,28 +39,16 @@
                                 purchase_units: [{
                                     amount: {
                                         value: total,
-                                    },
-
-                                    shipping: {
-                                        shipping_detail : {
-                                            name: {
-                                                full_name: 'Hans Muller'
-                                            },
-                                            address: {
-                                                address_line_1: 'MyStreet 12',
-                                                admin_area_2: 'New York',
-                                                postal_code: '10001',
-                                                country_code: 'US',
-                                            }
-                                        }
-                                    }
-                                    
+                                    },                                    
                                 }]
                             });
                         },
 
                         onApprove: (data, actions) => {
-                            return actions.order.capture()
+                            return {
+                                //check if products are avaiable
+                                //get total
+                                actions.order.capture()
                                 .then(function(orderData) {
                                     if(orderData.status=='COMPLETED'){
                                         $wire.set('gateway','paypal');
@@ -71,6 +59,7 @@
                                         return actions.restart();
                                     }
                                 });
+                            }
                         },
 
                         onError: function (err) {

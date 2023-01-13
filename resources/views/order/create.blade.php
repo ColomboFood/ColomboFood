@@ -39,7 +39,7 @@
                 addresses_confirmed : @entangle('addresses_confirmed'),
             }"
             x-init="
-                Livewire.on('addressesConfirmed', () => {
+                Livewire.on('orderCreated', () => {
                     if(selected != 4)
                         selected = null;
                 });
@@ -112,12 +112,12 @@
                         </div>
                         <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
-                                <x-input-floating label="{{ __('Country/Region') }}" name="shipping_address_country_region" wire:model.lazy="shipping_address.country_region"/>
-                                <x-jet-input-error class="mb-4" for="shipping_address.country_region"/>
-                            </div>
-                            <div>
                                 <x-input-floating label="{{ __('Postal Code') }}" maxlength="5" name="shipping_address_postal_code" wire:model.lazy="shipping_address.postal_code"/>
                                 <x-jet-input-error class="mb-4" for="shipping_address.postal_code"/>
+                            </div>
+                            <div>
+                                <x-input-floating label="{{ __('Country/Region') }}" name="shipping_address_country_region" wire:model.lazy="shipping_address.country_region"/>
+                                <x-jet-input-error class="mb-4" for="shipping_address.country_region"/>
                             </div>
                         </div>
 
@@ -126,18 +126,20 @@
                             <x-jet-input-error class="mb-4" for="note"/>
                         </div>
 
-                        <div class="mt-6 md:flex md:justify-between">
-                            <div class="flex items-center mb-6">
-                                @if($shipping_address != $billing_address)
-                                <button class="text-sm underline link"
-                                    wire:click="copyAddress()"
-                                >{{ __('Use as billing address') }}</button>
+                        <div class="pt-4 md:flex items-center md:justify-between space-x-2">
+                            <div class="flex items-center mb-6 md:mb-0">
+                                @if(!$shipping_address->sameAddress($billing_address))
+                                    <x-secondary-button ghost="true" class="text-sm underline link"
+                                        wire:click="copyAddress()"
+                                    >{{ __('Use as billing address') }}</x-secondary-button>
                                 @endif
                             </div>
 
                             @auth
-                                <x-secondary-button wire:click.prevent='updateDefaultShippingAddress'
-                                >{{ __('Save as default') }}</x-secondary-button>
+                                @if( !auth()->user()->defaultAddress->sameAddress($shipping_address) )
+                                    <x-secondary-button class="w-full md:w-auto" wire:click.prevent='updateDefaultShippingAddress'
+                                    >{{ __('Save as default') }}</x-secondary-button>
+                                @endif
                             @endauth
                             
                         </div>
@@ -222,19 +224,24 @@
                         </div>
                         <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
-                                <x-input-floating label="{{ __('Country/Region') }}" name="billing_address_country_region" wire:model.lazy="billing_address.country_region"/>
-                                <x-jet-input-error class="mb-4" for="billing_address.country_region"/>
-                            </div>
-                            <div>
                                 <x-input-floating label="{{ __('Postal Code') }}" maxlength="5" name="billing_address_postal_code" wire:model.lazy="billing_address.postal_code"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.postal_code"/>
                             </div>
+                            <div>
+                                <x-input-floating label="{{ __('Country/Region') }}" name="billing_address_country_region" wire:model.lazy="billing_address.country_region"/>
+                                <x-jet-input-error class="mb-4" for="billing_address.country_region"/>
+                            </div>
                         </div>
 
-                        <div class="mt-6 md:flex md:justify-end">
+                        <div class="pt-4 md:flex items-center md:justify-end">
                             @auth
-                                <x-secondary-button wire:click.prevent='updateDefaultBillingAddress'
-                                >{{ __('Save as default') }}</x-secondary-button>
+                                @if( !auth()->user()->defaultAddress->sameAddress($billing_address) 
+                                    || auth()->user()->vat != $vat
+                                    || auth()->user()->fiscal_code != $fiscal_code 
+                                    )
+                                    <x-secondary-button class="w-full md:w-auto" wire:click.prevent='updateDefaultBillingAddress'
+                                    >{{ __('Save as default') }}</x-secondary-button>
+                                @endif
                             @endauth
                         </div>
                     </div>
@@ -367,7 +374,7 @@
             </div>
 
             @if($addresses_confirmed)
-            <x-secondary-button class="w-full py-4 mt-12 text-base" wire:click.prevent="$set('addresses_confirmed',false)"
+            <x-secondary-button ghost="true" class="w-full py-4 mt-12 text-base" wire:click.prevent="$set('addresses_confirmed',false)"
             >{{ __('Edit') }}</x-secondary-button>
             @endif
 
@@ -378,7 +385,7 @@
                 :subtotal="$subtotal"
                 :discounted-subtotal="$discounted_subtotal"
                 :tax="$tax"
-                :total="number_format( $total + (optional($shipping_price)->price ?? 0), 2)"
+                :total="$total + (optional($shipping_price)->price ?? 0)"
                 :coupon="$coupon"
                 :shipping="$shipping_price"
                 :shipping-price="optional($shipping_price)->price"
@@ -387,14 +394,14 @@
                 <x-slot:actions>
                     @if($addresses_confirmed)
                         @if($shipping_price->min_price <= $total)
-                            <livewire:checkout :total="$total+$shipping_price->price" :key="$shipping_price->id"/>
+                            <livewire:checkout :order="$order"/>
                         @else
                             <div class="w-full px-2 py-4 text-base text-center cursor-pointer bg-danger-500">
                                 {{ trans_choice('shopping_cart.checkout.min_price', null, [ 'price' => number_format($shipping_price->min_price,2).'€' ]) }}
                             </div>
                         @endif
                     @else
-                        <x-button class="w-full py-4 text-base" wire:click.prevent='confirmOrder'
+                        <x-button class="w-full py-4 text-base" wire:click.prevent='createOrder'
                         >{{ __('Confirm Order') }}</x-button>
                         @error('*')
                             <p class="w-full px-2 py-2 mt-4 text-sm text-center bg-red-50 text-danger-500">{{ __('Whoops! Something went wrong.') }}</p>
