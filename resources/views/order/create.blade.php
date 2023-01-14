@@ -136,7 +136,7 @@
                             </div>
 
                             @auth
-                                @if( !auth()->user()->defaultAddress->sameAddress($shipping_address) )
+                                @if( !auth()->user()->defaultAddress?->sameAddress($shipping_address) )
                                     <x-secondary-button class="w-full md:w-auto" wire:click.prevent='updateDefaultShippingAddress'
                                     >{{ __('Save as default') }}</x-secondary-button>
                                 @endif
@@ -235,7 +235,7 @@
 
                         <div class="pt-4 md:flex items-center md:justify-end">
                             @auth
-                                @if( !auth()->user()->defaultAddress->sameAddress($billing_address) 
+                                @if( !auth()->user()->defaultAddress?->sameAddress($billing_address) 
                                     || auth()->user()->vat != $vat
                                     || auth()->user()->fiscal_code != $fiscal_code 
                                     )

@@ -223,21 +223,29 @@ class Order extends Model
 
     public function canBePaied()
     {
-        $payable_statuses = OrderStatus::whereIn('name',['payment_failed','draft'])->get();
+        $payable_statuses = OrderStatus::whereIn('name',['payment_failed'])->get();
 
         return $payable_statuses->contains($this->status);
     }
 
     public function canBeEdited()
     {
-        $editabled_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied','draft'])->get();
+        $editabled_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied'])->get();
 
         return $editabled_statuses->contains($this->status);
     }
 
     public function canBeInvoiced()
     {
-        return strtolower($this->status->name) !='pending' && strtolower($this->status->name) !='payment_failed';
+        return strtolower($this->status->name) !='pending' && strtolower($this->status->name) !='payment_failed'
+            && strtolower($this->status->name) !='refunded' && strtolower($this->status->name) !='cancelled';
+    }
+
+    public function isActive()
+    {
+        $active_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied','preparing'])->get();
+
+        return $active_statuses->contains($this->status);
     }
 
     public function setAsPaied()

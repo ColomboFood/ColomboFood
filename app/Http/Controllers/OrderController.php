@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class OrderController extends Controller
 {
@@ -16,11 +17,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Auth::user()->orders()->with(['products','status'])
-            ->whereHas('status', fn($query) => $query->where('order_statuses.name','!=','draft'))
-            ->orderBy('id','desc')->paginate(10);
+        $orders = Auth::user()->orders()->with(['products','status'])->placed()
+            ->orderBy('id','desc')->paginate(5);
+        $randomProduct = \App\Models\Product::inRandomOrder()->first();
+        $SEOData = new SEOData(
+            title: __('My Orders'),
+        );
 
-        return view('order.index', compact('orders'));
+        return view('order.index', compact('orders','randomProduct','SEOData'));
     }
 
     /**
@@ -54,7 +58,11 @@ class OrderController extends Controller
     {
         $this->authorize('view', $order);
 
-        return view('order.show', compact('order'));
+        $SEOData = new SEOData(
+            title: __('Order').' #'.$order->number,
+        );
+
+        return view('order.show', compact('order','SEOData'));
     }
 
     /**
