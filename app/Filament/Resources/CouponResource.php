@@ -49,6 +49,7 @@ class CouponResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('code')->label(__('Code'))
                                     ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+                                    ->unique(ignorable: fn (?Coupon $record): ?Coupon => $record)
                                     ->required(),
                                 Forms\Components\TextInput::make('amount')->label(__('Amount'))
                                     ->prefix(fn (Closure $get) => $get('is_fixed_amount') ? '€' : null )

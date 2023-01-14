@@ -52,7 +52,7 @@ class CancelUnpaidOrders implements ShouldQueue
             }
 
             $orders = Order::where('order_status_id', $draft_status->id)
-                ->whereDate('updated_at', '<=', Carbon::now()->sub('days',7)->delete());
+                ->whereDate('updated_at', '<=', Carbon::now()->sub('days',7))->delete();
         }
         else
         {

@@ -22,7 +22,7 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <div class="flex h-full space-x-3">
+                <div class="space-x-3">
                     <x-jet-nav-link href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
                         <div class="relative w-6 h-6">
                             <x-icons.cart/>

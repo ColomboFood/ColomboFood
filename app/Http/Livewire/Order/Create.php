@@ -363,8 +363,8 @@ class Create extends Component
 
             if($this->order->coupon)
             {
-                $this->order->redemptions++;
-                $this->order->save();
+                $this->order->coupon->redemptions++;
+                $this->order->coupon->save();
             }
 
             $this->order->history()->create([

@@ -237,7 +237,7 @@ class Order extends Model
 
     public function canBeInvoiced()
     {
-        return strtolower($this->status->name) !='pending' && strtolower($this->status->name) !='payment_failed'
+        return strtolower($this->status->name) !='draft' && strtolower($this->status->name) !='pending' && strtolower($this->status->name) !='payment_failed'
             && strtolower($this->status->name) !='refunded' && strtolower($this->status->name) !='cancelled';
     }
 

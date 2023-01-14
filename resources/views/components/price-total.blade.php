@@ -23,7 +23,7 @@
 
     <div class="flex items-center justify-between">
         <span class="">{{ __('Subtotal') }}</span>
-        <span class="text-xl font-bold">{{ number_format( $subtotal + $tax ,2) }}€</span>
+        <span class="text-xl font-bold">{{ number_format( $subtotal ,2) }}€</span>
     </div>
 
     @if($coupon)
