@@ -72,8 +72,8 @@ class InvoiceController extends Controller
         }
 
         $invoice = Invoice::make()
-            ->series($order->invoice_series)
-            ->sequence($order->invoice_sequence)
+            ->series($order->invoice_series ?? 'invalid')
+            ->sequence($order->invoice_sequence ?? 0)
             ->buyer($customer)
             ->taxRate(config('cart.tax'))
             ->shipping($order->shipping_price)

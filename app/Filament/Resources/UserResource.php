@@ -71,10 +71,12 @@ class UserResource extends Resource
                             ]),
                         Forms\Components\Card::make()
                             ->schema([
+                                Forms\Components\Placeholder::make('last_seen')->label(__('Last seen'))
+                                    ->content(fn (?User $record): string => $record?->last_seen ? $record->last_seen->format(config('custom.datetime_format')) : '-'),
                                 Forms\Components\Placeholder::make('created_at')->label(__('Created at'))
-                                    ->content(fn (?User $record): string => $record ? $record->created_at->format(config('custom.datetime_format')) : '-'),
+                                    ->content(fn (?User $record): string => $record?->created_at ? $record->created_at->format(config('custom.datetime_format')) : '-'),
                                 Forms\Components\Placeholder::make('updated_at')->label(__('Updated at'))
-                                    ->content(fn (?User $record): string => $record ? $record->updated_at->format(config('custom.datetime_format')) : '-'),
+                                    ->content(fn (?User $record): string => $record?->updated_at ? $record->updated_at->format(config('custom.datetime_format')) : '-'),
                             ]),
                     ])
                     ->columnSpan(1),    
@@ -108,10 +110,14 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('orders_count')->label(__('Orders Count'))
                     ->counts('orders')
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')->label(__('Created at'))
+                Tables\Columns\TextColumn::make('last_seen')->label(__('Last seen'))
                     ->dateTime(config('custom.datetime_format'))
                     ->sortable()
                     ->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')->label(__('Created at'))
+                    ->dateTime(config('custom.datetime_format'))
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('created_at','desc')
             ->filters([

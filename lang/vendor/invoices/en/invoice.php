@@ -37,4 +37,5 @@ return [
     'due'                    => 'Due',
     'email'                  => 'Email',
     'order_number'           => 'Order Number',
+    'SWIFT'                  => 'SWIFT'
 ];

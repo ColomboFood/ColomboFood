@@ -37,4 +37,5 @@ return [
     'due'                    => 'Causale',
     'email'                  => 'Email',
     'order_number'           => 'Numero ordine',
+    'SWIFT'                  => 'SWIFT'
 ];

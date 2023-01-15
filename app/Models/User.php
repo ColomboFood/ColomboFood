@@ -39,6 +39,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'phone',
         'fiscal_code',
         'vat',
+        'last_seen'
     ];
 
     /**
@@ -64,6 +65,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'last_seen' => 'datetime'
     ];
 
     /**

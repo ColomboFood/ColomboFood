@@ -78,8 +78,8 @@ return [
          * Default attributes for Seller::class
          */
         'attributes' => [
-            'name'          => 'Towne, Smith and Ebert',
-            'address'       => '89982 Pfeffer Falls Damianstad, CO 66972-8160',
+            'name'          => 'ColomboFood',
+            'address'       => 'Via degli Alimentari 2, Milano 21100',
             'code'          => '41-1985581',
             'vat'           => '123456789',
             'phone'         => '760-355-3930',
