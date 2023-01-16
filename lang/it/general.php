@@ -21,6 +21,7 @@ return [
 
     'order_statuses' => [
         'draft' => 'Bozza',
+        'cancelled' => 'Annullato',
         'completed' => 'Completato',
         'disputed' => 'Contestato',
         'paied' => 'Pagato',

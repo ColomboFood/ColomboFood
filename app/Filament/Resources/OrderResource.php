@@ -234,7 +234,13 @@ class OrderResource extends Resource
                     )
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('email')->label(__('Email'))
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\BadgeColumn::make('shippingPrice.name')->label(__('Shipping'))
+                    ->colors([
+                        'secondary',
+                        'secondary' => fn ($state): bool => $state !== null,
+                    ]),
                 Tables\Columns\TextColumn::make('total')->label(__('Total'))
                     ->money('eur')
                     ->sortable()
@@ -273,6 +279,14 @@ class OrderResource extends Resource
                                     fn (Builder $query, $total): Builder => $query->where('total', '>=', $total),
                                 );
                         }),
+                    Tables\Filters\Filter::make('fast_shipping')->label(__('Fast Shipping'))
+                        ->query(fn (Builder $query): Builder => 
+                            $query->whereHas('shippingPrice', fn($query) => $query->where('max_days','!=',null)->where('max_days','<=',2))
+                        ),
+                    Tables\Filters\Filter::make('hide_drafts')->label(__('Hide Drafts'))
+                        ->query(fn (Builder $query): Builder => 
+                            $query->whereHas('status', fn($query) => $query->where('name','!=','draft'))
+                        )->default(),
                 ],
                 layout: Layout::AboveContent,
             )
