@@ -31,7 +31,6 @@ class Create extends Component
         return [
             'email' => 'required|email'. (auth()->user() ? '' : '|unique:users,email'),
             'phone' => 'nullable|numeric|digits_between:10,13',
-
             'shipping_address.full_name' => 'required',
             'shipping_address.address' => 'required',
             'shipping_address.city' => 'required',
@@ -307,7 +306,7 @@ class Create extends Component
                 'billing_address_postal_code' => $this->billing_address->postal_code,
                 'fiscal_code' => $this->fiscal_code,
                 'vat' => $this->vat,
-                'email' => $this->email,
+                'email' => auth()->user()?->email ?? $this->email,
                 'phone' => $this->phone,
                 'note' => $this->note,
                 'subtotal' => $this->subtotal,
@@ -316,7 +315,7 @@ class Create extends Component
                 'coupon_id' => $this->coupon ? $this->coupon->id : null,
                 'coupon_discount' => $this->coupon ? $this->coupon->discount($this->subtotal) : null,
                 'order_status_id' => $status_id,
-                'user_id' => auth()->user() ? auth()->user()->id : null,
+                'user_id' => auth()->user()?->id,
                 'shipping_price_id' => $this->shipping_price->id,
                 'shipping_price' => $this->shipping_price->price,
                 'avaiable_from' => $this->maxAvaiableFrom(),

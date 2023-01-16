@@ -173,7 +173,8 @@ return [
         'country_region' => 'Paese',
         'postal_code' => 'Codice Postale',
         'vat' => 'Partita IVA',
-        'fiscal_code' => 'Codice Fiscale'
+        'fiscal_code' => 'Codice Fiscale',
+        'phone' => 'Numero di telefono'
     ],
 
     /*

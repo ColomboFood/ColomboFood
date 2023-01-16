@@ -32,7 +32,7 @@
                     </svg>
                 </span>
 
-                <p class="ml-3 text-sm text-white truncate" x-text="message"></p>
+                <p class="ml-3 text-sm text-white truncate select-none" x-text="message"></p>
             </div>
 
             <div class="shrink-0 sm:ml-3">

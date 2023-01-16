@@ -1,14 +1,12 @@
 @php
     if($errors->has('shipping_address.*') || $errors->has('email') || $errors->has('phone') || $errors->has('note'))
-        $step = 1;
+        $shownStep = 1;
     elseif($errors->has('billing_address.*') || $errors->has('fiscal_code') || $errors->has('vat'))
-        $step = 2;
+        $shownStep = 2;
     elseif($errors->has('shipping_price.*'))
-        $step = 3;
+        $shownStep = 3;
     elseif($errors->has('coupon.*'))
-        $step = 4;
-    else
-        $step = $shownStep;
+        $shownStep = 4;
 @endphp
 
 <x-slot name="seo">
@@ -35,13 +33,13 @@
     
         <div class="w-full pb-12 md:1/2 lg:w-2/3 md:pr-12 md:pb-0" 
             x-data="{ 
-                selected: @js($step),
+                selected: @entangle('shownStep'),
                 addresses_confirmed : @entangle('addresses_confirmed'),
             }"
             x-init="
                 Livewire.on('orderCreated', () => {
                     if(selected != 4)
-                        selected = null;
+                        selected = 0;
                 });
             "
         >
@@ -49,7 +47,7 @@
             <div class="relative border-b border-gray-200">
                 <button class="w-full pb-6"
                     x-bind:disabled="addresses_confirmed"
-                    @click="selected !== 1 ? selected = 1 : selected = null">
+                    @click="selected !== 1 ? selected = 1 : selected = 0">
                     <div class="flex items-center justify-between">
                         <span @class([
                                 'font-semibold',
@@ -85,7 +83,7 @@
                 >
                     @if(!$addresses_confirmed)
                     <div class="py-6 space-y-2">
-                        <x-input-floating @class(['hidden' => Auth::check()]) label="{{ __('Email') }}" name="shipping_address_email" wire:model.lazy="email"/>
+                        <x-input-floating @class(['hidden' => Auth::check()]) label="{{ __('Email') }}" name="email" wire:model.lazy="email"/>
                         <div class="grid gap-2 xl:grid-cols-2 xl:gap-6">
                             <div>
                                 <x-input-floating label="{{ __('Full Name') . ' / ' . __('Company') }}" name="shipping_address_full_name" wire:model.lazy="shipping_address.full_name"/>
@@ -126,10 +124,10 @@
                             <x-jet-input-error class="mb-4" for="note"/>
                         </div>
 
-                        <div class="pt-4 md:flex items-center md:justify-between space-x-2">
+                        <div class="items-center pt-4 space-x-2 md:flex md:justify-between">
                             <div class="flex items-center mb-6 md:mb-0">
                                 @if(!$shipping_address->sameAddress($billing_address))
-                                    <x-secondary-button ghost="true" class="text-sm underline link"
+                                    <x-secondary-button class="w-full md:w-auto"
                                         wire:click="copyAddress()"
                                     >{{ __('Use as billing address') }}</x-secondary-button>
                                 @endif
@@ -137,11 +135,10 @@
 
                             @auth
                                 @if( !auth()->user()->defaultAddress?->sameAddress($shipping_address) )
-                                    <x-secondary-button class="w-full md:w-auto" wire:click.prevent='updateDefaultShippingAddress'
+                                    <x-secondary-button ghost="true" class="w-full md:w-auto" wire:click.prevent='updateDefaultShippingAddress'
                                     >{{ __('Save as default') }}</x-secondary-button>
                                 @endif
                             @endauth
-                            
                         </div>
                     </div>
                     @endif
@@ -151,7 +148,7 @@
             <div class="relative border-b border-gray-200">
                 <button class="w-full py-6"
                     x-bind:disabled="addresses_confirmed"
-                    @click="selected !== 2 ? selected = 2 : selected = null">
+                    @click="selected !== 2 ? selected = 2 : selected = 0">
                     <div class="flex items-center justify-between">
                         <span @class([
                                 'font-semibold',
@@ -233,13 +230,13 @@
                             </div>
                         </div>
 
-                        <div class="pt-4 md:flex items-center md:justify-end">
+                        <div class="items-center pt-4 md:flex md:justify-end">
                             @auth
                                 @if( !auth()->user()->defaultAddress?->sameAddress($billing_address) 
                                     || auth()->user()->vat != $vat
                                     || auth()->user()->fiscal_code != $fiscal_code 
                                     )
-                                    <x-secondary-button class="w-full md:w-auto" wire:click.prevent='updateDefaultBillingAddress'
+                                    <x-secondary-button ghost="true" class="w-full md:w-auto" wire:click.prevent='updateDefaultBillingAddress'
                                     >{{ __('Save as default') }}</x-secondary-button>
                                 @endif
                             @endauth
@@ -252,7 +249,7 @@
             <div class="relative border-b border-gray-200">
                 <button class="w-full py-6"
                     x-bind:disabled="addresses_confirmed"
-                    @click="selected != 3 ? selected = 3 : selected = null">
+                    @click="selected != 3 ? selected = 3 : selected = 0">
                     <div class="flex items-center justify-between">
                         <span @class([
                                 'font-semibold',
@@ -313,7 +310,7 @@
             <div class="relative border-b border-gray-200">
                 <button class="w-full py-6"
                     x-bind:disabled="addresses_confirmed"
-                    @click="selected !== 4 ? selected = 4 : selected = null">
+                    @click="selected !== 4 ? selected = 4 : selected = 0">
                     <div class="flex items-center justify-between">
                         <span @class([
                                 'font-semibold',
