@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <h1 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Home') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="h-96 xl:h-[28rem] 2xl:h-[32rem] flex items-center justify-center w-full bg-cover bg-[url('https://random.imagecdn.app/1500/320')]">

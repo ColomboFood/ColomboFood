@@ -1,8 +1,8 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800" id="breadcrumb">
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="flex justify-center py-8 mx-auto" x-data="instantsearch">
         <div class="flex flex-col w-full mx-auto md:space-x-10 md:flex-row md:inline-flex max-w-7xl sm:px-6 lg:px-8">

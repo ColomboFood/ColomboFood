@@ -34,7 +34,7 @@
             </a>
             @if(!$product->short_description)
                 <div class="text-gray-500">
-                    {{ $product->short_description}} 200g
+                    {{ $product->short_description}}
                 </div>
             @endif
             @if(count($product->attributeValues))
