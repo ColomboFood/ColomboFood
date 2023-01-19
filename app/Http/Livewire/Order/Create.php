@@ -76,12 +76,14 @@ class Create extends Component
         }
 
         $this->cartContent = Cart::instance('default')->content()->map(function($item){
+            $pricePerQuantity = $item->model->applyTax($item->model->pricePerQuantity($item->qty!='' ? $item->qty : 1, $item->price));
             return collect([
                 'id' => $item->id,
                 'name' => $item->name,
                 'price' => $item->price,
+                'tax_rate' => $item->model->tax_rate ?? config('cart.tax'),
                 'qty' => $item->qty,
-                'pricePerQuantity' => $item->model->pricePerQuantity($item->qty!='' ? $item->qty : 1, $item->model->taxed_price)
+                'pricePerQuantity' => $pricePerQuantity,
             ]);
         });
         $this->order = new Order();
@@ -326,6 +328,8 @@ class Create extends Component
                 $pivots[$item['id']] = [
                     'price' => $item['price'],
                     'quantity' => $item['qty'],
+                    'tax_rate' => $item['tax_rate'],
+                    'discount' => $this->coupon && !$this->coupon->is_fixed_amount ? round($this->coupon->discount($item['price'] * $item['qty'] ),2) : null,
                 ];
             }
             $this->order->products()->sync($pivots);

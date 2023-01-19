@@ -59,13 +59,18 @@ class Coupon extends Model
         return ($this->is_fixed_amount ? '€' : '').$this->amount.($this->is_fixed_amount ? '' : '%');
     }
 
+    public function applyBeforeTax()
+    {
+        return config('custom.discount_before_tax') && !$this->is_fixed_amount;
+    }
+
     public function discount($total)
     {
         $discount = 0;
 
         if($this->is_fixed_amount)
         {
-            $discount = $this->total > $this->amount ? $this->amount : $total;
+            $discount = $total > $this->amount ? $this->amount : $total;
         }
         else
         {

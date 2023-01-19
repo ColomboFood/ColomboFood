@@ -31,12 +31,18 @@ class ImportProductImages extends Command
     public function handle()
     {
         $images = collect(Storage::disk(config('media-library.disk_name'))->allFiles('data/import/immagini'));
+        $ctr = 0;
         foreach($images as $image)
         {
             $sku = Str::of($image)->replace('.jpg','')->explode('/')->last();
             $product = Product::where('sku', $sku)->first();
-            if($product && !$product->hasImage()) $product->addMediaFromDisk($image, config('media-library.disk_name'))->toMediaCollection('gallery');
+            if($product && !$product->hasImage()){
+                $product->addMediaFromDisk($image, config('media-library.disk_name'))->toMediaCollection('gallery');
+                $ctr++;
+            }
         }
+
+        dump("Imported " . $ctr . " images");
 
         return Command::SUCCESS;
     }

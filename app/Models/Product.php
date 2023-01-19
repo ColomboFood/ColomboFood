@@ -36,7 +36,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         'selling_price',
         'discount_is_fixed_amount',
         'discount_amount',
-        'tax',
+        'tax_rate',
         'quantity',
         'weight',
         'low_stock_threshold',
@@ -192,13 +192,13 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class)->withPivot('price', 'quantity', 'discount');
+        return $this->belongsToMany(Order::class)->withPivot('price', 'quantity', 'discount','tax_rate');
     }
 
     public function paidOrders()
     {
         $validStatuses = OrderStatus::whereIn('name',['paied','completed'])->get()->pluck('id');
-        return $this->belongsToMany(Order::class)->whereIn('order_status_id', $validStatuses)->withPivot('price', 'quantity', 'discount');
+        return $this->belongsToMany(Order::class)->whereIn('order_status_id', $validStatuses)->withPivot('price', 'quantity', 'discount', 'tax_rate');
     }
 
     public function variants()
@@ -383,16 +383,16 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
         );
     }
 
-    public function applyTax($price, $tax = null)
+    public function applyTax($price, $tax_rate = null)
     {
-        if($tax === null) $tax = $this->attributes['tax'] ?? config('cart.tax');
-        return number_format(round($price + round($price * ($tax / 100), 2),2),2);
+        if($tax_rate === null) $tax_rate = $this->attributes['tax_rate'] ?? config('cart.tax');
+        return number_format(round($price + round($price * ($tax_rate / 100), 2),2),2);
     }
 
-    public function removeTax($price, $tax = null)
+    public function removeTax($price, $tax_rate = null)
     {
-        if($tax === null) $tax = $this->attributes['tax'] ?? config('cart.tax');
-        return number_format(round($price / (1 + ($tax/100)),2),2);
+        if($tax_rate === null) $tax_rate = $this->attributes['tax_rate'] ?? config('cart.tax');
+        return number_format(round($price / (1 + ($tax_rate/100)),2),2);
     }
 
     protected function taxedOriginalPrice(): Attribute

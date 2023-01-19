@@ -8,14 +8,14 @@
 <x-slot name="seo">
     {!! 
         seo(new RalphJSmit\Laravel\SEO\Support\SEOData(
-                title: __('Order Update')
+                title: __('Order Update').' #'.$order->number 
             )) 
     !!}
 </x-slot>
 
 <x-slot name="header">
     <h1 class="mb-4 text-3xl font-bold">
-        {{ __('Order Update') }}
+        {{ __('Order Update').' #'.$order->number }} 
     </h1>
 </x-slot>
 
@@ -247,7 +247,8 @@
         <div class="w-full md:1/2 lg:w-1/3">
             <x-price-total
                 :subtotal="$order->subtotal"
-                :discounted-subtotal="$order->discounted_subtotal"
+                :discounted-subtotal="$order->subtotal - $order->coupon_discount"
+                :original-total="$order->total + $order->coupon_discount"
                 :tax="$order->tax"
                 :total="$order->total"
                 :coupon="$order->coupon"

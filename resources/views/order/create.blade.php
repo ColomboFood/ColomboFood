@@ -381,6 +381,7 @@
             <x-price-total
                 :subtotal="$subtotal"
                 :discounted-subtotal="$discounted_subtotal"
+                :original-total="$original_total"
                 :tax="$tax"
                 :total="$total + (optional($shipping_price)->price ?? 0)"
                 :coupon="$coupon"

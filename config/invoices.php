@@ -79,8 +79,8 @@ return [
          */
         'attributes' => [
             'name'          => 'ColomboFood',
-            'address'       => 'Via degli Alimentari 2, Milano 21100',
-            'code'          => '41-1985581',
+            'address'       => 'Via degli Alimentari 2, Milano 21100, Italia',
+            'code'          => null,
             'vat'           => '123456789',
             'phone'         => '760-355-3930',
             'custom_fields' => [
@@ -90,7 +90,6 @@ return [
                  * Used to display additional info on Seller section in invoice
                  * attribute => value
                  */
-                'SWIFT' => 'BANK101',
             ],
         ],
     ],

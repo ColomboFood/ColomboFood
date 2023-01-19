@@ -14,6 +14,7 @@ return [
     'buyer'                  => 'Acquirente',
     'address'                => 'Indirizzo',
     'code'                   => 'Codice',
+    'fiscal_code'            => 'Codice fiscale',
     'vat'                    => 'P.IVA',
     'phone'                  => 'Telefono',
     'description'            => 'Descrizione',

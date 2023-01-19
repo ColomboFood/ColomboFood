@@ -119,9 +119,11 @@
                         options = {
                             clientSecret: '{{ $intent['client_secret'] }}',
                             appearance : {
-                                theme: 'stripe',
+                                theme: 'flat',
                                 labels: 'floating',
                                 variables: {
+                                    colorPrimary: '#F6787C',
+                                    borderRadius: '0px',
                                 },
                             },
                             loader : 'always',

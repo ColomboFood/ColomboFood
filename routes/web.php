@@ -42,6 +42,7 @@ Route::middleware([
 
     Route::get('/orders', [App\Http\Controllers\OrderController::class , 'index'] )->name('order.index');
     Route::get('/order/create/login', fn() => redirect()->route('order.create') )->name('order.login');
+    Route::get('/order/{order}/reorder', [App\Http\Controllers\OrderController::class , 'reorder'] )->name('order.reorder');
 
     Route::post('review/{product}/store', [App\Http\Controllers\ReviewController::class , 'store'] )->name('review.store');
 });

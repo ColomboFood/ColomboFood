@@ -85,7 +85,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('price', 'quantity', 'discount')->withoutGlobalScopes();
+        return $this->belongsToMany(Product::class)->withPivot('price', 'quantity', 'discount','tax_rate')->withoutGlobalScopes();
     }
 
     public function user()

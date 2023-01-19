@@ -26,15 +26,17 @@
         <span class="text-xl font-bold">{{ number_format( $subtotal ,2) }}€</span>
     </div>
 
-    @if($coupon)
+    @if($coupon && $coupon->applyBeforeTax())
     <div class="flex items-center justify-between">
-        <span class="">{{ $coupon->label }} {{ $coupon->code ?? '' }}</span>
-        <span class="text-xl font-bold">-{{ number_format( $subtotal - $discountedSubtotal , 2) }}€</span>
+        <span class="">{{ !$coupon->is_fixed_amount ? $coupon->label : '' }} {{ $coupon->code }}</span>
+        <span class="text-xl font-bold">-{{ number_format( $discount() , 2) }}€</span>
     </div>
-    <div class="flex items-center justify-between">
-        <span class=""></span>
-        <span class="text-xl font-bold">{{ number_format($discountedSubtotal, 2) }}€</span>
-    </div>
+        @if($discountedSubtotal)
+        <div class="flex items-center justify-between">
+            <span class=""></span>
+            <span class="text-xl font-bold">{{ number_format($discountedSubtotal, 2) }}€</span>
+        </div>
+        @endif
     @endif
     
     @if($tax)
@@ -44,6 +46,19 @@
         </span>
         <span class="text-base font-bold">{{ number_format($tax, 2) }}€</span>
     </div>
+    @endif
+
+    @if($coupon && !$coupon->applyBeforeTax())
+    <div class="flex items-center justify-between">
+        <span class="">{{ !$coupon->is_fixed_amount ? $coupon->label : '' }} {{ $coupon->code }}</span>
+        <span class="text-xl font-bold">-{{ number_format( $discount() , 2) }}€</span>
+    </div>
+        @if($discountedSubtotal)
+        <div class="flex items-center justify-between">
+            <span class=""></span>
+            <span class="text-xl font-bold">{{ number_format($discountedSubtotal, 2) }}€</span>
+        </div>
+        @endif
     @endif
 
     @if(isset($shipping))

@@ -10,6 +10,7 @@ trait WithCartTotals
 {
     public $subtotal;
     public $discounted_subtotal;
+    public $original_total;
     public $tax;
     public $shipping_price;
     public $total;
@@ -79,13 +80,19 @@ trait WithCartTotals
         $this->coupon = Coupon::where('code',$this->coupon_code)->first();
 
         $this->subtotal = Cart::instance('default')->subtotal(null,null,'');
-        if ($this->coupon) {
+        if($this->coupon && !$this->coupon->applyBeforeTax() ){
+            $this->tax = Cart::instance('default')->tax();
+            $this->original_total = Cart::instance('default')->total(null,null,'');
+            $this->total = $this->original_total - round($this->coupon->discount($this->original_total),2);
+        }
+        elseif ($this->coupon && $this->coupon->applyBeforeTax() ) {
             $this->discounted_subtotal = round( (float) $this->subtotal - $this->coupon->discount(Cart::instance('default')->subtotal(null,null,'')) , 2);
             $tax_total = 0;
             foreach(Cart::instance('default')->content() as $item)
             {
-                $tax_total += round( ( $item->price - round($this->coupon->discount($item->price),2) ) * $item->qty * $item->taxRate/100 , 2 );
+                $tax_total += round( ( $item->price - $this->coupon->discount($item->price) ) * $item->qty * $item->taxRate/100 , 2 );
             }
+           
             $this->tax = round( $tax_total , 2);
             $this->total = round( $this->discounted_subtotal + $this->tax, 2);
         }

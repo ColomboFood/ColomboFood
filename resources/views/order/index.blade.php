@@ -85,6 +85,12 @@
                                 <x-button class="w-full" type="submit">{{ __('Complete Payment') }}</x-button>
                             </form>
                         @endif
+                        @if($order->canBeInvoiced())
+                            <form class="w-full" action="{{ route('order.reorder', $order) }}" method="GET">
+                                <x-button type="submit" class="justify-center w-full"
+                                >{{ __('Reorder') }}</x-button>
+                            </form>
+                        @endif
                         <form class="w-full" action="{{ route('order.show', $order) }}" method="GET">
                             <x-secondary-button type="submit" class="justify-center w-full"
                             s>{{ __('Details') }}</x-secondary-button>

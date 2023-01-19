@@ -68,7 +68,8 @@ class CouponResource extends Resource
                             ])->columnSpan('full'),
                         Forms\Components\Toggle::make('is_fixed_amount')->label(__('Is Fixed Amount'))
                             ->reactive()
-                            ->columnSpan('full'),
+                            ->columnSpan('full')
+                            ->hiddenOn('edit'),
 
                         Forms\Components\Fieldset::make('restrictions')->label(__('Restrictions'))
                             ->schema([

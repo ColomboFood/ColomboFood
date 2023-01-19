@@ -274,7 +274,7 @@ class ProductResource extends Resource
                                 Forms\Components\Toggle::make('featured')->label(__('Featured')),
                                 Forms\Components\Toggle::make('hidden')->label(__('Hidden'))
                                     ->default(true),
-                                Forms\Components\TextInput::make('tax')->label(__('Tax'))
+                                Forms\Components\TextInput::make('tax_rate')->label(__('Tax'))
                                     ->placeholder(config('cart.tax'))
                                     ->numeric()
                                     ->suffix('%')

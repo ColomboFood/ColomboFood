@@ -84,7 +84,7 @@
 
     <div class="order-1 w-full px-4 mt-6 text-center md:px-0 md:pl-4 md:order-2 md:text-right md:mt-0 md:w-3/12 lg:w-2/12">
         <div class="text-lg font-black text-gray-900">
-            {{ $product->pricePerQuantity($item['qty']!='' ? $item['qty'] : 1, $product->taxed_price) }}€
+            {{ $product->applyTax( $product->pricePerQuantity($item['qty']!='' ? $item['qty'] : 1, $product->price) ) }}€
         </div>
     </div>
     <div class="absolute flex items-center justify-center w-6 h-6 p-1 leading-none text-center text-gray-500 rounded-full shadow-xl cursor-pointer hover:text-gray-900 hover:bg-secondary-100 bg-secondary-50 -top-1 -right-2"

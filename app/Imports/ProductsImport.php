@@ -55,11 +55,11 @@ class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertCo
             'name'              => $row[1], //ucwords(strtolower($row[1])),
             'slug'              => Str::slug(strtolower($row[1])),
             'short_description' => $row[2],
-            'tax'               => $row[4] != config('cart.tax')*100 ? (float)$row[4]/100 : null,
+            'tax_rate'               => $row[4] != config('cart.tax')*100 ? (float)$row[4]/100 : null,
             'original_price'    => (float) str_replace(',', '.', $row[5]),
             'selling_price'    => (float) str_replace(',', '.', $row[5]),
             'quantity'          => (int)$row[6] > 0 ? (int)$row[6] : 0,
-            'hidden'            => true,
+            'hidden'            => false,
         ]);
     }
 }

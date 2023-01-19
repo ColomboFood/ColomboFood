@@ -94,4 +94,6 @@ filament e media library > medialibrary header CacheControl no-cache
 prodotti con varianti > nella ricerca vengono mostrati prezzo, quantità e foto della variante principale
 non aggiungere piú valori dello stesso attributo a un singolo prodotto
 non aggiungere sottovarianti alle varianti
+
+prima applicare price*quantity e poi calcolare tax
 -->

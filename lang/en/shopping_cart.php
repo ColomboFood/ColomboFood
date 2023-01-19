@@ -22,5 +22,5 @@ return [
     'remove.cart' => 'Remove from cart',
     'add.wishlist' => 'Add to wishlist',
     'add.cart' => 'Add to cart',
-    'checkout.min_price' => 'Minium subtotal :price',
+    'checkout.min_price' => 'Minium total :price',
 ];

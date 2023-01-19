@@ -66,6 +66,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
             $table->decimal('price',6,2);
+            $table->decimal('tax_rate',4,2)->nullable();
             $table->unsignedInteger('quantity');
             $table->decimal('discount',6,2)->nullable();
 

@@ -76,6 +76,7 @@
                         :heading="__('Payment Details')"
                         :subtotal="$order->subtotal"
                         :discounted-subtotal="$order->subtotal - $order->coupon_discount"
+                        :original-total="$order->total + $order->coupon_discount"
                         :tax="$order->tax"
                         :total="$order->total"
                         :coupon="$order->coupon"
@@ -87,6 +88,12 @@
                                 @if($order->canBePaied())
                                     <form action="{{ route('order.update', $order ) }}" method="GET">
                                         <x-button class="w-full py-4 text-base">{{ __('Pay Now') }}</x-button>
+                                    </form>
+                                @endif
+                                @if($order->canBeInvoiced())
+                                    <form class="w-full" action="{{ route('order.reorder', $order) }}" method="GET">
+                                        <x-button type="submit" class="justify-center w-full"
+                                        >{{ __('Reorder') }}</x-button>
                                     </form>
                                 @endif
                                 @if($order->canBeInvoiced())
@@ -181,7 +188,7 @@
 
                             <div class="order-1 w-full px-4 mt-6 text-center md:px-0 md:pl-4 md:order-2 md:text-right md:mt-0 md:w-3/12 lg:w-2/12">
                                 <div class="text-lg font-black text-gray-900">
-                                    {{ $product->pricePerQuantity($product->pivot->quantity,$product->applyTax($product->pivot->price)) }}€
+                                    {{ $product->applyTax( $product->pricePerQuantity($product->pivot->quantity, $product->pivot->price) ) }}€
                                 </div>
                             </div>
                         </div>

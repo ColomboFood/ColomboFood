@@ -6,10 +6,15 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Traits\Livewire\WithShoppingLists;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class OrderController extends Controller
 {
+
+    use WithShoppingLists;
+
     /**
      * Display a listing of the resource.
      *
@@ -97,5 +102,28 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {  
 
+    }
+
+    /**
+     * Create a new Cart with same products.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function reorder(Order $order)
+    {  
+        foreach($order->products as $product)
+        {
+            if (config('custom.skip_quantity_checks') || $product->quantity)
+            {
+                $quantity = $product->pivot->quantity;
+                if(!config('custom.skip_quantity_checks'))
+                    $quantity = $quantity <= $product->quantity? $quantity : $product->quantity;
+                $item =Cart::instance('default')->add($product, $quantity );
+                if($product->tax_rate) Cart::instance('default')->setTax($item->rowId, $product->tax_rate);
+            }
+        }
+
+        return redirect()->route('cart.index');
     }
 }

@@ -27,6 +27,6 @@ return [
 
     'use_watermark' => false,
 
-    'discount_before_tax' => false
+    'discount_before_tax' => true
 
 ];

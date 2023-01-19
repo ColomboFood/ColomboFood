@@ -72,6 +72,7 @@
             <x-price-total
                 :subtotal="$subtotal"
                 :discounted-subtotal="$discounted_subtotal"
+                :original-total="$original_total"
                 :tax="$tax"
                 :total="$total"
                 :coupon="$coupon"

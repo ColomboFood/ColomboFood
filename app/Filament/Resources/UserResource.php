@@ -107,8 +107,8 @@ class UserResource extends Resource
                     ])
                     ->dateTime(config('custom.datetime_format'))
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('orders_count')->label(__('Orders Count'))
-                    ->counts('orders')
+                Tables\Columns\TextColumn::make('placed_orders_count')->label(__('Orders Count'))
+                    ->counts('placedOrders')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('last_seen')->label(__('Last seen'))
                     ->dateTime(config('custom.datetime_format'))
