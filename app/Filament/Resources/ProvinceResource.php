@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProvinceResource\Pages;
-use App\Filament\Resources\ProvinceResource\RelationManagers;
-use App\Models\Province;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Province;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Filters\Layout;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\ProvinceResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ProvinceResource\RelationManagers;
 
 class ProvinceResource extends Resource
 {
@@ -86,7 +87,8 @@ class ProvinceResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('active')->label(__('Active'))
                     ->query(fn (Builder $query): Builder => $query->active()),
-            ])
+                    
+            ],layout: Layout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

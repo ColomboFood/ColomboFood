@@ -6,7 +6,7 @@
 ])
 
 <div {!! $attributes->only('class')->merge(['class' => 'relative z-0 w-full group border-0 px-0 my-2' ]) !!}>
-    <input class="block py-2.5 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-primary-500 peer" 
+    <input class="block py-2.5 px-2 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-primary-500 peer" 
         {{ $disabled ? 'disabled' : '' }}
         {{ $attributes->except('class') }} 
         name="{{ $name }}"
