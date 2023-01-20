@@ -75,6 +75,10 @@ class LatestOrders extends BaseWidget
     protected function getTableFilters(): array
     {
         return [
+            Tables\Filters\Filter::make('fast_shipping')->label(__('Fast Shipping'))
+                ->query(fn (Builder $query): Builder => 
+                    $query->whereHas('shippingPrice', fn($query) => $query->where('max_days','!=',null)->where('max_days','<=',2))
+                ),
             Tables\Filters\SelectFilter::make('status')
                 ->label(__('Status'))
                 ->relationship('status', 'name')

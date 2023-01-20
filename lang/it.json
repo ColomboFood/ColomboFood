@@ -56,6 +56,7 @@
     "Orders" : "Ordini",
     "My Orders" : "Cronologia Ordini",
     "Status" : "Stato",
+    "Statuses": "Stati",
     "Number": "Numero",
     "Tracking Number" : "Codice Spedizione",
     "Shipping Label" : "Etichetta di Spedizione",
@@ -149,7 +150,10 @@
     "Billing Address" : "Indirizzo di fatturazione",
     "Postal Code": "Codice Postale",
     "Country/Region" : "Paese",
+    "Country": "Paese",
+    "Region": "Regione",
     "Province" : "Provincia",
+    "Provinces" : "Province",
     "City" : "Città",
     "Address2" : "Indirizzo Secondario",
     "Company" : "Ragione Sociale",
@@ -342,5 +346,9 @@
     "About Us": "Chi Siamo",
     "Last seen": "Ultimo accesso",
     "Fast Shipping": "Consegna Rapida",
-    "Hide Drafts": "Nascondi Bozze"
+    "Hide Drafts": "Nascondi Bozze",
+
+    "Date From": "Dal",
+    "Date To": "Al"
+    
 } 

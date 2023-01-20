@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new CancelUnpaidOrders)->daily();
-        
+
+        $schedule->command('export:daily-orders')->daily();
         $schedule->command('sitemap:generate')->daily();
     }
 

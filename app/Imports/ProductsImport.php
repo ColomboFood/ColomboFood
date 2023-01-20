@@ -2,16 +2,20 @@
 
 namespace App\Imports;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithProgressBar;
 use Maatwebsite\Excel\Concerns\WithUpsertColumns;
 
-class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertColumns
+class ProductsImport implements ToModel, WithStartRow, WithUpserts, WithUpsertColumns, WithProgressBar
 {
+    use Importable;
+    
     private $categories;
 
     public function __construct()

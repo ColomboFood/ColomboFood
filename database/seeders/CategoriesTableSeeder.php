@@ -34,12 +34,12 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Pasta fresca',
             'featured' => true
         ]);
-        $gastronomia->addMediaFromUrl(asset('img/pasta-fresca.png'))->toMediaCollection('hero');
+        $pasta->addMediaFromUrl(asset('img/pasta-fresca.png'))->toMediaCollection('hero');
         $pasticceria = Category::create([
             'name' => 'Pasticceria',
             'featured' => true
         ]);
-        $gastronomia->addMediaFromUrl(asset('img/pasticceria.png'))->toMediaCollection('hero');
+        $pasticceria->addMediaFromUrl(asset('img/pasticceria.png'))->toMediaCollection('hero');
         Category::create([
             'name' => 'Torte',
             'parent_id' => $pasticceria->id,

@@ -29,9 +29,9 @@ class ImportProducts extends Command
      */
     public function handle()
     {
-        dump('Importing products...');
+        $this->output->title('Starting products import');
         Excel::import(new ProductsImport, '/data/import/articoliweb.csv');
-        dump('Products imported');
+        $this->output->success('Import successful');
         return Command::SUCCESS;
     }
 }

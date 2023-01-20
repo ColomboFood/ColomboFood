@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\OrderStatus;
+use App\Exports\OrdersExport;
 use Illuminate\Console\Command;
 use App\Exports\OrderProductsExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -30,7 +32,7 @@ class ExportDailyOrders extends Command
     public function handle()
     {
         dump('Exporting daily orders...');
-        Excel::store(new OrderProductsExport(yesterday()), 'data/export/daily_orders-'.(today()->format('dmy')).'.csv', config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
+        Excel::store(new OrdersExport(yesterday()->startOfDay(), today()->startOfDay(), [OrderStatus::where('name','like','paied')->first()->id]), 'data/export/daily_orders-'.(today()->format('d_m_y')).'.csv', config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
             'visibility' => 'private',
         ]);
         dump('Orders exported');
