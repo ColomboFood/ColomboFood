@@ -35,7 +35,7 @@
         <!-- Province -->
         <div class="col-span-6 sm:col-span-2">
             <x-jet-label for="province" value="{{ __('Province') }}" />
-            <x-input id="province" type="text" class="block w-full mt-1" wire:model.defer="address.province" maxlength="2" autocomplete="province"/>
+            <x-province-select id="province"  class="block w-full mt-1" wire:model.defer="address.province" autocomplete="province" active/>
             <x-jet-input-error for="address.province" class="mt-2" />
         </div>
 
@@ -49,7 +49,7 @@
         <!-- Country/Region -->
         <div class="col-span-6 sm:col-span-2">
             <x-jet-label for="country_region" value="{{ __('Country/Region') }}" />
-            <x-input id="country_region" type="text" class="block w-full mt-1" wire:model.defer="address.country_region" autocomplete="country_region"/>
+            <x-country-select id="country_region" class="block w-full mt-1" wire:model.defer="address.country_region"/>
             <x-jet-input-error for="address.country_region" class="mt-2" />
         </div>
         

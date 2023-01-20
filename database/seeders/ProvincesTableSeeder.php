@@ -19,6 +19,6 @@ class ProvincesTableSeeder extends Seeder
     {
         Excel::import(new ProvincesImport, '/data/import/provinces.csv');
 
-        Province::whereIn('code', [ 'MI', 'PV', 'VA'])->update(['active' => true]);
+        Province::whereIn('code', [ 'MI', 'PV', 'VA'])->update(['is_active' => true]);
     }
 }

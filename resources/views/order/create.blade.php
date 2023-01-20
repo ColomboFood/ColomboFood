@@ -104,7 +104,7 @@
                                 <x-jet-input-error class="mb-4" for="shipping_address.city"/>
                             </div>
                             <div>
-                                <x-input-floating label="{{ __('Province') }}" maxlength="2" name="shipping_address_province" wire:model.lazy="shipping_address.province"/>
+                                <x-province-select floating label="{{ __('Province') }}" active name="shipping_address_province" wire:model.lazy="shipping_address.province"/>
                                 <x-jet-input-error class="mb-4" for="shipping_address.province"/>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                 <x-jet-input-error class="mb-4" for="shipping_address.postal_code"/>
                             </div>
                             <div>
-                                <x-input-floating label="{{ __('Country/Region') }}" name="shipping_address_country_region" wire:model.lazy="shipping_address.country_region"/>
+                                <x-country-select floating label="{{ __('Country/Region') }}" name="shipping_address_country_region" wire:model.lazy="shipping_address.country_region"/>
                                 <x-jet-input-error class="mb-4" for="shipping_address.country_region"/>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                                 <x-jet-input-error class="mb-4" for="billing_address.city"/>
                             </div>
                             <div>
-                                <x-input-floating label="{{ __('Province') }}" maxlength="2" name="billing_address_province" wire:model.lazy="billing_address.province"/>
+                                <x-province-select floating label="{{ __('Province') }}" name="billing_address_province" wire:model.lazy="billing_address.province"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.province"/>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                                 <x-jet-input-error class="mb-4" for="billing_address.postal_code"/>
                             </div>
                             <div>
-                                <x-input-floating label="{{ __('Country/Region') }}" name="billing_address_country_region" wire:model.lazy="billing_address.country_region"/>
+                                <x-country-select floating label="{{ __('Country/Region') }}" name="billing_address_country_region" wire:model.lazy="billing_address.country_region"/>
                                 <x-jet-input-error class="mb-4" for="billing_address.country_region"/>
                             </div>
                         </div>
