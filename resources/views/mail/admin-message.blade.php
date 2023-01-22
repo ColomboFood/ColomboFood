@@ -3,9 +3,9 @@
 {!! $message !!}
 
 @component('mail::button', ['url' => ''])
-Button Text
+{{ __('Go to website') }}
 @endcomponent
 
-Thanks,<br>
+{{ __('Regards') }},<br>
 {{ config('app.name') }}
 @endcomponent

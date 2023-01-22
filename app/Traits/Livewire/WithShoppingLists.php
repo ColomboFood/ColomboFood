@@ -2,8 +2,8 @@
 
 namespace App\Traits\Livewire;
 
-use Throwable;
 use App\Models\Product;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -213,25 +213,25 @@ trait WithShoppingLists
             try{
                 Cart::instance($instance)->erase(Auth::user()->email);
             }
-            catch(Throwable $e){
+            catch(Exception $e){
                 Log::error("Error erasing ".$instance." in WithSoppingLists\n" . $e);
             }
             try{
                 Cart::instance($instance)->store(Auth::user()->email);
             }
-            catch(Throwable $e){
+            catch(Exception $e){
                 Log::error("Error storing (1) ".$instance." in WithSoppingLists\n" . $e);
             }
             try{
                 Cart::instance($instance)->restore(Auth::user()->email);
             }
-            catch(Throwable $e){
+            catch(Exception $e){
                 Log::error("Error restoring ".$instance." in WithSoppingLists\n" . $e);
             }
             try{
                 Cart::instance($instance)->store(Auth::user()->email);
             }
-            catch(Throwable $e){
+            catch(Exception $e){
                 Log::error("Error storing (2) ".$instance." in WithSoppingLists\n" . $e);
             }
         }
