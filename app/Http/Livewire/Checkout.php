@@ -21,8 +21,8 @@ class Checkout extends Component
     public $gateway;
 
     protected $listeners = [
-        'orderPlaced',
-        'orderUpdated',
+        'orderPlaced' => 'redirectToSuccess',
+        'orderUpdated' => 'redirectToSuccess',
     ];
 
     public function mount(Order $order, $update = false)
@@ -33,14 +33,10 @@ class Checkout extends Component
         $this->submitDisabled = false;
     }
 
-    public function orderPlaced()
+    public function submitPayment()
     {
-        $this->emit('paymentConfirmed');
-    }
-
-    public function orderUpdated()
-    {
-        $this->emit('paymentConfirmed');
+        $this->submitDisabled = true;
+        $this->emit('submitPayment');
     }
 
     public function confirmPayment()
@@ -63,9 +59,8 @@ class Checkout extends Component
         ]);
     }
 
-    public function submitPayment()
+    public function storePayment()
     {
-        $this->submitDisabled = true;
         if($this->update)
             $this->emit('updateOrder',$this->intent['id'],$this->gateway);
         else

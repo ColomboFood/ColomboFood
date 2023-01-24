@@ -40,14 +40,7 @@ class PaymentIntentPaymentFailedJob implements ShouldQueue
         $order = Order::where('payment_gateway','stripe')->where('payment_id',$payment_intent)->first();
         if ($order) 
         {
-            $status = OrderStatus::where('name','payment_failed')->first();
-            if($status){
-                $order->status()->associate($status)->save();
-                $order->history()->create([
-                    'order_status_id' => $status->id,
-                ]);
-            }
-            else
+            if(!$order->setAsPaymentFailed()) 
                 Log::error('Couldn\'t update status to "payment_failed" for order #'.$order->id .' (Payment Failed)');
         }
         else

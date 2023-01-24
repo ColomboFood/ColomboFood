@@ -28,7 +28,14 @@
                             <a class="text-lg" href="{{ route('order.show', $order) }}">
                                 #{{ $order->number }} 
                             </a>
-                            <span class="bg-white uppercase text-primary-500 text-xs mx-2 px-2 py-0.5 border border-primary-500">
+                            <span @class([
+                                'bg-white uppercase px-2 py-0.5 border text-xs mx-2',
+                                'text-primary-500 border-primary-500' => $order->status->color() == 'primary',
+                                'text-secondary-500 border-secondary-500' => $order->status->color() == 'secondary',
+                                'text-warning-500 border-warning-500' => $order->status->color() == 'warning',
+                                'text-danger-500 border-danger-500' => $order->status->color() == 'danger',
+                                'text-success-500 border-success-500' => $order->status->color() == 'success',
+                            ])>
                                 {{ $order->status->label }}
                             </span>
                         </div>
@@ -80,7 +87,7 @@
                     </div>
 
                     <div class="flex flex-col items-center w-full px-6 py-6 mt-12 space-y-2 bg-gray-50 md:w-1/3 md:mt-0">
-                        @if($order->canBePaied())
+                        @if($order->canBePaid())
                             <form class="w-full" action="{{ route('order.update', $order) }}" method="GET">
                                 <x-button class="w-full" type="submit">{{ __('Complete Payment') }}</x-button>
                             </form>

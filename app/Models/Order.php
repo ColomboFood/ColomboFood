@@ -70,7 +70,7 @@ class Order extends Model
         'total'      => 'decimal:2',
         'shipping_price' => 'decimal:2',
     ];
-
+    
     public function scopePlaced($query)
     {
         $excluded_statuses = [ 'draft' ];
@@ -191,20 +191,20 @@ class Order extends Model
             case('payment_failed'):
                 $can = $this->status->name == 'pending' || $this->status->name == 'draft';
                 break;
-            case('paied'):
+            case('paid'):
                 $can = $this->status->name == 'pending' || $this->status->name == 'draft';
                 break;
             case('preparing'):
-                $can = $this->status->name == 'paied';
+                $can = $this->status->name == 'paid';
                 break;
             case('shipped'):
-                $can = $this->status->name == 'paied' || $this->status->name == 'preparing';
+                $can = $this->status->name == 'paid' || $this->status->name == 'preparing';
                 break;
             case('completed'):
-                $can = $this->status->name == 'paied' || $this->status->name == 'shipped';
+                $can = $this->status->name == 'paid' || $this->status->name == 'shipped';
                 break;
             case('refunded'):
-                $can = $this->status->name == 'completed' || $this->status->name == 'shipped'  || $this->status->name == 'paied';
+                $can = $this->status->name == 'completed' || $this->status->name == 'shipped'  || $this->status->name == 'paid';
                 break;
             case('cancelled'):
                 $can = $this->status->name == 'paid';
@@ -216,23 +216,23 @@ class Order extends Model
 
     public function canBeDeleted()
     {
-        $deletable_statuses = OrderStatus::whereIn('name',['payment_failed'])->get();
+        $deletable_statuses = collect(['payment_failed']);
 
-        return $deletable_statuses->contains($this->status);
+        return $deletable_statuses->contains($this->status->name);
     }
 
-    public function canBePaied()
+    public function canBePaid()
     {
-        $payable_statuses = OrderStatus::whereIn('name',['payment_failed'])->get();
+        $payable_statuses = collect(['payment_failed']);
 
-        return $payable_statuses->contains($this->status);
+        return $payable_statuses->contains($this->status->name);
     }
 
     public function canBeEdited()
     {
-        $editabled_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied'])->get();
+        $editable_statuses = collect(['pending','payment_failed','paid']);
 
-        return $editabled_statuses->contains($this->status);
+        return $editable_statuses->contains($this->status->name);
     }
 
     public function canBeInvoiced()
@@ -243,17 +243,36 @@ class Order extends Model
 
     public function isActive()
     {
-        $active_statuses = OrderStatus::whereIn('name',['pending','payment_failed','paied','preparing'])->get();
+        $active_statuses = collect(['pending','payment_failed','paid','preparing']);
 
-        return $active_statuses->contains($this->status);
+        return $active_statuses->contains($this->status->name);
     }
 
-    public function setAsPaied()
+    public function setAsPaymentFailed()
     {
         $res = false;
 
-        DB::transaction(function () {
-            $status = OrderStatus::where('name','paied')->first();
+        DB::transaction(function () use(&$res) {
+            $status = OrderStatus::where('name','payment_failed')->first();
+            if ($status) {
+                $this->status()->associate($status);
+                $this->save();
+                $this->history()->create([
+                    'order_status_id' => $status->id,
+                ]);
+                $res = true;
+            }
+        });
+
+        return $res;
+    }
+
+    public function setAsPaid()
+    {
+        $res = false;
+
+        DB::transaction(function () use(&$res) {
+            $status = OrderStatus::where('name','paid')->first();
             if ($status) {
                 $lastInvoiceSequence= Order::where('invoice_series', today()->format('y'))->max('invoice_sequence') ?? 0;
                 $this->status()->associate($status);

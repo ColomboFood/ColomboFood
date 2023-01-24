@@ -53,7 +53,7 @@
                                     if(orderData.status=='COMPLETED'){
                                         $wire.set('gateway','paypal');
                                         $wire.set('intent.id',orderData.id);
-                                        $wire.submitPayment();
+                                        $wire.storePayment();
                                     }
                                     else{
                                         return actions.restart();
@@ -100,17 +100,16 @@
                         elements : null,
                         errorMessage : null,
                         async submit(){
-                            error = (await this.stripe.confirmPayment({
+                            res = (await this.stripe.confirmPayment({
                                 elements : this.elements,
-                                confirmParams: {
-                                    return_url: '{{ route('stripe.handle.checkout.response') }}',
-                                },
-                            })).error;
-                            if(error) {
-                                this.errorMessage = error.message;
-                                @this.set('submitDisabled', false);
+                                confirmParams: {},
+                                redirect: 'if_required'
+                            }));
+                            if(res.error) {
+                                this.errorMessage = res.error.message;
+                                $wire.set('submitDisabled', false);
                             } else {
-                                console.log('Stripe unexpected error');
+                                $wire.storePayment();
                             }
                         }
                     }"
@@ -123,6 +122,7 @@
                                 labels: 'floating',
                                 variables: {
                                     colorPrimary: '#F6787C',
+                                    colorDanger: '#C83030',
                                     borderRadius: '0px',
                                 },
                             },
@@ -131,7 +131,7 @@
                         elements = stripe.elements(options);
                         paymentElement = elements.create('payment');
                         paymentElement.mount('#payment-element');
-                        Livewire.on('paymentConfirmed', () =>{
+                        Livewire.on('submitPayment', () =>{
                             submit();
                         });
                     "
@@ -140,7 +140,7 @@
                     <div id="payment-element">
                         <!-- Elements will create form elements here -->
                     </div>
-                    <div id="error-message" x-text="errorMessage">
+                    <div class="mt-2 text-sm text-danger-500" id="error-message" x-text="errorMessage">
                         <!-- Display error message to your customers here -->
                     </div>
                 </form>
@@ -151,9 +151,13 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button wire:click="submitPayment" :disabled="$submitDisabled" class="ml-3" wire:loading.attr="disabled">
+                <x-button wire:click="submitPayment" :disabled="$submitDisabled" class="ml-3" wire:loading.attr="disabled">
                     {{ __('Confirm') }}
-                </x-danger-button>
+                    <x-icons.spinner @class([
+                        'w-4 h-4 ml-1 text-white',
+                        'hidden' => !$submitDisabled
+                    ])/>
+                </x-button>
             </x-slot>
         </div>
     </x-jet-dialog-modal>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Notifications\AdminMessage;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -56,8 +57,8 @@ Route::middleware([
 ->group(function () {
     Route::get('login', fn() => redirect('login') )->name('filament.auth.login');
     Route::prefix('mail')->group( function() {
-        Route::get('order/placed', function() {
-            return "Email";
+        Route::get('admin', function() {
+            return (new AdminMessage('Test Mail','Questa mail server per fare dei test'))->toMail('admin@admin.com');
         });
     });
 

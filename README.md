@@ -96,4 +96,6 @@ non aggiungere piú valori dello stesso attributo a un singolo prodotto
 non aggiungere sottovarianti alle varianti
 
 prima applicare price*quantity e poi calcolare tax
+
+quantitá di prodotti e utilizzi coupon vengono validati tra cart/checkout ma non da checkout/paid
 -->

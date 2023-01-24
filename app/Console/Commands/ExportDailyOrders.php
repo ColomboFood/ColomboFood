@@ -32,7 +32,7 @@ class ExportDailyOrders extends Command
     public function handle()
     {
         dump('Exporting daily orders...');
-        Excel::store(new OrdersExport(yesterday()->startOfDay(), today()->startOfDay(), [OrderStatus::where('name','like','paied')->first()->id]), 'data/export/daily_orders-'.(today()->format('d_m_y')).'.csv', config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
+        Excel::store(new OrdersExport(yesterday()->startOfDay(), today()->startOfDay(), [OrderStatus::where('name','like','paid')->first()->id]), 'data/export/daily_orders-'.(today()->format('d_m_y')).'.csv', config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
             'visibility' => 'private',
         ]);
         dump('Orders exported');

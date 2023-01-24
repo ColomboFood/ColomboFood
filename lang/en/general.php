@@ -24,7 +24,7 @@ return [
         'cancelled' => 'cancelled',
         'completed' => 'Completed',
         'disputed' => 'Disputed',
-        'paied' => 'Paied',
+        'paid' => 'Paid',
         'preparing' => 'Preparing',
         'payment_failed' => 'Payment Failed',
         'pending' => 'Pending',
@@ -32,7 +32,7 @@ return [
         'shipped' => 'Shipped',
 
         'changes' => [
-            'paied' => 'Set as Paied',
+            'paid' => 'Set as Paid',
             'preparing' => 'Preparing for Shipping',
             'shipped' => 'Set as Shipped',
             'refunded' => 'Set as Refunded',

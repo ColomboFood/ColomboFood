@@ -56,13 +56,13 @@ class EditOrder extends EditRecord
         }
         array_push($actions, ViewAction::make());
 
-        if ($this->record->statusCanBecome('Paied')) 
+        if ($this->record->statusCanBecome('Paid')) 
         {
-            $paied= Action::make('paied')->label(__('Set as Paied'))
+            $paid= Action::make('paid')->label(__('Set as Paid'))
                 ->action(function (array $data): void {
-                    $this->record->setAsPaied();
+                    $this->record->setAsPaid();
                     $this->redirect(route('filament.resources.orders.view', $this->record));
-                    $this->notify('success',__('general.order_statuses.changes.paied'));
+                    $this->notify('success',__('general.order_statuses.changes.paid'));
                 })
                 ->form([
                     Select::make('payment_gateway')->label(__('Payment Gateway'))
@@ -74,7 +74,7 @@ class EditOrder extends EditRecord
                         ->default($this->record->payment_id)
                         ->required(),
                 ]);
-            array_push($grouped_actions, $paied);
+            array_push($grouped_actions, $paid);
         }
         if($this->record->statusCanBecome('Refunded'))
         {

@@ -26,7 +26,7 @@ class OrdersOverview extends BaseWidget
 
     protected function getCards(): array
     {
-        $included_statuses = [ 'paied', 'preparing', 'shipped' ];
+        $included_statuses = [ 'paid', 'preparing', 'shipped' ];
 
         $ctrData = $this->getCtrData();
 

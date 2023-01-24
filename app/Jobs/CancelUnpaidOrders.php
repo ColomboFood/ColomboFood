@@ -39,8 +39,13 @@ class CancelUnpaidOrders implements ShouldQueue
         $draft_status = OrderStatus::where('name',insensitive_like(),'draft')->first();
         if($failed_status && $cancelled_status && $draft_status)
         {
-            $orders = Order::where('order_status_id', $failed_status->id )
-                ->whereDate('updated_at', '<=' , Carbon::now()->sub('days',2))->get();
+            $orders = Order::with('history')
+                ->where('orders.order_status_id', $failed_status->id )
+                ->whereHas('history', fn($query) => 
+                    $query->where('order_histories.order_status_id', $failed_status->id)->latest()
+                        ->whereDate('created_at', '<=' , Carbon::now()->subDays(7))
+                )
+                ->get();
             foreach($orders as $order)
             {
                 $order->status()->associate($cancelled_status->id);
@@ -51,17 +56,22 @@ class CancelUnpaidOrders implements ShouldQueue
                 $order->restock();
             }
 
-            $orders = Order::where('order_status_id', $draft_status->id)
-                ->whereDate('updated_at', '<=', Carbon::now()->sub('days',7))->delete();
+            $orders = Order::with('history')
+                ->where('orders.order_status_id', $draft_status->id )
+                ->whereHas('history', fn($query) => 
+                    $query->where('order_histories.order_status_id', $draft_status->id)->latest()
+                        ->whereDate('created_at', '<=' , Carbon::now()->subDays(7)))
+                )
+                ->delete();
         }
         else
         {
-            if(!$failed_status && !$cancelled_status)
-                Log::error('OrderStatuses payment_failed and cancelled not found.');
-            elseif(!$failed_status)
-                Log::error('OrderStatus payment_failed not found.');
-            else
-                Log::error('OrderStatus cancelled not found.');
+            if(!$failed_status)
+                Log::error('OrderStatuses "cancelled" not found.');
+            if(!$draft_status)
+                Log::error('OrderStatus "draft" not found.');
+            if(!$cancelled_status)
+                Log::error('OrderStatus "payment_failed" not found.');
         }
     }
 }

@@ -19,13 +19,13 @@ class OrderStatusesTableSeeder extends Seeder
             'draft',
             'pending',
             'payment_failed',
-            'paied',
+            'paid',
             'preparing',
             'shipped',
             'completed',
             'cancelled',
             'refunded',
-            'disputed'
+            // 'disputed'
         ];
 
         foreach($statuses as $status)

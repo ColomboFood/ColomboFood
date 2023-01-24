@@ -213,7 +213,7 @@ class Update extends Component
 
     public function updateOrder($payment_id, $gateway)
     {
-        if(Order::find($this->order->id)->canBePaied()) {
+        if(Order::find($this->order->id)->canBePaid()) {
             $pending_id = OrderStatus::where('name', 'pending')->first()->id;
             $this->order->update([
                 'payment_gateway' => $gateway,

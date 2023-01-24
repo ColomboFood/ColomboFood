@@ -15,7 +15,14 @@
             
             <div class="flex flex-col space-y-4 md:flex-row md:justify-between md:space-y-0">
                 <div class="space-y-6">
-                    <span class="bg-white uppercase text-primary-500 px-2 py-0.5 border border-primary-500">
+                    <span @class([
+                        'bg-white uppercase px-2 py-0.5 border',
+                        'text-primary-500 border-primary-500' => $order->status->color() == 'primary',
+                        'text-secondary-500 border-secondary-500' => $order->status->color() == 'secondary',
+                        'text-warning-500 border-warning-500' => $order->status->color() == 'warning',
+                        'text-danger-500 border-danger-500' => $order->status->color() == 'danger',
+                        'text-success-500 border-success-500' => $order->status->color() == 'success',
+                    ])>
                         {{ $order->status->label }}
                     </span>
                     @if($order->tracking_number)
@@ -85,7 +92,7 @@
                     >
                         <x-slot:actions>
                             <div class="space-y-2">
-                                @if($order->canBePaied())
+                                @if($order->canBePaid())
                                     <form action="{{ route('order.update', $order ) }}" method="GET">
                                         <x-button class="w-full py-4 text-base">{{ __('Pay Now') }}</x-button>
                                     </form>
@@ -119,7 +126,7 @@
         </div>
                
         <div class="w-full px-6 pb-8 overflow-hidden lg:px-8">     
-            <div class="w-full py-6 mb-6 md:px-12 md:mb-0">
+            <div class="w-full py-6 mb-6 md:mb-0">
                 <div class="hidden w-full mb-6 font-bold lg:flex">
                     <div class="w-full text-center lg:w-3/6">
                         <span class="">{{ __('Description') }}</span>

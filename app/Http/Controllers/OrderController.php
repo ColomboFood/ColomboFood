@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Auth::user()->orders()->with(['products','status'])->placed()
+        $orders = Auth::user()->orders()->with(['products.media','status'])->placed()
             ->orderBy('id','desc')->paginate(5);
         $randomProduct = \App\Models\Product::inRandomOrder()->first();
         $SEOData = new SEOData(

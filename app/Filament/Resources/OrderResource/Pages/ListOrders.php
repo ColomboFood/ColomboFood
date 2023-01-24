@@ -34,7 +34,7 @@ class ListOrders extends ListRecords
                             Forms\Components\Select::make('statuses')
                                 ->multiple()
                                 ->options(OrderStatus::all()->pluck('name','id'))
-                                ->default([OrderStatus::where('name','like','paied')->first()->id])
+                                ->default([OrderStatus::where('name','like','paid')->first()->id])
                         ])
                 ])
                 ->action(function (array $data) {

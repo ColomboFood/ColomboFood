@@ -7,22 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AdminMessage extends Notification implements ShouldQueue
+class OrderPaid extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $subject;
-    public $message;
+    public $order;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($subject, $message)
+    public function __construct($order)
     {
-        $this->subject = $subject;
-        $this->message = $message;
+        $this->order = $order->with('products');
     }
 
     /**
@@ -45,10 +43,10 @@ class AdminMessage extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->subject)  
-                    ->markdown('mail.admin-message', [
-                        'message' => $this->message,
-                    ]);
+            ->subject(__('We have received your order'))
+            ->markdown('mail.order.paid', [
+                'order' => $this->order,
+            ]);
     }
 
     /**

@@ -260,7 +260,7 @@
                         <x-button class="w-full py-4 text-base" wire:click.prevent="updateAddresses"
                         >{{ __('Update Addresses') }}</x-button>
                     @endif
-                    @if($addresses_confirmed && $order->canBePaied())
+                    @if($addresses_confirmed && $order->canBePaid())
                         <livewire:checkout :order="$order" update="true"/>
                     @endif
                 </x-slot>

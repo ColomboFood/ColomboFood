@@ -44,7 +44,7 @@ class LatestOrders extends BaseWidget
                                         $state === __('general.order_statuses.shipped') || 
                                         $state === __('general.order_statuses.preparing'),
                         'success' => __('general.order_statuses.completed'),
-                        'warning' => __('general.order_statuses.paied'),
+                        'warning' => __('general.order_statuses.paid'),
                         'danger' => __('general.order_statuses.cancelled'),
                     ]),
                 Tables\Columns\TextColumn::make('user.name')->label(__('Name'))

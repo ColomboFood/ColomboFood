@@ -134,7 +134,7 @@ class Index extends Component
         ])->get();
 
         return view('product.index',[
-            'products' => Product::filter([
+            'products' => Product::with('media')->filter([
                 'query' => $this->query,
                 'category' => $this->category,
                 'brand' => $this->brand,

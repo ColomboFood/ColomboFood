@@ -345,9 +345,10 @@ class Create extends Component
 
     public function placeOrder($payment_id, $gateway)
     {
-        $validated = $this->validate();
+        // $validated = $this->validate();
 
-        if(!$this->areCartProductsAvaiable()) $this->redirect(route('cart.index'));
+        // if(!$this->areCartProductsAvaiable()) $this->redirect(route('cart.index'));
+        if(false) {}
         else{
             $status_id = OrderStatus::where('name', 'pending')->first()->id;
             $this->order->update([
@@ -359,7 +360,7 @@ class Create extends Component
 
             foreach ($this->order->products as $product) {
                 if(config('custom.skip_quantity_checks')) {
-                    $product->quantity = ($product->quantity > $product->pivot->quantity) ? $product->quantity-$product->pivot->qty : 0;
+                    $product->quantity = max($product->quantity - $product->pivot->qty , 0);
                     $product->save();
                 }
             }
@@ -381,7 +382,7 @@ class Create extends Component
             $this->deleteData();
 
             if($gateway == 'paypal')
-                $this->order->setAsPaied();
+                $this->order->setAsPaid();
 
             $this->emit('orderPlaced');
         }
