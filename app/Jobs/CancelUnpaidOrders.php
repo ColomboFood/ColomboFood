@@ -60,7 +60,7 @@ class CancelUnpaidOrders implements ShouldQueue
                 ->where('orders.order_status_id', $draft_status->id )
                 ->whereHas('history', fn($query) => 
                     $query->where('order_histories.order_status_id', $draft_status->id)->latest()
-                        ->whereDate('created_at', '<=' , Carbon::now()->subDays(7)))
+                        ->whereDate('created_at', '<=' , Carbon::now()->subDays(7))
                 )
                 ->delete();
         }
