@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderCancelled extends Notification
+class OrderCompleted extends Notification
 {
     use Queueable;
 
@@ -43,8 +43,8 @@ class OrderCancelled extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(__('Your order has been cancelled'))
-            ->markdown('mail.order.cancelled', [
+            ->subject(__('Your order has been delivered'))
+            ->markdown('mail.order.completed', [
                 'order' => $this->order,
             ]);
     }

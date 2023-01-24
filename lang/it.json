@@ -129,9 +129,26 @@
     "Are you sure you want to cancel this order?" : "Sei sicuro di voler annullare questo ordine?",
     "Are you sure you want to empty your wishlist?" : "Sei sicuro di voler svuota la tua wishlist?",
 
+    "Dear :name": "Gentile :name",
     "We have received your order": "Abbiamo ricevuto il tuo ordine",
+    "Thank you for your order. We will notify you as soon as your products are shipped.": 
+    "Grazie per il tuo ordine. Ti avviseremo non appena i prodotti verranno spediti.",
+    "You can check your order status by clicking the button below or visiting \"My Orders\" page.":
+    "Puoi controllare lo stato dell'ordine in qualsiasi momento cliccando sul bottone in basso, oppure visitando la pagina \"Cronologia Ordini\".",
+    "View Order": "Vedi Ordine",
     "Your order has been cancelled": "Il tuo ordine è stato annullato",
-
+    "Your order :number has been cancelled.": "Il tuo ordine :number è stato annullato.",
+    "If you have any question or issue, feel free to contact our support team.": 
+    "Per qualsiasi problema o domanda, contatta il nostro Support Clienti.",
+    "Your order payment has failed": "Pagamento non riuscito per il tuo ordine",
+    "We couldn't process payment for your order :number.": "Non è stato possibile completare il pagamento per il tuo ordine :number.",
+    "Your order has been shipped": "Il tuo ordine è stato spedito",
+    "We inform you that your order :number has been shipped today.": "Ti informiamo che il tuo ordine :number è stato spedito oggi.",
+    "Please, try it again as soon as possibile so your order won't be cancelled.": "Perfavore, ritenta il pagamento il prima possibile in modo da non rischiare che il tuo ordine venga annullato.",
+    "Your order has been delivered": "Il tuo ordine è stato consegnato",
+    "Visit \"My Orders\" page or click the following link to see the invoice": "Visita la pagina \"Cronologia Ordini\" o clicca sul seguente link per vedere la ricevuta",
+    "Your order :number has been delivered. Thank you for choosing us.": "Il tuo ordine :number è stato consegnato. Grazie per averci scelto.",
+    "You can buy the same products again by clicking on the \"Reorder\" button in the order page.": "Puoi riordinare gli stessi prodotti cliccando sul \"Ordina di nuovo\" nella pagina dell'ordine.",
     "Some products are no more avaiable" : "Alcuni prodotti non sono più disponibili",
     
     "Previous" : "Prec.",
@@ -347,9 +364,9 @@
 
     "See more": "Scopri",
     "Login to view price": "Accedi per vedere il prezzo",
-    "Haven't found anything, yet?": "Non hai ancora trovato articoli che ti interessano?",
+    "Haven't found anything, yet?": "Non hai ancora trovato prodotti che ti interessano?",
     "To Shop": "Al Negozio",
-    "Random Product": "Articolo casuale",
+    "Random Product": "Prodotto casuale",
     "Back to Shop": "Torna al Negozio",
 
     "About Us": "Chi Siamo",

@@ -255,7 +255,7 @@ img {
 /* Panels */
 
 .panel {
-    border-left: #F6787C solid 4px;
+    border-left: #607C9E solid 4px; /* secondary-500 */
     margin: 21px 0;
 }
 

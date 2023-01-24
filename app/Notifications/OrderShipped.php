@@ -20,7 +20,7 @@ class OrderShipped extends Notification
      */
     public function __construct($order)
     {
-        $this->order = $order->with('products');
+        $this->order = $order->load(['user','shippingPrice']);
     }
 
     /**
@@ -42,7 +42,11 @@ class OrderShipped extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.order.shipped');
+        return (new MailMessage)
+            ->subject(__('Your order has been shipped'))
+            ->markdown('mail.order.shipped', [
+                'order' => $this->order,
+            ]);
     }
 
     /**

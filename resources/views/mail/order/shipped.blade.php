@@ -1,12 +1,14 @@
 <x-mail::message>
-# Introduction
+{{__('Dear :name',['name' => '**'.($order->user?->name ?? $order->shipping_address_full_name).'**' ])}}
 
-The body of your message.
+{{ __('We inform you that your order :number has been shipped today.', ['number' => '#'.$order->number]) }}
 
-<x-mail::button :url="''">
-Button Text
+{{ __('You can check your order status by clicking the button below or visiting "My Orders" page.') }}
+
+<x-mail::button url="{{ route('order.show', $order) }}">
+{{ __('View Order') }}
 </x-mail::button>
 
-Thanks,<br>
-{{ config('app.name') }}
+{{ __('Regards') }},<br>
+**{{ config('app.name') }}**
 </x-mail::message>

@@ -20,7 +20,7 @@ class OrderPaymentFailed extends Notification
      */
     public function __construct($order)
     {
-        $this->order = $order->with('products');
+        $this->order = $order->load('user');
     }
 
     /**
@@ -43,7 +43,7 @@ class OrderPaymentFailed extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(__('Your order has been cancelled'))
+            ->subject(__('Your order payment has failed'))
             ->markdown('mail.order.payment-failed', [
                 'order' => $this->order,
             ]);

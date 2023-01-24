@@ -1,12 +1,11 @@
-@component('mail::message')
+<x-mail::message>
 
 {!! $message !!}
 
-@component('mail::button', ['url' => route('home') ])
+<x-mail::button url="{{ route('home') }}">
 {{ __('Go to website') }}
-@endcomponent
+<x-mail::button>
 
 {{ __('Regards') }},<br>
-{{ config('app.name') }}
-
-@endcomponent
+**{{ config('app.name') }}**
+</x-mail::message>

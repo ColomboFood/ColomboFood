@@ -20,7 +20,7 @@ class OrderPaid extends Notification implements ShouldQueue
      */
     public function __construct($order)
     {
-        $this->order = $order->with('products');
+        $this->order = $order->load(['user','products','shippingPrice']);
     }
 
     /**
