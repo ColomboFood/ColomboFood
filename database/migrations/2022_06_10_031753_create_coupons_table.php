@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('max_redemptions')->nullable();
             $table->decimal('min_total',8,2)->nullable();
             $table->dateTime('expires_on')->nullable();
+            $table->boolean('once_per_user')->default(false);
             $table->timestamps();
         });
 

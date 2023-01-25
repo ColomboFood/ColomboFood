@@ -61,7 +61,7 @@
                     <x-secondary-button class="py-2 text-base" wire:click="removeCoupon"
                     ><x-icons.x/></x-secondary-button>
                     @else
-                    <x-secondary-button class="py-2 text-base" wire:click="checkCoupon('{{ $coupon_code }}')"
+                    <x-secondary-button class="py-2 text-base" wire:click="refreshTotals"
                     >{{ __('Check') }}</x-secondary-button>
                     @endif
                 </div>

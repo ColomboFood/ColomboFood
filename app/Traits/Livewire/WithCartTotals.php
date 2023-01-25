@@ -21,13 +21,17 @@ trait WithCartTotals
 
     public function checkCoupon()
     {
+        $this->coupon_code = $this->coupon_code ?? session()->get('coupon');
         if(Str::of($this->coupon_code)->trim()->isNotEmpty())
         {
             $coupon = Coupon::where('code', $this->coupon_code)->first();
             $error = null;
 
             if ($coupon) {
-                if ($coupon->max_redemptions && $coupon->max_redemptions <= $coupon->redemptions)
+                if ( 
+                    ($coupon->max_redemptions && $coupon->max_redemptions <= $coupon->redemptions) ||
+                    ($coupon->once_per_user && auth()->check() && $coupon->wasUsedBy(auth()->user()) )
+                )
                 {    
                     $this->coupon=null;
                     $error=__('Coupon Already Redeemed');
@@ -42,18 +46,21 @@ trait WithCartTotals
                     $this->coupon=null;
                     $error=__("Required minimum total of").' '.($coupon->min_total).'€';
                 }
+                elseif($coupon->once_per_user && !auth()->check())
+                {
+                    $this->coupon=null;
+                    $error=__('Invalid Coupon');
+                }
                 else
                 {
                     $this->coupon=$coupon;
                     $error=null;
-                    session()->put('coupon', $this->coupon->code);   
+                    session()->put('coupon', $this->coupon->code);
                 }
             } else {
                 $this->coupon=null;
                 $error=__('Invalid Coupon');
             }
-
-            $this->refreshTotals();
 
             $this->coupon_error = $error;
             if($error)
@@ -76,8 +83,7 @@ trait WithCartTotals
 
     public function refreshTotals()
     {
-        $this->coupon_code = $this->coupon_code ?? session()->get('coupon');
-        $this->coupon = Coupon::where('code',$this->coupon_code)->first();
+        $this->checkCoupon();
 
         $this->subtotal = Cart::instance('default')->subtotal(null,null,'');
         if($this->coupon && !$this->coupon->applyBeforeTax() ){

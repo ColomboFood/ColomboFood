@@ -83,6 +83,7 @@ class CouponResource extends Resource
                                         ->thousandsSeparator(',')
                                         ->maxValue(999999)
                                     ),
+                                Forms\Components\Toggle::make('once_per_user')->label(__('Once Per User')),
                                 Forms\Components\TextInput::make('max_redemptions')->label(__('Max Redemptions'))
                                     ->numeric()
                                     ->minValue(1),
@@ -90,7 +91,7 @@ class CouponResource extends Resource
                                     ->displayFormat(config('custom.date_format')),
                             ])
                             ->columns([
-                                'md' => 3,
+                                'md' => 2,
                                 'lg' => null,
                             ])
                             ->columnSpan('full'),

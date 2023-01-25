@@ -17,7 +17,8 @@ class Coupon extends Model
         'redemptions',
         'max_redemptions',
         'expires_on',
-        'min_total'
+        'min_total',
+        'once_per_user'
     ];
 
     /**
@@ -78,5 +79,12 @@ class Coupon extends Model
         }
 
         return $discount;
+    }
+
+    public function wasUsedBy(User $user)
+    {
+        return $this->orders()
+            ->whereHas('status', fn($query) => $query->whereNotIn('name',['draft','cancelled']) )
+            ->whereHas('user', fn($query) => $query->where('id',$user->id))->exists();
     }
 }

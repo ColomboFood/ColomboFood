@@ -369,7 +369,7 @@
                             <x-secondary-button wire:click="removeCoupon"
                             ><x-icons.x/></x-secondary-button>
                             @else
-                            <x-secondary-button wire:click="checkCoupon('{{ $coupon_code }}')"
+                            <x-secondary-button wire:click="refreshTotals"
                             >{{ __('Check') }}</x-secondary-button>
                             @endif
                         </div>
