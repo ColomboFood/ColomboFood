@@ -80,21 +80,38 @@
 
     </div>
 
-    <div class="container grid w-full gap-6 px-6 mx-auto my-12 md:grid-cols-2 lg:grid-cols-5">
+    <div class="container grid w-full gap-6 px-6 mx-auto my-12 md:grid-cols-2">
         
-        <div class="flex items-center justify-center px-6 pt-6 pb-10 bg-neutral-50 lg:col-span-2 bg-opacity-60">
-            <div class="flex flex-col">
-                <p>Cerchi un prodotto particolare che non trovi sul sito?</p>
-                <p>Scrivi a <a class="underline" href="mailto:info@info.it">info@colombofood.it</a></p>
+        <div class="relative flex flex-col items-center justify-center px-6 pt-6 pb-10 lg:flex-row bg-primary-500">
+            <div class="flex flex-col lg:pl-48">
+                <p class="max-w-xs mx-auto text-center">
+                    Ti servono 50 lasagne
+                    per pranzo? 100 Sbrodoloni
+                    per il primo pomeriggio?
+                </p>
+                <div class="flex flex-col items-center justify-center mt-2 text-white uppercase">
+                    <span>MANDA UN WHATSAPP AL</span>
+                    <a class="text-3xl font-black"
+                        href="https://wa.me/3662121189?text=Ciao%2C%20ho%20bisogno%20di%20questi%20prodotti%3A"
+                    >366 212 11 89<img class="inline h-6 ml-2 -mt-2" src="/img/logos/whatsapp.svg" /> </a>
+                    </span>CONSEGNE EXPRESS!!</span>
+                </div>
             </div>
+            <img class="absolute bottom-0 left-0 hidden lg:block w-72" src="/img/supporto.png"/>
         </div>
 
-        <div class="flex flex-col px-4 py-10 bg-secondary-50 lg:flex-row lg:col-span-3 bg-opacity-60">
-            <div class="flex flex-col mb-12 text-center lg:mb-0 lg:ml-auto lg:mr-0">
-                <p>Consegna in tutta Italia!</p>
-                <a class="mx-auto underline max-w-max" href="">Guarda le tariffe</a>
+        <div class="flex flex-col px-4 py-10 bg-secondary-50 xl:flex-row bg-opacity-60">
+            <div class="flex flex-col mb-12 text-center xl:mb-0 xl:ml-auto xl:mr-0">
+                <p class="max-w-sm mx-auto">
+                    Consegniamo con nostri
+                    furgoni anonimi a <span class="font-semibold">Milano e provincia</span>
+                     + nuove zone aggiunte mensilmente
+                </p>
+                <form action="{{ route('delivery') }}" method="GET" class="mt-6">
+                    <x-button type="submit" class="px-12">Scopri dove consegniamo</x-button>
+                </form>
             </div>
-            <img class="h-32 mx-auto -mb-10 lg:ml-auto lg:mr-12" src="/img/camioncino.png" />
+            <img class="h-32 mx-auto -mb-10 xl:ml-12" src="/img/furgoncino.png" />
         </div>
 
     </div>
@@ -109,8 +126,10 @@
                 <div class="max-w-sm pt-4 pb-10 ml-4 md:pt-0 md:pb-0 md:mt-12">
                     <p class="text-3xl font-bold">Hai la partita Iva?</p>
                     <p class="mt-6">
-                        ColomboFood ha studiato una serie di offerte dedicate e personalizzate rivolte ai commercianti,
-                        proprietari di bar, panetterie o piccole attività.
+                        Colombo Food ha studiato una serie di offerte
+                        dedicate e personalizzate rivolte ai commercianti,
+                        proprietari di bar, panetterie o piccole attività,
+                        che hanno delle esigenze particolari.
                     </p>
                     <p class="mt-6 font-bold">
                         Perchè a volte avere la Partita Iva può essere un vantaggio!
@@ -127,18 +146,29 @@
         <div class="container flex flex-col w-full mx-auto my-12 md:h-96 md:flex-row">
             <div class="flex flex-col items-center w-full">
                 <div class="max-w-sm pt-4 pb-10 mr-12 text-right md:pt-0 md:pb-0 md:my-auto">
-                    <p class="text-3xl font-bold text-accent-500">Da oggi puoi ritirare direttamente nel nostro magazzino!</p>
-                    <p class="mt-2">
-                        Organizza il tuo ritiro chiamandoci al
-                        <span class="inline-block">+39 02 392 835 39</span>
+                    <p class="text-3xl font-bold text-accent-500">
+                        Gestisci un piccolo Hotel
+                        o affiti appartamenti
+                        su AirBnB e Booking?
                     </p>
+                    <p class="mt-2">
+                        Coccolate i vostri ospiti con brioche, torte,
+                        dolci di pasticceria appena sfornati.
+                        Servite anche il pranzo o la cena?
+                        Il nostro servizio vi permette di selezionare
+                        tra moltissimi prodotti e ricerverli
+                        quotidianamente a prezzi vantaggiosissimi!
+                    </p>
+                    <div class="mt-6">
+                        <x-button class="px-12">Scopri l'offerta</x-button>
+                    </div>
                 </div>
             </div>
-            <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" src="/img/shipping.png"/>
+            <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" src="/img/cornetto.png"/>
         </div>
     </div>
 
-    <div class="w-full bg-neutral-50">
+    <div class="w-full bg-gray-50 bg-opacity-60">
         <div class="container flex w-full px-6 py-6 mx-auto my-12">
             <img class="hidden h-24 my-auto ml-auto mr-12 md:block" 
                 src="/img/logos/pane_quotidiano.png"

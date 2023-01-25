@@ -7,8 +7,8 @@
         <h2 class="mb-12 text-2xl font-bold">{{ __('Dove consegniamo') }}</h2>
         <p>
             Il nostro personale specializzato consegna quotidianamente con i mezzi aziendali (anonimi)
-            refrigerati su <span class="font-bold">Milano e provincia</span> inoltre serviamo diversi comuni in 
-            <span class="font-bold">provincia di Pavia</span> e alcune zone del <span class="font-bold">Lago di Garda</span>.
+            refrigerati su <span class="font-semibold">Milano e provincia</span> inoltre serviamo diversi comuni in 
+            <span class="font-semibold">provincia di Pavia</span> e alcune zone del <span class="font-semibold">Lago di Garda</span>.
         </p>
         <p>
             Mensilmente cerchiamo di espandere le nostre aree di consegna.
