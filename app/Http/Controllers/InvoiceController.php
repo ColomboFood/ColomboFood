@@ -62,8 +62,8 @@ class InvoiceController extends Controller
                 'order_number' => '#'.$order->number,
                 'email' => $order->billing_address_full_name,
                 'address' => $addressString,
-                'fiscal_code' => $order->fiscal_code,
-                'vat' => $order->vat,
+                'fiscal_code' => $order->fiscal_code ? $order->fiscal_code : '-',
+                'vat' => $order->vat ? $order->vat : '-',
             ],
         ]);
 
@@ -80,6 +80,7 @@ class InvoiceController extends Controller
         }
 
         $invoice = Invoice::make()
+            ->logo(public_path('img/logo.png'))
             ->series($order->invoice_series ?? 'invalid')
             ->sequence($order->invoice_sequence ?? 0)
             ->buyer($customer)

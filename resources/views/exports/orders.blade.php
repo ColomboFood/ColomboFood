@@ -30,7 +30,7 @@
             <td>1</td>
             <td>{{$order->shipping_price}}</td>
             <td>{{0}}</td>
-            <td>{{$order->fiscal_code}}</td>
+            <td>{{$order->fiscal_code ? $order->fiscal_code : $order->vat}}</td>
             <td>{{$order->vat}}</td>
             <td>{{$order->email}}</td>
             <td>{{$order->billing_address_full_name}}</td>

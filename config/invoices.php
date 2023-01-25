@@ -78,11 +78,11 @@ return [
          * Default attributes for Seller::class
          */
         'attributes' => [
-            'name'          => 'ColomboFood',
-            'address'       => 'Via degli Alimentari 2, Milano 21100, Italia',
-            'code'          => null,
-            'vat'           => '123456789',
-            'phone'         => '760-355-3930',
+            'name'          => 'DolciFollie di Politi Pier Silvio',
+            'address'       => 'Via Marco D\'Agrate 14, Milano 20139',
+            'code'          => 'SUBM70N',
+            'vat'           => '09350380961',
+            'phone'         => '366 212 11 89',
             'custom_fields' => [
                 /*
                  * Custom attributes for Seller::class

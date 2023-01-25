@@ -196,7 +196,7 @@ class Update extends Component
                     'billing_address_province' => $this->billing_address->province,
                     'billing_address_country_region' => $this->billing_address->country_region,
                     'billing_address_postal_code' => $this->billing_address->postal_code,
-                    'fiscal_code' => $this->order->fiscal_code ?? $this->order->vat,
+                    'fiscal_code' => $this->order->fiscal_code ? $this->order->fiscal_code : $this->order->vat,
                     'vat' => $this->order->vat,
                     'email' => auth()->user()?->email ?? $this->order->email,
                     'phone' => $this->order->phone,

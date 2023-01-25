@@ -280,9 +280,9 @@ class Create extends Component
 
     public function createOrder()
     {
-        $this->validate();
+        $validated = $this->validate();
 
-        $this->fiscal_code = $this->fiscal_code ?? $this->vat;
+        $this->fiscal_code = $this->fiscal_code ? $this->fiscal_code : $this->vat;
 
         $this->storeData();
 
