@@ -385,6 +385,9 @@
     "From :email": "Da :email",
     "Delivery": "Dove Consegniamo",
     "Buy Online": "Acquista Online",
-    "Email Sent": "Email Inviata"
+    "Email Sent": "Email Inviata",
+    "Summary": "Riepilogo",
+    "With Tax": "Con IVA",
+    "Without Tax": "Senza IVA"
     
 } 

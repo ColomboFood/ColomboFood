@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
                 ShippingPricesTableSeeder::class,
                 CategoriesTableSeeder::class,
                 AttributesTableSeeder::class,
+                TagsTableSeeder::class,
+                ProvincesTableSeeder::class
             ]);
         }
         else
@@ -32,6 +34,8 @@ class DatabaseSeeder extends Seeder
                 ShippingPricesTableSeeder::class,
                 CategoriesTableSeeder::class,
                 AttributesTableSeeder::class,
+                TagsTableSeeder::class,
+                ProvincesTableSeeder::class
             ]);
         }
 

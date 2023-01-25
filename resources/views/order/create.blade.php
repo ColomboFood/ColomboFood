@@ -292,7 +292,7 @@
                                 value="{{ $option->id }}"
                             >
                             <div @class([
-                                    'inline-block p-4 mx-auto shadow-md cursor-pointer w-full text-left',
+                                    'inline-block p-4 mx-auto shadow-md cursor-pointer w-full text-left h-full flex flex-col justify-between',
                                     'ring ring-primary-500 ring-opacity-50' => $shipping_price->id == $option->id,
                                 ])
                                 x-on:click="$refs.shipping{{$option->id}}.click()"
@@ -307,7 +307,7 @@
                                 @if($option->min_spend)
                                 <div class="text-sm text-gray-500">{{ __('Minimum spend :amount€',['amount' => $option->min_spend]) }}</div>
                                 @endif
-                                <div class="mt-2 font-black text-right">{{ $option->price }}€</div>
+                                <div class="pt-2 mt-auto mb-0 font-black text-right">{{ $option->price }}€</div>
                             </div>
                         @endforeach
                     </div>

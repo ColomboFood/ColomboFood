@@ -8,7 +8,7 @@
     'bg-primary-500' => $theme == 'primary'
 ])>
 
-    <div class="mb-2 text-3xl font-bold">{{ isset($heading) ? $heading :  __('Total') }}</div>
+    <div class="mb-2 text-3xl font-bold">{{ isset($heading) ? $heading :  __('Summary') }}</div>
 
     @if($products)
     <div class="flex flex-col pb-6 border-b border-white">
@@ -22,7 +22,7 @@
     @endif
 
     <div class="flex items-center justify-between">
-        <span class="">{{ __('Subtotal') }}</span>
+        <div class="">{{ __('Total') }}<div class="inline ml-1 text-xs">({{ __('Without Tax') }})</div></div>
         <span class="text-xl font-bold">{{ number_format( $subtotal ,2) }}€</span>
     </div>
 
@@ -71,7 +71,7 @@
     @endif
 
     <div class="flex items-center justify-between pt-8 pb-6 border-t border-white">
-        <span class="text-xl font-bold">{{ __('Total') }}</span>
+        <div class="text-xl font-bold">{{ __('Total') }}<div class="inline ml-1 text-xs">({{ __('With Tax') }})</div></div>
         <span class="text-xl font-bold">{{ number_format( $total, 2) }}€</span>
     </div>
 

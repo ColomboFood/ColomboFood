@@ -28,6 +28,7 @@ class ShippingPricesTableSeeder extends Seeder
             'name'          => 'Express',
             'price'         => 10.00,  
             'active'        => true, 
+            'min_days'      => 2,
             'max_days'      => 2,
         ]);
     }
