@@ -97,7 +97,14 @@
                     </span>CONSEGNE EXPRESS!!</span>
                 </div>
             </div>
-            <img class="absolute bottom-0 left-0 hidden lg:block w-72" src="/img/support.png"/>
+
+            <img class="absolute bottom-0 left-0 hidden lg:block w-72" src="/img/supporto.png"/>
+            <div class="absolute bottom-32 left-24 hidden lg:block">
+                <div class="relative w-28 h-14 rounded-full bg-primary-50 text-xs flex items-center justify-center">
+                    <p class="w-20 text-center">vi rispondiamo subito!</p>
+                    <div class="absolute bg-primary-50 h-4 w-2 -bottom-2 left-4 rounded-r-full"></div>
+                </div>
+            </div>
         </div>
 
         <div class="flex flex-col px-4 py-10 bg-secondary-50 xl:flex-row bg-opacity-60">

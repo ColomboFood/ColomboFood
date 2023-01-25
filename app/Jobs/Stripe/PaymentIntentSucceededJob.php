@@ -41,7 +41,7 @@ class PaymentIntentSucceededJob implements ShouldQueue
         if($order)
         {
             if(!$order->setAsPaid()) 
-                Log::error('Couldn\'t update status to "paid" for order #'.$order->id .' (Payment Failed)');
+                Log::error('Couldn\'t update status to "paid" for order #'.$order->id .' (Payment Succeeded)');
         }
         else
             Log::error('Order not found for payment intent '.$payment_intent. ' (Payment Succeeded)');

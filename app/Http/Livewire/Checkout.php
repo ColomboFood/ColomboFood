@@ -33,9 +33,13 @@ class Checkout extends Component
         $this->submitDisabled = false;
     }
 
-    public function submitPayment()
+    public function attemptSubmit()
     {
         $this->submitDisabled = true;
+        $this->order->update([
+            'payment_gateway' => $this->gateway,
+            'payment_id' => $this->intent['id'],
+        ]);
         $this->emit('submitPayment');
     }
 
@@ -69,14 +73,23 @@ class Checkout extends Component
 
     public function redirectToSuccess()
     {
-        $route_name=Auth::user() ? 'order.index' : 'cart.index';
+        if($this->gateway == 'stripe')
+        {
+            return redirect()->route('stripe.handle.checkout.response',[
+                'payment_intent' => $this->intent['id']
+            ]);
+        }
+        else
+        {
+            $route_name=Auth::user() ? 'order.index' : 'cart.index';
 
-        $banner_message=__('banner_notifications.payment.succeeded');
-        $banner_style="success";
-        session()->flash('flash.banner', $banner_message);
-        session()->flash('flash.bannerStyle', $banner_style);
+            $banner_message=__('banner_notifications.payment.succeeded');
+            $banner_style="success";
+            session()->flash('flash.banner', $banner_message);
+            session()->flash('flash.bannerStyle', $banner_style);
 
-        return redirect()->route($route_name);
+            return redirect()->route($route_name);
+        }
     }
 
     public function render()

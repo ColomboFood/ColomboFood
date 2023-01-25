@@ -5,12 +5,12 @@
             <span class="mb-2 font-bold uppercase opacity-50">{{ __('Sitemap') }}</span>
             <a class="cursor-pointer hover:underline" href="{{ route('home') }}">{{ __('Home') }}</a>
             <a class="cursor-pointer hover:underline" href="{{ route('about-us') }}">{{ __('About us') }}</a>
-            <a class="cursor-pointer hover:underline" href="{{ route('delivery') }}">{{ __('Deliveryy') }}</a>
-            <a class="cursor-pointer hover:underline" href="{{ route('product.index') }}">{{ __('Shop') }}</a>
+            <a class="cursor-pointer hover:underline" href="{{ route('delivery') }}">{{ __('Delivery') }}</a>
+            <a class="cursor-pointer hover:underline" href="{{ route('product.index') }}">{{ __('Buy Online') }}</a>
         </div>
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">{{ __('Legal') }}</span>
-            <a class="cursor-pointer hover:underline" href="#">{{ __('Politica di Reso') }}</a>
+            {{-- <a class="cursor-pointer hover:underline" href="#">{{ __('Politica di Reso') }}</a> --}}
             <a href="https://www.iubenda.com/privacy-policy/77646933" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy ">
                 {{ __('Privacy Policy') }}
             </a>
@@ -21,7 +21,8 @@
         </div>
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">Social</span>
-            <div class="grid grid-flow-col gap-4">
+            <div class="text-gray-500">{{ __('Coming Soon...') }}</div>
+            {{-- <div class="grid grid-flow-col gap-4">
                 <a href="#">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
@@ -35,7 +36,7 @@
                     <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                     </svg>
                 </a>
-            </div>
+            </div> --}}
         </div>
     </div>
 

@@ -195,7 +195,7 @@ class Order extends Model
         switch(strtolower($status))
         {
             case('payment_failed'):
-                $can = $this->status->name == 'pending' || $this->status->name == 'draft';
+                $can = $this->status->name == 'pending';
                 break;
             case('paid'):
                 $can = $this->status->name == 'pending' || $this->status->name == 'draft';
