@@ -38,13 +38,7 @@ class EditOrder extends EditRecord
         {
             $shipped= Action::make('shipped')->label(__('Set as Shipped'))
                 ->action(function (array $data): void {
-                    $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'shipped')->first()->id;
-                    $this->record->status()->associate($status_id);
-                    $this->record->tracking_number= $data['tracking_number'];
-                    $this->record->save();
-                    $this->record->history()->create([
-                        'order_status_id' => $status_id,
-                    ]);
+                    $this->record->setAsShipped($data['tracking_number']);
                     $this->redirect(route('filament.resources.orders.view', $this->record));
                     $this->notify('success',__('general.order_statuses.changes.shipped'));
                 })
@@ -53,6 +47,16 @@ class EditOrder extends EditRecord
                         ->default($this->record->tracking_number),
                 ]);
             array_push( $actions , $shipped);
+        }
+        if($this->record->statusCanBecome('Completed'))
+        {
+            $completed= Action::make('completed')->label(__('Set as Completed'))
+                ->action(function (array $data): void {
+                    $this->record->setAsCompleted();
+                    $this->redirect(route('filament.resources.orders.view', $this->record));
+                    $this->notify('success',__('general.order_statuses.changes.completed'));
+                });
+            array_push( $actions , $completed);
         }
         array_push($actions, ViewAction::make());
 

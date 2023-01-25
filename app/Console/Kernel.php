@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Jobs\CancelUnpaidOrders;
+use App\Jobs\ClearUnpaidOrders;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new CancelUnpaidOrders)->daily();
+        $schedule->job(new ClearUnpaidOrders)->daily();
 
         $schedule->command('export:daily-orders')->daily();
         $schedule->command('sitemap:generate')->daily();

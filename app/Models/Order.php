@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
+use App\Notifications\OrderCancelled;
+use App\Notifications\OrderCompleted;
+use App\Notifications\OrderPaid;
+use App\Notifications\OrderPaymentFailed;
+use App\Notifications\OrderShipped;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Notification;
 
 class Order extends Model
 {
@@ -260,6 +266,7 @@ class Order extends Model
                 $this->history()->create([
                     'order_status_id' => $status->id,
                 ]);
+                Notification::route('mail', $this->user?->email ?? $this->email)->notify(new OrderPaymentFailed($this));
                 $res = true;
             }
         });
@@ -282,6 +289,70 @@ class Order extends Model
                 $this->history()->create([
                     'order_status_id' => $status->id,
                 ]);
+                Notification::route('mail', $this->user?->email ?? $this->email)->notify(new OrderPaid($this));
+                $res = true;
+            }
+        });
+
+        return $res;
+    }
+
+    public function setAsShipped($tracking_number = null)
+    {
+        $res = false;
+
+        DB::transaction(function () use(&$res, $tracking_number) {
+            $status = OrderStatus::where('name','shipped')->first();
+            if ($status) {
+                $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'shipped')->first()->id;
+                $this->status()->associate($status_id);
+                $this->tracking_number = $tracking_number;
+                $this->save();
+                $this->history()->create([
+                    'order_status_id' => $status_id,
+                ]);
+                Notification::route('mail', $this->user?->email ?? $this->email)->notify(new OrderShipped($this));
+                $res = true;
+            }
+        });
+
+        return $res;
+    }
+
+    public function setAsCompleted()
+    {
+        $res = false;
+
+        DB::transaction(function () use(&$res) {
+            $status = OrderStatus::where('name','completed')->first();
+            if ($status) {
+                $this->status()->associate($status);
+                $this->save();
+                $this->history()->create([
+                    'order_status_id' => $status->id,
+                ]);
+                Notification::route('mail', $this->user?->email ?? $this->email)->notify(new OrderCompleted($this));
+                $res = true;
+            }
+        });
+
+        return $res;
+    }
+
+    public function setAsCancelled()
+    {
+        $res = false;
+
+        DB::transaction(function () use(&$res) {
+            $status = OrderStatus::where('name','cancelled')->first();
+            if ($status) {
+                $this->status()->associate($status);
+                $this->save();
+                $this->history()->create([
+                    'order_status_id' => $status->id,
+                ]);
+                $this->restock();
+                Notification::route('mail', $this->user?->email ?? $this->email)->notify(new OrderCancelled($this));
                 $res = true;
             }
         });

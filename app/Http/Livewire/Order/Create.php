@@ -334,9 +334,9 @@ class Create extends Component
             }
             $this->order->products()->sync($pivots);
 
-            $this->order->history()->create([
+            $this->order->history()->updateOrCreate([
                 'order_status_id' => $status_id,
-            ]);
+            ],[]);
         }
 
         $this->addresses_confirmed = true;

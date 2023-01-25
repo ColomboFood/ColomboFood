@@ -3,7 +3,8 @@
 
 {{ __('Your order :number has been delivered. Thank you for choosing us.', ['number' => '#'.$order->number]) }}
 
-{{ __('You can buy the same products again by clicking on the "Reorder" button in the order page.') }}
+{{ __('You can buy the same products again by clicking on the "Reorder" button in the order page.') }}<br>
+{{ __('You can also let us know about your experience with us by leaving a review for the products you have bought.') }}
 
 <x-mail::button url="{{ route('order.show', $order) }}">
 {{ __('View Order') }}

@@ -70,6 +70,7 @@
     "Phone" : "Telefono",
     "Set as Paid" : "Segna come Pagato",
     "Set as Shipped" : "Segna come Spedito",
+    "Set as Completed" : "Segna come Completato",
     "Set as Refunded" : "Segna come Rimborsato",
     "Prepare for Shipping" : "Segna come In Lavorazione",
     "History" : "Cronologia",
@@ -149,6 +150,7 @@
     "Visit \"My Orders\" page or click the following link to see the invoice": "Visita la pagina \"Cronologia Ordini\" o clicca sul seguente link per vedere la ricevuta",
     "Your order :number has been delivered. Thank you for choosing us.": "Il tuo ordine :number è stato consegnato. Grazie per averci scelto.",
     "You can buy the same products again by clicking on the \"Reorder\" button in the order page.": "Puoi riordinare gli stessi prodotti cliccando sul \"Ordina di nuovo\" nella pagina dell'ordine.",
+    "You can also let us know about your experience with us by leaving a review for the products you have bought.": "Se vuoi, puoi farci sapere com'è stata la tua esperienza con noi lasciando delle recensioni sui prodotti che hai acquistato.",
     "Some products are no more avaiable" : "Alcuni prodotti non sono più disponibili",
     
     "Previous" : "Prec.",

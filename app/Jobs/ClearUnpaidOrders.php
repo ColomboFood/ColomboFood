@@ -13,7 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class CancelUnpaidOrders implements ShouldQueue
+class ClearUnpaidOrders implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -48,12 +48,7 @@ class CancelUnpaidOrders implements ShouldQueue
                 ->get();
             foreach($orders as $order)
             {
-                $order->status()->associate($cancelled_status->id);
-                $order->save();
-                $order->history()->create([
-                    'order_status' => $cancelled_status->id,
-                ]);
-                $order->restock();
+                $order->setAsCancelled();
             }
 
             $orders = Order::with('history')
