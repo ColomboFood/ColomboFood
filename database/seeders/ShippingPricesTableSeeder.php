@@ -17,17 +17,15 @@ class ShippingPricesTableSeeder extends Seeder
     {
         ShippingPrice::create([
             'name'          => 'Standard',
-            'description'   => 'Consegna entro 2-4 giorni',
             'price'         => 0.00, 
             'active'        => true,
-            'min_price'     => 50.00
+            'min_spend'     => 50.00,
             'min_days'      => 2,
             'max_days'      => 4,
         ]);
 
         ShippingPrice::create([
             'name'          => 'Express',
-            'description'   => 'Consegna in 48h',
             'price'         => 10.00,  
             'active'        => true, 
             'max_days'      => 2,

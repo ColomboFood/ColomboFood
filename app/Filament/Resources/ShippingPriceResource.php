@@ -65,7 +65,7 @@ class ShippingPriceResource extends Resource
                                             ->thousandsSeparator(',')
                                             ->maxValue(999999)
                                     ),
-                                Forms\Components\TextInput::make('min_price')->label(__('Minimum Price'))
+                                Forms\Components\TextInput::make('min_spend')->label(__('Minimum Spend'))
                                     ->prefix('€')
                                     ->mask(
                                         fn (Forms\Components\TextInput\Mask $mask) => $mask

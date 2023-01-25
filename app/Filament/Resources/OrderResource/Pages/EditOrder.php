@@ -23,7 +23,7 @@ class EditOrder extends EditRecord
         {
             $prearing= Action::make('preparing')->label(__('Prepare for Shipping'))
                 ->action(function (array $data): void {
-                    $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'preparing')->first()->id;
+                    $status_id = \App\Models\OrderStatus::where('name', insensitiveLike(),'preparing')->first()->id;
                     $this->record->status()->associate($status_id);
                     $this->record->save();
                     $this->record->history()->create([
@@ -85,7 +85,7 @@ class EditOrder extends EditRecord
             $refunded= Action::make('refunded')->label(__('Set as Refunded'))
                 ->color('danger')
                 ->action(function (array $data): void {
-                    $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'refunded')->first()->id;
+                    $status_id = \App\Models\OrderStatus::where('name', insensitiveLike(),'refunded')->first()->id;
                     $this->record->status()->associate($status_id);
                     $this->record->save();
                     $this->record->history()->create([

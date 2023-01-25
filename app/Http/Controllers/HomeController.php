@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Province;
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use App\Models\ShippingPrice;
 use Illuminate\Support\Facades\App;
 
 class HomeController extends Controller
@@ -41,5 +43,18 @@ class HomeController extends Controller
                 ]
             ]);
         return view('home', compact('featured_categories', 'featured_products', 'brands', 'collections'));
+    }
+
+    public function aboutUs()
+    {
+        return view('about-us');
+    }
+
+    public function delivery()
+    {
+        $provinces = Province::all();
+        $shippingPrices = ShippingPrice::active()->get();
+        
+        return view('delivery', compact('provinces','shippingPrices'));
     }
 }

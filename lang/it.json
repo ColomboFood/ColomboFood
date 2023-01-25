@@ -279,6 +279,8 @@
     "Coupon Already Redeemed" : "Coupon già riscattato",
     "Expired Coupon" : "Coupon Scaduto",
     "Required minimum total of" : "Serve una spesa minima di",
+    "Minimum spend :amount€": "Spesa minima :amount€",
+    "Free": "Gratis",
     "or more" : "o più",
     "or less" : "o meno",
     "Details" : "Dettagli",
@@ -361,7 +363,7 @@
     "Day": "Giorno",
     "Avaiable From": "Disponibile Dal",
     "Advance Sale": "Prevendita",
-    "Minimum Price": "Spesa minima",
+    "Minimum Spend": "Spesa minima",
     "Advanced Sale Alert": "Questo ordine sará spedito dopo il :date",
 
     "See more": "Scopri",
@@ -380,6 +382,7 @@
     "Date To": "Al",
 
     "New Order": "Nuovo Ordine",
-    "From :email": "Da :email"
+    "From :email": "Da :email",
+    "Delivery": "Dove Consegniamo"
     
 } 

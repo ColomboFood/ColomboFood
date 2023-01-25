@@ -306,7 +306,7 @@ class Order extends Model
         DB::transaction(function () use(&$res, $tracking_number) {
             $status = OrderStatus::where('name','shipped')->first();
             if ($status) {
-                $status_id = \App\Models\OrderStatus::where('name', insensitive_like(),'shipped')->first()->id;
+                $status_id = \App\Models\OrderStatus::where('name', insensitiveLike(),'shipped')->first()->id;
                 $this->status()->associate($status_id);
                 $this->tracking_number = $tracking_number;
                 $this->save();

@@ -4,8 +4,9 @@
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">{{ __('Sitemap') }}</span>
             <a class="cursor-pointer hover:underline" href="{{ route('home') }}">{{ __('Home') }}</a>
+            <a class="cursor-pointer hover:underline" href="{{ route('about-us') }}">{{ __('About us') }}</a>
+            <a class="cursor-pointer hover:underline" href="{{ route('delivery') }}">{{ __('Deliveryy') }}</a>
             <a class="cursor-pointer hover:underline" href="{{ route('product.index') }}">{{ __('Shop') }}</a>
-            <a class="cursor-pointer hover:underline" href="#">{{ __('About us') }}</a>
         </div>
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">{{ __('Legal') }}</span>

@@ -298,7 +298,15 @@
                                 x-on:click="$refs.shipping{{$option->id}}.click()"
                             >
                                 <div class="mb-2 text-sm font-semibold">{{ $option->name }}</div>
+                                @if($option->description)
                                 <div class="text-sm text-gray-500">{{ $option->description }}</div>
+                                @endif
+                                @if($option->deliveryTimeLabel())
+                                <div class="text-sm text-gray-500">{{ $option->deliveryTimeLabel() }}</div>
+                                @endif
+                                @if($option->min_spend)
+                                <div class="text-sm text-gray-500">{{ __('Minimum spend :amount€',['amount' => $option->min_spend]) }}</div>
+                                @endif
                                 <div class="mt-2 font-black text-right">{{ $option->price }}€</div>
                             </div>
                         @endforeach
@@ -391,11 +399,11 @@
             >
                 <x-slot:actions>
                     @if($addresses_confirmed)
-                        @if($shipping_price->min_price <= $total)
+                        @if($shipping_price->min_spend <= $total)
                             <livewire:checkout :order="$order"/>
                         @else
                             <div class="w-full px-2 py-4 text-base text-center cursor-pointer bg-danger-500">
-                                {{ trans_choice('shopping_cart.checkout.min_price', null, [ 'price' => number_format($shipping_price->min_price,2).'€' ]) }}
+                                {{ trans_choice('shopping_cart.checkout.min_spend', null, [ 'amount' => number_format($shipping_price->min_spend,2).'€' ]) }}
                             </div>
                         @endif
                     @else

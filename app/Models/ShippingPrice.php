@@ -14,7 +14,7 @@ class ShippingPrice extends Model
         'name',
         'description',
         'price',
-        'min_price',
+        'min_spend',
         'min_days',
         'max_days',
         'active'

@@ -86,9 +86,9 @@ class Category extends Model implements HasMedia
                 $query->when(
                     $filters['query'] ?? false,
                     fn ($query) =>
-                    $query->where('name', insensitive_like(), '%' . $filters['query'] . '%')
-                        ->orWhere('short_description', insensitive_like(), '%' . $filters['query'] . '%')
-                        ->orWhere('description', insensitive_like(), '%' . $filters['query'] . '%')
+                    $query->where('name', insensitiveLike(), '%' . $filters['query'] . '%')
+                        ->orWhere('short_description', insensitiveLike(), '%' . $filters['query'] . '%')
+                        ->orWhere('description', insensitiveLike(), '%' . $filters['query'] . '%')
                 );
 
                 return $query;

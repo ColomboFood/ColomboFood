@@ -34,9 +34,9 @@ class ClearUnpaidOrders implements ShouldQueue
      */
     public function handle()
     {
-        $failed_status = OrderStatus::where('name',insensitive_like(),'payment_failed')->first();
-        $cancelled_status = OrderStatus::where('name',insensitive_like(),'cancelled')->first();
-        $draft_status = OrderStatus::where('name',insensitive_like(),'draft')->first();
+        $failed_status = OrderStatus::where('name',insensitiveLike(),'payment_failed')->first();
+        $cancelled_status = OrderStatus::where('name',insensitiveLike(),'cancelled')->first();
+        $draft_status = OrderStatus::where('name',insensitiveLike(),'draft')->first();
         if($failed_status && $cancelled_status && $draft_status)
         {
             $orders = Order::with('history')

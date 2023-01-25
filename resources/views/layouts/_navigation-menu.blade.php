@@ -12,11 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="container hidden space-x-4 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
-                        {{ __('Shop') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="#" :active="false">
+                    <x-jet-nav-link href="{{ route('about-us') }}" :active="request()->routeIs('about-us')">
                         {{ __('About Us') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('delivery') }}" :active="request()->routeIs('delivery')">
+                        {{ __('Delivery') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link accent href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
+                        {{ __('Shop') }}
                     </x-jet-nav-link>
                 </div>
             </div>

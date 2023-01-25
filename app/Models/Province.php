@@ -21,4 +21,9 @@ class Province extends Model
     {
         $query->where('is_active',true);
     }
+
+    public function isActive()
+    {
+        return $this->is_active;
+    }
 }
