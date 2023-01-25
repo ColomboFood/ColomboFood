@@ -44,7 +44,7 @@
         <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 
             @foreach ($featured_products as $product)
-                <div class="last:hidden last:md:flex">
+                <div class="last:md:hidden last:lg:flex">
                     <a class="block w-full h-full" href="{{ route('product.show', $product) }}">
                         <div class="flex flex-col items-center w-full h-full p-2">
                             <div class="relative h-48 overflow-hidden group">
@@ -92,12 +92,12 @@
                 <div class="flex flex-col items-center justify-center mt-2 text-white uppercase">
                     <span>MANDA UN WHATSAPP AL</span>
                     <a class="text-3xl font-black"
-                        href="https://wa.me/3662121189?text=Ciao%2C%20ho%20bisogno%20di%20questi%20prodotti%3A"
+                        href="https://wa.me/393662121189?text=Ciao%2C%20ho%20bisogno%20di%20questi%20prodotti%3A"
                     >366 212 11 89<img class="inline h-6 ml-2 -mt-2" src="/img/logos/whatsapp.svg" /> </a>
                     </span>CONSEGNE EXPRESS!!</span>
                 </div>
             </div>
-            <img class="absolute bottom-0 left-0 hidden lg:block w-72" src="/img/supporto.png"/>
+            <img class="absolute bottom-0 left-0 hidden lg:block w-72" src="/img/support.png"/>
         </div>
 
         <div class="flex flex-col px-4 py-10 bg-secondary-50 xl:flex-row bg-opacity-60">

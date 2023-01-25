@@ -174,7 +174,8 @@ return [
         'postal_code' => 'Codice Postale',
         'vat' => 'Partita IVA',
         'fiscal_code' => 'Codice Fiscale',
-        'phone' => 'Numero di telefono'
+        'phone' => 'Numero di telefono',
+        'phot' => 'L\'immagine'
     ],
 
     /*

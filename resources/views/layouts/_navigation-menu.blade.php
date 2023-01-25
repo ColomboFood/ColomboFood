@@ -19,7 +19,7 @@
                         {{ __('Delivery') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link accent href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
-                        {{ __('Shop') }}
+                        {{ __('Buy Online') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                     </x-dropdown-link>
                 @endauth
                 <x-dropdown-link href="{{ route('product.index') }}">
-                    {{ __('Shop') }}
+                    {{ __('Buy Online') }}
                 </x-dropdown-link>
                 <div class="pt-2 pb-1 space-y-1 border-t border-secondary-50">
                     @auth

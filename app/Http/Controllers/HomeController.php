@@ -19,7 +19,7 @@ class HomeController extends Controller
         // $featured_products = Product::where('quantity', '>', 0)->inRandomOrder()->take(15)->get();
         $featured_products = Product::with('media')->withCount('paidOrders')
             ->orderBy('featured','desc')->orderBy('paid_orders_count','desc')
-            ->take(15)->get();
+            ->take(10)->get();
         $brands = Brand::whereHas(
             'media',
             fn ($query) =>
