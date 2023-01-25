@@ -30,6 +30,16 @@ class ShippingPrice extends Model
         $query->where('active', true);
     }
 
+    public function scopeFast($query)
+    {
+        $query->where('max_days','!=',null)->where('max_days','<=',2);
+    }
+
+    public function isFast()
+    {
+        return $this->max_days != null && $this->max_days <= 2;
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);

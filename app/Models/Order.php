@@ -289,7 +289,9 @@ class Order extends Model
                 $this->history()->create([
                     'order_status_id' => $status->id,
                 ]);
-                Notification::route('mail', $this->user?->email ?? $this->email)->notify(new OrderPaid($this));
+                Notification::route('mail', $this->user?->email ?? $this->email)
+                    ->route('slack', config('services.slack.webhook'))
+                    ->notify(new OrderPaid($this));
                 $res = true;
             }
         });

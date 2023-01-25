@@ -281,7 +281,7 @@ class OrderResource extends Resource
                         }),
                     Tables\Filters\Filter::make('fast_shipping')->label(__('Fast Shipping'))
                         ->query(fn (Builder $query): Builder => 
-                            $query->whereHas('shippingPrice', fn($query) => $query->where('max_days','!=',null)->where('max_days','<=',2))
+                            $query->whereHas('shippingPrice', fn($query) => $query->fast())
                         ),
                     Tables\Filters\Filter::make('hide_drafts')->label(__('Hide Drafts'))
                         ->query(fn (Builder $query): Builder => 

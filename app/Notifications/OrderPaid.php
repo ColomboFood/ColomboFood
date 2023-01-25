@@ -3,15 +3,17 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\SlackMessage;
 
 class OrderPaid extends Notification implements ShouldQueue
 {
     use Queueable;
 
     public $order;
+    public $is_fast;
 
     /**
      * Create a new notification instance.
@@ -21,6 +23,7 @@ class OrderPaid extends Notification implements ShouldQueue
     public function __construct($order)
     {
         $this->order = $order->load(['user','products','shippingPrice']);
+        $this->is_fast = $order->shippingPrice->isFast();
     }
 
     /**
@@ -31,7 +34,7 @@ class OrderPaid extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','slack'];
     }
 
     /**
@@ -47,6 +50,23 @@ class OrderPaid extends Notification implements ShouldQueue
             ->markdown('mail.order.paid', [
                 'order' => $this->order,
             ]);
+    }
+
+    /**
+     * Get the Slack representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\SlackMessage
+     */
+    public function toSlack($notifiable)
+    {
+        $url = route('filament.resources.orders.view', $this->order);
+        return (new SlackMessage)
+                    ->content( ($this->is_fast? ':rocket:' : '' ) . __('New Order'))
+                    ->attachment(function ($attachment) use ($url) {
+                        $attachment->title('#'.$this->order->number, $url)
+                                   ->content(__('From :email', ['email' =>  $this->order->email]));
+                    });
     }
 
     /**

@@ -21,13 +21,16 @@ class ShippingPricesTableSeeder extends Seeder
             'price'         => 0.00, 
             'active'        => true,
             'min_price'     => 50.00
+            'min_days'      => 2,
+            'max_days'      => 4,
         ]);
 
         ShippingPrice::create([
             'name'          => 'Express',
             'description'   => 'Consegna in 48h',
             'price'         => 10.00,  
-            'active'         => true, 
+            'active'        => true, 
+            'max_days'      => 2,
         ]);
     }
 }
