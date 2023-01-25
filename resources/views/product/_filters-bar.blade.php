@@ -54,7 +54,7 @@
             <div class="flex flex-col">
                 <div class="flex">
                     <x-input class="w-full" type="text" placeholder="{{ __('Search...') }}"
-                        wire:model.debounce.500ms="query" />
+                        wire:model.debounce.200ms="query" />
                     <x-button class="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">

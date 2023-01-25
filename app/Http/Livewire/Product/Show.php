@@ -97,6 +97,14 @@ class Show extends Component
         return $description;
     }
 
+    public function getTagsProperty()
+    {
+        $tags = $this->product->tags()->get();
+        if(!$tags && $this->product->defaultVariant)
+            $tags = $this->product->defaultVariant->tags()->get();
+        return $tags;
+    }
+
     public function shouldSelectVariantByImage()
     {
         return ($this->product->defaultVariant || $this->product->variants()->count()) 

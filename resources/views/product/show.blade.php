@@ -125,6 +125,15 @@
                             @endif
                         @endforeach
                     @endif
+
+                    @if($this->tags->count())
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <x-icons.tags class="mt-0.5"/>
+                            @foreach($this->tags as $tag )
+                                <span class="capitalize">{{ $tag->name }}</span>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 {{-- End Details Section --}}
                 
