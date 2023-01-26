@@ -1,6 +1,7 @@
 <x-app-layout>
 
-    <div class="w-full h-[32rem] bg-cover bg-right-bottom"
+    @if(!$featured_collection)
+    <div class="w-full h-[32rem] bg-cover bg-right"
         style="background-image: url('/img/homebanner.png')"
     >
         <div class="pt-24 mx-auto lg:container lg:pt-32">
@@ -24,6 +25,32 @@
             </div>
         </div>
     </div>
+    @else
+    <div class="w-full h-[32rem] bg-cover bg-right"
+        style="background-image: url({{$featured_collection->hero}})"
+    >
+        <div class="pt-24 mx-auto lg:container lg:pt-32">
+            <div class="w-full px-6 py-4 mx-auto text-center bg-white lg:text-left lg:px-2 lg:w-96 lg:p-auto bg-opacity-80 lg:bg-opacity-0 lg:ml-20">
+                <div class="mx-auto max-w-max">
+                    <x-jet-application-logo class="mx-auto lg:w-full max-h-28 lg:max-h-none"/>
+                    {{-- <x-algolia-autocomplete class="w-full mt-6"/> --}}
+                    <form method="GET" action="{{ route('product.index') }}">
+                        <div class="flex items-center w-full pr-2 mt-6 transition focus-within:border-primary-500 focus-within:border-b-2">
+                            <input class="flex-1 bg-transparent border-transparent peer focus:border-transparent focus:ring focus:ring-transparent"
+                                type="text" name="query" placeholder="{{ __('Search...') }}"
+                            />
+                            <button type="submit" class="transition duration-300 opacity-50 hover:opacity-100 peer-focus:opacity-100">
+                                <svg class="w-5 h-5 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <div class="container grid gap-6 px-6 mx-auto my-6 md:grid-cols-3">
         @foreach($featured_categories as $category)
@@ -99,10 +126,10 @@
             </div>
 
             <img class="absolute bottom-0 left-0 hidden lg:block w-72" src="/img/supporto.png"/>
-            <div class="absolute bottom-32 left-24 hidden lg:block">
-                <div class="relative w-28 h-14 rounded-full bg-primary-50 text-xs flex items-center justify-center">
+            <div class="absolute hidden bottom-32 left-24 lg:block">
+                <div class="relative flex items-center justify-center text-xs rounded-full w-28 h-14 bg-primary-50">
                     <p class="w-20 text-center">vi rispondiamo subito!</p>
-                    <div class="absolute bg-primary-50 h-4 w-2 -bottom-2 left-4 rounded-r-full"></div>
+                    <div class="absolute w-2 h-4 rounded-r-full bg-primary-50 -bottom-2 left-4"></div>
                 </div>
             </div>
         </div>

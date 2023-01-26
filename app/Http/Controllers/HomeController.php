@@ -32,17 +32,8 @@ class HomeController extends Controller
                     'url' => route('product.index', ['brand' => $brand->slug])
                 ]
             ]);
-        $collections = Collection::featured()->inRandomOrder()->take(3)->get();
-        if ($collections->count())
-            $collections = $collections->mapWithKeys(fn ($collection, $key) => [
-                $key => [
-                    'hero' => $collection->hero,
-                    'url' => route('product.index', ['collection' => $collection->slug]),
-                    'name' => $collection->name,
-                    'description' => $collection->description
-                ]
-            ]);
-        return view('home', compact('featured_categories', 'featured_products', 'brands', 'collections'));
+        $featured_collection = Collection::with('media')->featured()->whereHas('media')->latest()->first();
+        return view('home', compact('featured_categories', 'featured_products', 'brands', 'featured_collection'));
     }
 
     public function aboutUs()
