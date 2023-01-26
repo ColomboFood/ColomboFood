@@ -38,7 +38,12 @@ class ListOrders extends ListRecords
                         ])
                 ])
                 ->action(function (array $data) {
-                    $file_name = 'daily_orders-'.(today()->format('d_m_y')).'.csv';
+                    $file_name = 'daily_orders-'.(
+                        \Carbon\Carbon::parse($data['from_date'])->format('dmyHi')
+                        . '-' .
+                        \Carbon\Carbon::parse($data['to_date'])->format('dmyHi')
+                    ).'.csv';
+                    dd($file_name);
                     // Excel::store(new OrdersExport($data['from_date'],$data['to_date'],$data['statuses']), 'data/export/'.$file_name , config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
                     //     'visibility' => 'private',
                     // ]);
