@@ -18,7 +18,7 @@
                 di qualità. È da qui che nasce il mio interesse e la mia passione per il buon cibo e la sua distribuzione.
             </p>
             <p>
-                È da qui che nel 2016 si relaizza il mio sogno di bambino. Nasce Colombo Food.
+                È da qui che nel 2016 si realizza il mio sogno di bambino. Nasce Colombo Food.
             </p>
             <p>
                 Colombo Food è oramai un'azienda consolidata nel settore e in continua crescita grazie alla passione
