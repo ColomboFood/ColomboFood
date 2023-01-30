@@ -41,7 +41,7 @@
         </tr>
         @foreach($order->products as $product)
         <tr>
-            <td>{{$order->id}}</td>
+            <td>CF{{$order->id}}</td>
             <td>{{$order->created_at->format('d/m/Y')}}</td>
             <td>{{$order->payment_gateway}}</td>
             <td>{{$order->payment_id}}</td>

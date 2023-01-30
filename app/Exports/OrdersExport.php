@@ -32,12 +32,12 @@ class OrdersExport implements FromView
             'shipping_sku' => $this->shipping?->sku ?? '00.CONSEGNA',
             'orders' => Order::with(['products'])
                 ->when($this->from, fn ($query) => 
-                    $query->whereHas('history', fn ($query) => $query->wherein('order_status_id', $this->statuses))
+                    $query->whereHas('history', fn ($query) => $query->whereIn('order_status_id', $this->statuses))
                         ->where('updated_at','>=', $this->from) 
                 )
                 ->when($this->to, fn ($query) => 
-                    $query->whereHas('history', fn ($query) => $query->wherein('order_status_id', $this->statuses))
-                        ->where('updated_at','>=', $this->to) 
+                    $query->whereHas('history', fn ($query) => $query->whereIn('order_status_id', $this->statuses))
+                        ->where('updated_at','<=', $this->to) 
                 )->get()
         ]);
     }

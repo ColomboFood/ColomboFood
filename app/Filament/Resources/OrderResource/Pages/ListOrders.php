@@ -43,9 +43,9 @@ class ListOrders extends ListRecords
                         . '-' .
                         \Carbon\Carbon::parse($data['to_date'])->format('dmyHi')
                     ).'.csv';
-                    Excel::store(new OrdersExport($data['from_date'],$data['to_date'],$data['statuses']), 'data/export/'.$file_name , config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
-                        'visibility' => 'private',
-                    ]);
+                    // Excel::store(new OrdersExport($data['from_date'],$data['to_date'],$data['statuses']), 'data/export/'.$file_name , config('filesystems.default') , \Maatwebsite\Excel\Excel::CSV, [
+                    //     'visibility' => 'private',
+                    // ]);
                     return Excel::download(new OrdersExport($data['from_date'],$data['to_date'],$data['statuses']), $file_name .'.csv');
                 }),
         ];
