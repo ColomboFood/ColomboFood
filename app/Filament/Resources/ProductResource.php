@@ -264,6 +264,7 @@ class ProductResource extends Resource
                                     ->collection('gallery')
                                     ->multiple()
                                     ->enableReordering()
+                                    ->enableDownload()
                                     ->panelLayout('circular')
                                     ->panelAspectRatio('5:6'),
                             ]),

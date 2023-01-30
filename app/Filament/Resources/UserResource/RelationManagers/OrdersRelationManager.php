@@ -96,6 +96,9 @@ class OrdersRelationManager extends RelationManager
                             ->required(),
                         Forms\Components\RichEditor::make('message')
                             ->label(__('Message'))
+                            ->disableToolbarButtons([
+                                'attachFiles',
+                            ])
                             ->required(),
                     ]),
                 Tables\Actions\EditAction::make()

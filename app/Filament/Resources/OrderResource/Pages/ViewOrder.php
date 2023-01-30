@@ -40,6 +40,9 @@ class ViewOrder extends ViewRecord
                         ->required(),
                     \Filament\Forms\Components\RichEditor::make('message')
                         ->label(__('Message'))
+                        ->disableToolbarButtons([
+                            'attachFiles',
+                        ])
                         ->required(),
                 ])
         );

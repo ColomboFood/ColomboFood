@@ -57,6 +57,7 @@ class BrandResource extends Resource
                                     ->panelLayout('circular')
                                     ->imageCropAspectRatio('16:9')
                                     ->panelAspectRatio('16:9')
+                                    ->enableDownload()
                                     ->columnSpan('full'),
                             ])->columns([
                                 'md' => 2,
@@ -69,7 +70,8 @@ class BrandResource extends Resource
                                 Forms\Components\SpatieMediaLibraryFileUpload::make('logo')->label(__('Logo'))
                                     ->collection('logo')
                                     ->panelLayout('circular')
-                                    ->panelAspectRatio('1:1'),
+                                    ->panelAspectRatio('1:1')
+                                    ->enableDownload(),
                             ]),
                         Forms\Components\Section::make(__('Settings'))
                             ->schema([
