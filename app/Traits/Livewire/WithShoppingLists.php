@@ -214,25 +214,25 @@ trait WithShoppingLists
                 Cart::instance($instance)->erase(Auth::user()->email);
             }
             catch(Exception $e){
-                Log::error("Error erasing ".$instance." in WithSoppingLists\n" . $e);
+                Log::error("Error erasing ".$instance." in WithSoppingLists [". Auth::user()->email ."]");
             }
             try{
                 Cart::instance($instance)->store(Auth::user()->email);
             }
             catch(Exception $e){
-                Log::error("Error storing (1) ".$instance." in WithSoppingLists\n" . $e);
+                Log::error("Error storing (1) ".$instance." in WithSoppingLists [". Auth::user()->email ."]");
             }
             try{
                 Cart::instance($instance)->restore(Auth::user()->email);
             }
             catch(Exception $e){
-                Log::error("Error restoring ".$instance." in WithSoppingLists\n" . $e);
+                Log::error("Error restoring ".$instance." in WithSoppingLists [". Auth::user()->email ."]");
             }
             try{
                 Cart::instance($instance)->store(Auth::user()->email);
             }
             catch(Exception $e){
-                Log::error("Error storing (2) ".$instance." in WithSoppingLists\n" . $e);
+                Log::error("Error storing (2) ".$instance." in WithSoppingLists [". Auth::user()->email ."]");
             }
         }
     }
