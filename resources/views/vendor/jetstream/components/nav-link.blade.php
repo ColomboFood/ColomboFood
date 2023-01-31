@@ -4,7 +4,7 @@
 ])
 
 @php
-$active_colors = $accent ? 'text-accent-500' : 'text-accent-900';
+$active_colors = $accent ? 'text-accent-500' : 'text-gray-900';
 $not_active_colors = $accent ? 'text-accent-400 hover:text-accent-500 focus:text-accent-500' : 'text-gray-500 hover:text-gray-900 focus:text-gray-900';
 $classes = ($active ?? false)
             ? 'inline-flex items-center px-1 pt-1 border-b-2 border-primary-500 text-sm font-medium leading-5 
