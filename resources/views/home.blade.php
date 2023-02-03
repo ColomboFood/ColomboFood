@@ -154,7 +154,6 @@
         <div class="container flex flex-col w-full mx-auto my-12 md:h-96 md:flex-row">
             <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" 
                 src="/img/shop.png"
-                
             />
             <div class="flex flex-col items-center w-full">
                 <div class="max-w-sm pt-4 pb-10 ml-4 md:pt-0 md:pb-0 md:mt-12">
@@ -169,7 +168,9 @@
                         Perchè a volte avere la Partita Iva può essere un vantaggio!
                     </p>
                     <div class="mt-6">
-                        <x-button class="px-12">Scopri i vantaggi</x-button>
+                        <form action="{{ route('info') . "#special-iva" }}" method="GET">
+                            <x-button class="px-12">Scopri i vantaggi</x-button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -194,7 +195,9 @@
                         quotidianamente a prezzi vantaggiosissimi!
                     </p>
                     <div class="mt-6">
-                        <x-button class="px-12">Scopri l'offerta</x-button>
+                        <form action="{{ route('info') . "#special-bnb" }}" method="GET">
+                            <x-button class="px-12">Scopri l'offerta</x-button>
+                        </form>
                     </div>
                 </div>
             </div>

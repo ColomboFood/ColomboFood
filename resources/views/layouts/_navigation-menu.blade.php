@@ -181,9 +181,17 @@
                             {{ __('My Orders') }}
                     </x-dropdown-link>
                 @endauth
-                <x-dropdown-link href="{{ route('product.index') }}">
+                <x-dropdown-link accent="true" href="{{ route('product.index') }}">
                     {{ __('Buy Online') }}
                 </x-dropdown-link>
+                <div class="pt-2 pb-1 space-y-1 border-t border-secondary-50">
+                    <x-dropdown-link href="{{ route('about-us') }}" :active="request()->routeIs('about-us')">
+                        {{ __('About Us') }}
+                    </x-dropdown-link>
+                    <x-dropdown-link href="{{ route('delivery') }}" :active="request()->routeIs('delivery')">
+                        {{ __('Delivery') }}
+                    </x-dropdown-link>
+                </div>
                 <div class="pt-2 pb-1 space-y-1 border-t border-secondary-50">
                     @auth
                         <form method="POST" action="{{ route('logout') }}" x-data>

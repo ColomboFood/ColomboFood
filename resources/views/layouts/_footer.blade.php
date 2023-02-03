@@ -7,6 +7,7 @@
             <a class="cursor-pointer hover:underline" href="{{ route('about-us') }}">{{ __('About Us') }}</a>
             <a class="cursor-pointer hover:underline" href="{{ route('delivery') }}">{{ __('Delivery') }}</a>
             <a class="cursor-pointer hover:underline" href="{{ route('product.index') }}">{{ __('Buy Online') }}</a>
+            <a class="cursor-pointer hover:underline" href="{{ route('info') }}">{{ __('Info') }}</a>
         </div>
         <div class="grid gap-2 place-items-start">
             <span class="mb-2 font-bold uppercase opacity-50">{{ __('Useful Links') }}</span>

@@ -48,4 +48,9 @@ class HomeController extends Controller
         
         return view('delivery', compact('provinces','shippingPrices'));
     }
+
+    public function info()
+    {
+        return view('info');
+    }
 }

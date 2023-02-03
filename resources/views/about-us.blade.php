@@ -9,7 +9,7 @@
             </div>
         </div>
     </div> --}}
-    <div class="w-full bg-bottom bg-cover h-64 lg:h-[32rem] " style="background-image: url('/img/bambino.png')"></div>
+    <div class="w-full bg-top bg-cover h-64 lg:h-[32rem] " style="background-image: url('/img/bambino.png')"></div>
 
     <div class="container max-w-5xl px-6 py-12 mx-auto mb-12 prose">
         <div>
@@ -40,11 +40,6 @@
             </p>
             <img class="h-10 mt-12 md:ml-auto md:mr-0" src="/img/pier-firma.png"/>
         </div>
-
-        {{-- <div class="grid gap-6 mt-12 md:grid-cols-2 not-prose">
-            <img class="object-cover h-64" src="/img/gastronomia.png"/>
-            <img class="object-cover h-64" src="/img/pasta-fresca.png"/>
-        </div> --}}
     </div>
 
 </x-app-layout>
