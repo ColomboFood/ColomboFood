@@ -17,6 +17,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class , 'index'] )->name('
 Route::get('/about-us', [App\Http\Controllers\HomeController::class , 'aboutUs'] )->name('about-us');
 Route::get('/delivery', [App\Http\Controllers\HomeController::class , 'delivery'] )->name('delivery');
 Route::get('/info', [App\Http\Controllers\HomeController::class , 'info'] )->name('info');
+Route::get('/contact-us', [App\Http\Controllers\HomeController::class , 'contactUs'] )->name('contact-us');
 
 Route::get('/shop', App\Http\Livewire\Product\Index::class )->name('product.index');
 Route::get('/shop/{product:slug}', App\Http\Livewire\Product\Show::class )->name('product.show');

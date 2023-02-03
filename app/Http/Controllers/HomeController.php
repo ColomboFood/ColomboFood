@@ -53,4 +53,9 @@ class HomeController extends Controller
     {
         return view('info');
     }
+
+    public function contactUs()
+    {
+        return view('contact-us');
+    }
 }
