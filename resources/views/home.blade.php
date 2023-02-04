@@ -155,8 +155,8 @@
             <img class="object-cover object-top h-64 lg:w-full md:max-w-xs lg:max-w-none md:object-center md:h-full lg:h-auto" 
                 src="/img/shop.png"
             />
-            <div class="flex flex-col items-center w-full">
-                <div class="max-w-sm pt-4 pb-10 ml-4 md:pt-0 md:pb-0 md:mt-12">
+            <div class="flex flex-col items-center w-full px-4 md:pr-4">
+                <div class="max-w-sm pt-4 pb-10 ml-auto mr-auto md:ml-12 md:mr-0 md:pt-0 md:pb-0 md:mt-12">
                     <p class="text-3xl font-bold">Hai la partita Iva?</p>
                     <p class="mt-6">
                         Colombo Food ha studiato una serie di offerte
@@ -180,7 +180,7 @@
     <div class="w-full">
         <div class="container flex flex-col w-full mx-auto my-12 md:h-96 md:flex-row">
             <div class="flex flex-col items-center w-full">
-                <div class="max-w-sm pt-4 pb-10 mr-12 text-right md:pt-0 md:pb-0 md:my-auto">
+                <div class="max-w-sm px-4 pt-4 pb-10 ml-auto mr-auto text-right md:px-0 md:pl-4 md:mr-12 md:ml-0 md:pt-0 md:pb-0 md:my-auto">
                     <p class="text-3xl font-bold text-accent-500">
                         Gestisci un piccolo Hotel
                         o affiti appartamenti
