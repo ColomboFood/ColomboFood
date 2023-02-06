@@ -2,7 +2,7 @@
     'embed'
 ])
 
-<div class="relative text-gray-600 body-font">
+<div class="relative w-full h-full text-gray-600 body-font">
 
     <div class="absolute inset-0 bg-gray-300">
         <iframe style="filter: grayscale(1) contrast(1.2) opacity(0.4);"

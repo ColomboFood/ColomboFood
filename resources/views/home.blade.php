@@ -116,12 +116,12 @@
                     per pranzo? 100 Sbrodoloni
                     per il primo pomeriggio?
                 </p>
-                <div class="flex flex-col items-center justify-center mt-2 text-white uppercase">
+                <div class="flex flex-col items-center justify-center mt-2 font-semibold text-white uppercase">
                     <span>MANDA UN WHATSAPP AL</span>
                     <a class="text-3xl font-black"
                         href="https://wa.me/393662121189?text=Ciao%2C%20ho%20bisogno%20di%20questi%20prodotti%3A"
                     >366 212 11 89<img class="inline h-6 ml-2 -mt-2" src="/img/logos/whatsapp.svg" /> </a>
-                    </span>CONSEGNE EXPRESS!!</span>
+                    <span class="text-xl">CONSEGNE EXPRESS</span>
                 </div>
             </div>
 
@@ -138,7 +138,8 @@
             <div class="flex flex-col mb-12 text-center xl:mb-0 xl:ml-auto xl:mr-0">
                 <p class="max-w-sm mx-auto">
                     Consegniamo con nostri
-                    furgoni anonimi a <span class="font-semibold">Milano e provincia</span>
+                    furgoni anonimi a <span class="font-semibold">Milano e provincia</span> 
+                    dalle 05.00 del mattino
                      + nuove zone aggiunte mensilmente
                 </p>
                 <form action="{{ route('delivery') }}" method="GET" class="mt-6">
@@ -168,7 +169,8 @@
                         Perchè a volte avere la Partita Iva può essere un vantaggio!
                     </p>
                     <div class="mt-6">
-                        <form action="{{ route('info') . "#special-iva" }}" method="GET">
+                        {{-- <form action="{{ route('info') . "#special-iva" }}" method="GET"> --}}
+                        <form action="{{ route('info') }}" method="GET">
                             <x-button class="px-12">Scopri i vantaggi</x-button>
                         </form>
                     </div>
@@ -195,7 +197,8 @@
                         quotidianamente a prezzi vantaggiosissimi!
                     </p>
                     <div class="mt-6">
-                        <form action="{{ route('info') . "#special-bnb" }}" method="GET">
+                        {{-- <form action="{{ route('info') . "#special-bnb" }}" method="GET"> --}}
+                        <form action="{{ route('info') }}" method="GET">
                             <x-button class="px-12">Scopri l'offerta</x-button>
                         </form>
                     </div>

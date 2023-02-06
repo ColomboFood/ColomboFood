@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('delivery') }}" :active="request()->routeIs('delivery')">
                         {{ __('Delivery') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('contact-us') }}" :active="request()->routeIs('contact-us')">
+                        {{ __('Contact Us') }}
+                    </x-jet-nav-link>
                     <x-jet-nav-link accent href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
                         {{ __('Buy Online') }}
                     </x-jet-nav-link>
@@ -190,6 +193,9 @@
                     </x-dropdown-link>
                     <x-dropdown-link href="{{ route('delivery') }}" :active="request()->routeIs('delivery')">
                         {{ __('Delivery') }}
+                    </x-dropdown-link>
+                    <x-dropdown-link href="{{ route('contact-us') }}" :active="request()->routeIs('contact-us')">
+                        {{ __('Contact Us') }}
                     </x-dropdown-link>
                 </div>
                 <div class="pt-2 pb-1 space-y-1 border-t border-secondary-50">

@@ -8,15 +8,15 @@
 
             <div>
                 <ul class="pl-0 list-none">
-                    <li class="pl-0 font-bold odd:text-accent-500">5% DI SCONTO SUL PRIMO ORDINECODICE CONAMORE5</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">NESSUN MINIMO D'ORDINE</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">CONSEGNA STANDARDENTRO 4 GIORNI LAVORATIVI, GRATIS</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">CONSEGNA EXPRESSENTRO 2 GIORNI LAVORATIVI, 10€</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">OLTRE 400 REFERENZE A CATALAGO</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">CONSEGNE CON MEZZI REFRIGERATI ANONIMI</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">INIZIO CONSEGNE ALLE 05.00 DEL MATTINO</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">RICERCA E PERSONALIZZAZIONE PRODOTTI</li>
-                    <li class="pl-0 font-bold odd:text-accent-500">SCONTO 10% NELLA SETTIMANA DEL VOSTRO COMPLEANNO</li>
+                    <li class="pl-0 font-black odd:text-accent-500">5% DI SCONTO SUL PRIMO ORDINE <span class="font-normal">(CODICE CONAMORE5)</span></li>
+                    <li class="pl-0 font-black odd:text-accent-500">NESSUN MINIMO D'ORDINE</li>
+                    <li class="pl-0 font-black odd:text-accent-500">CONSEGNA STANDARDENTRO <span class="font-normal">(ENTRO 4 GIORNI LAVORATIVI, GRATIS)</span></li>
+                    <li class="pl-0 font-black odd:text-accent-500">CONSEGNA EXPRESSENTRO <span class="font-normal">(ENTRO 2 GIORNI LAVORATIVI, 10€)</span></li>
+                    <li class="pl-0 font-black odd:text-accent-500">OLTRE 400 REFERENZE A CATALAGO</li>
+                    <li class="pl-0 font-black odd:text-accent-500">CONSEGNE CON MEZZI REFRIGERATI ANONIMI</li>
+                    <li class="pl-0 font-black odd:text-accent-500">INIZIO CONSEGNE ALLE 05.00 DEL MATTINO</li>
+                    <li class="pl-0 font-black odd:text-accent-500">RICERCA E PERSONALIZZAZIONE PRODOTTI</li>
+                    <li class="pl-0 font-black odd:text-accent-500">SCONTO 10% NELLA SETTIMANA DEL VOSTRO COMPLEANNO</li>
                 </ul>
             </div>
         </div>
