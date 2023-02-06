@@ -137,9 +137,8 @@
         <div class="flex flex-col px-4 py-10 bg-secondary-50 xl:flex-row bg-opacity-60">
             <div class="flex flex-col mb-12 text-center xl:mb-0 xl:ml-auto xl:mr-0">
                 <p class="max-w-sm mx-auto">
-                    Consegniamo con nostri
+                    Consegniamo dalle 05.00 del mattino con nostri
                     furgoni anonimi a <span class="font-semibold">Milano e provincia</span> 
-                    dalle 05.00 del mattino
                      + nuove zone aggiunte mensilmente
                 </p>
                 <form action="{{ route('delivery') }}" method="GET" class="mt-6">

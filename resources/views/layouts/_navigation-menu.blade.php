@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="container hidden space-x-4 sm:-my-px sm:ml-10 sm:flex">
+                <div class="container hidden space-x-4 lg:-my-px lg:ml-10 lg:flex">
                     <x-jet-nav-link href="{{ route('about-us') }}" :active="request()->routeIs('about-us')">
                         {{ __('About Us') }}
                     </x-jet-nav-link>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden lg:flex lg:items-center lg:ml-6">
                 <div class="space-x-3">
                     <x-jet-nav-link href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
                         <div class="relative w-6 h-6">
@@ -113,7 +113,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="flex items-center -mr-2 space-x-2 sm:hidden">
+            <div class="flex items-center -mr-2 space-x-2 lg:hidden">
                 <x-jet-nav-link class="relative" href="{{ route('cart.index') }}" :active="request()->routeIs('cart.index')">
                     <x-icons.cart/>
                     <x-cart-counter class="absolute top-0 right-0 w-4 h-4 ml-1 text-[0.5rem] leading-4 font-medium text-center text-white rounded-full bg-primary-500"/>
@@ -130,7 +130,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div class="absolute inset-x-0 z-10 overflow-y-auto bg-white shadow-md sm:hidden"
+    <div class="absolute inset-x-0 z-10 overflow-y-auto bg-white shadow-md lg:hidden"
         x-show="open"
         x-cloak
         x-transition:enter="transition transform ease-out origin-top duration-200"

@@ -20,7 +20,7 @@
 @endforeach
 </x-mail::table>
 
-@if($order->coupon_discount)
+@if($order->coupon_discount > 0)
 {{ __('Discount') }}: -{{ number_format($order->coupon_discount,2)}}€ 
 <br>
 @endif

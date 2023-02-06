@@ -1,24 +1,70 @@
 <x-app-layout>
 
-    <div class="w-full bg-top bg-cover h-64 lg:h-[32rem]" style="background-image: url('/img/contatti.png')"></div>
+    <div class="w-full bg-center bg-cover h-64 lg:h-[32rem]" style="background-image: url('/img/contatti.png')"></div>
 
-    <div class="h-64 lg:h-[32rem]">
-        <x-google-map embed="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2799.6144129484005!2d9.213425210144122!3d45.43727358715696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c449e088668d%3A0xe189a6789606aaa2!2sVia%20Marco%20D&#39;Agrate%2C%2014%2C%2020139%20Milano%20MI!5e0!3m2!1sit!2sit!4v1675390573878!5m2!1sit!2sit">
+    <div class="container max-w-5xl px-6 py-12 mx-auto prose">
+        <div>
+            <h2 class="mb-12 text-2xl font-bold">{{ __('Contacts') }}</h2>
+
+            <div class="flex flex-col mb-6">
+                <span>Preferite fare i vostri ordini telefonicamente?</span>
+                <span class="font-bold uppercase text-accent-500">Ordini Telefonici</span>
+                <span class="font-black text-gray-900 uppercase">+39 338 780 7074</span>
+                <a class="underline" href="mailto:ordini@colombofood.it">ordini@colombofood.it</a>
+            </div>
+
+            <div class="flex flex-col mb-6">
+                <span class="text-accent-500">
+                    <span class="font-bold uppercase">ECommerce</span> <span>(informazioni sull'utilizzo della piattaforma)</span>
+                </span>
+                <span class="font-black text-gray-900 uppercase">+39 347 55 68 978</span>
+                <a class="underline" href="mailto:info@colombofood.it">info@colombofood.it</a>
+            </div>
             
-            <div class="container flex px-5 py-24 mx-auto">
-                <div class="relative z-10 flex flex-col w-full p-8 mt-10 bg-white shadow-md md:mr-12 lg:w-1/3 md:w-1/2 md:ml-auto md:mt-0">
-                    <h2 class="mb-2 text-lg font-semibold text-gray-900">{{ __('Contacts') }}</h2>
-                    <p class="text-gray-500">Box con informazioni di contatto</p>
-                    {{-- <div class="relative mb-4">
-                        <label for="email" class="text-sm leading-7 text-gray-600">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
+            <div class="flex flex-col mb-6">
+                <span class="text-accent-500">
+                    <span class="font-bold uppercase">Amministrazione</span> <span>(gestione ordini, fatture)</span>
+                </span>
+                <span class="font-black text-gray-900 uppercase">+39 02 3928 3559</span>
+                <a class="underline" href="mailto:amministrazione@colombofood.it">amministrazione@colombofood.it</a>
+            </div>
+
+        </div>
+
+        <div class="pt-16 -mt-16" id="work-with-us">
+            <h2 class="mb-12 text-2xl font-bold text-accent-500">{{ __('Work with us') }}</h2>
+
+            <p>
+                Siamo sempre alla ricerca di talenti da inserire nella nostra squadra.<br>
+                Se sei motivato, appassionato e hai una grande professionalità, siamo pronti ad offrirti un ambiente
+                di lavoro stimolante e produttivo.
+            </p>
+
+            <p>
+                Ti invitiamo a inviare il tuo CV e a candidarti per le posizioni aperte nel nostro team.<br>
+                La tua esperienza sarà sempre valutata e apprezzata.
+            </p>
+
+            <p>
+                Non vediamo l'ora di conoscerti, scrivici a: <br>
+                <a class="underline" href="mailto:info@colombofood.it">info@colombofood.it</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <x-google-map embed="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2801.0096500592686!2d9.122464315555629!3d45.40914497910034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c31ed0510799%3A0xe22ec8ee1995dbdf!2sVia%20Mario%20Idiomi%2C%204A%2C%2020090%20Assago%20MI!5e0!3m2!1sit!2sit!4v1675688446243!5m2!1sit!2sit">
+            
+            <div class="w-full py-12 sm:py-0">
+                <div class="relative z-10 w-3/4 max-w-full px-6 py-12 pb-24 ml-auto mr-auto prose bg-white sm:w-1/2 sm:mr-0">
+                    <div class="mx-auto w-fit">
+                        <h2 class="mb-2 text-2xl font-bold">{{ __('Dove siamo') }}</h2>
+                        <div class="mt-6 font-semibold text-accent-500">ColomboFood</div>
+                        <div class="">Via Mario Idiomi, 4A, 20090 Assago (Milano)</div>
+
+                        <div class="mt-6 font-semibold text-accent-500">Dolci Follie</div>
+                        <div class="">Via Marco D'Agrate, 14, 20139 Milano</div>
                     </div>
-                    <div class="relative mb-4">
-                        <label for="message" class="text-sm leading-7 text-gray-600">Message</label>
-                        <textarea id="message" name="message" class="w-full h-32 px-3 py-1 text-base leading-6 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none resize-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200"></textarea>
-                    </div>
-                    <button class="px-6 py-2 text-lg text-white border-0 rounded bg-primary-500 focus:outline-none hover:bg-primary-600">Button</button>
-                    <p class="mt-3 text-xs text-gray-500">Chicharrones blog helvetica normcore iceland tousled brook viral artisan.</p> --}}
                 </div>
             </div>
             
