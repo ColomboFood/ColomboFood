@@ -7,10 +7,11 @@
             <h2 class="mb-12 text-2xl font-bold">{{ __('Contacts') }}</h2>
 
             <div class="flex flex-col mb-6">
-                <span>Preferite fare i vostri ordini telefonicamente?</span>
-                <span class="font-bold uppercase text-accent-500">Ordini Telefonici</span>
-                <span class="font-black text-gray-900 uppercase">+39 338 780 7074</span>
-                <a class="underline" href="mailto:ordini@colombofood.it">ordini@colombofood.it</a>
+                <span class="font-bold uppercase text-accent-500">Ordina Con Whatsapp</span>
+                <a class="font-black text-gray-900 no-underline"
+                    href="https://wa.me/393662121189?text=Ciao%2C%20ho%20bisogno%20di%20questi%20prodotti%3A"
+                >+39 366 212 11 89 <img class="inline h-5 -mt-0.5 py-0 my-0 ml-1" src="/img/logos/whatsapp.svg" /> </a>
+                {{-- <a class="underline" href="mailto:ordini@colombofood.it">ordini@colombofood.it</a> --}}
             </div>
 
             <div class="flex flex-col mb-6">

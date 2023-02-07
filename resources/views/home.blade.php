@@ -66,7 +66,7 @@
     </div>
     
     <div class="container mx-auto my-12">
-        <h2 class="text-2xl font-bold text-center">I nostri <span class="text-accent-500">Best Seller</span></h2>
+        <h2 class="text-2xl font-bold text-center">I nostri <span class="text-accent-500">Consigli</span></h2>
     
         <div class="grid grid-cols-2 mx-6 my-12 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 

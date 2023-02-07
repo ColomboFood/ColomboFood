@@ -209,7 +209,8 @@ class ProductResource extends Resource
 
                         Forms\Components\Card::make()
                             ->schema([
-                                Forms\Components\TextInput::make('sku')->label(__('SKU')),
+                                Forms\Components\TextInput::make('sku')->label(__('SKU'))
+                                    ->unique(ignorable: fn (?Product $record): ?Product => $record),
                                 Forms\Components\Select::make('variant')->label(__('Variant Of'))
                                     ->relationship(
                                         'defaultVariant',

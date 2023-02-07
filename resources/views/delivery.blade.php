@@ -69,6 +69,11 @@
                 @endforeach
                 </tbody>
             </table>
+            
+            <div class="not-prose">
+                <p>Per garantire i tempi di consegna gli ordini devono essere effettuati <strong>entro le 16.30</strong>, oltre si considera il giorno successivo. </p>
+                <p>Sabato e Domenica sono giorni <strong>festivi</strong>.</p>
+            </div>
         @endif
         </div>
     </div>

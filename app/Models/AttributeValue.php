@@ -45,6 +45,9 @@ class AttributeValue extends Model
     public static function getLabel($name,  $value){
         $label = $value;
         switch(strtolower($name)){
+            case('pz'):
+                    $label = $value.'pz';
+                break;
             case('gr'):
             case('g'):
                 if($value < 1000)
