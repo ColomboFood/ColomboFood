@@ -47,7 +47,7 @@
                             x-show = "show ">
                     @endif
                 </div>
-                @if(count($this->gallery) > 2)
+                @if(count($this->gallery) > 1)
                     <div class="inline-flex mt-4 space-x-2">
                     @foreach ($this->gallery as $image )
                         <div class="border cursor-pointer"
