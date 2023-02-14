@@ -31,9 +31,9 @@ class ListOrders extends ListRecords
                             Forms\Components\DateTimePicker::make('to_date')->label(__('To Date'))
                                 ->gte('from_date')
                                 ->default(today()->startOfDay()),
-                            Forms\Components\Select::make('statuses')
+                            Forms\Components\Select::make('statuses')->label(__('Statuses'))
                                 ->multiple()
-                                ->options(OrderStatus::all()->pluck('name','id'))
+                                ->options(OrderStatus::all()->pluck('label','id'))
                                 ->default([OrderStatus::where('name','like','paid')->first()->id])
                         ])
                 ])
