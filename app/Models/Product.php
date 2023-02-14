@@ -96,9 +96,10 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
 
     public function getDynamicSEOData(): SEOData
     {
+        $description = $this->seo->description ?? $this->description;
         return new SEOData(
             title: $this->seo->title ?? $this->name,
-            description: $this->seo->description ?? $this->description,
+            description: strip_tags($description ?? ""),
             image: $this->image
         );
     }

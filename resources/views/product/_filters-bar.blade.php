@@ -70,11 +70,11 @@
                     <div class="space-y-2">
                         <div class="mb-2 font-bold">{{ __('Categories') }}</div>
                         @foreach ($categories->where('parent_id', null) as $category1)
-                            <div class="pl-2 text-sm" x-data="{
+                            <div class="pl-2 text-sm select-none" x-data="{
                                 open: @js($openMenus->contains($category1->name))
                             }">
                                 <div
-                                    class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category1->name) ? 'font-semibold' : '' }}"]>
+                                    class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category1->name) ? 'font-black' : '' }}"]>
                                     <span wire:click="toggleCategory('{{ $category1->slug }}')"
                                         x-on:click="open=true">{{ $category1->name }}</span>
                                     @if ($categories->filter(fn($c) => $c->parent_id == $category1->id)->count())
@@ -88,10 +88,10 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="pl-4" x-show="open">
+                                <div class="flex flex-col pl-4 mt-1 space-y-1" x-show="open">
                                     @foreach ($categories->where('parent_id', $category1->id) as $category2)
                                         <div
-                                            class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category2->name) ? 'font-semibold' : '' }}">
+                                            class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category2->name) ? 'font-black' : '' }}">
                                             <span
                                                 wire:click="toggleCategory('{{ $category2->slug }}')">{{ $category2->name }}</span>
                                         </div>
@@ -105,7 +105,7 @@
                 @if ($collections->count())
                     <div class="space-y-2">
                         <div class="mb-2 font-bold">{{ __('Collections') }}</div>
-                        <div class="flex flex-col px-2">
+                        <div class="flex flex-col px-2 select-none">
                             @foreach ($collections as $menuCollection)
                                 <label
                                     class="flex items-center justify-between py-1 text-sm cursor-pointer group last:pb-1 first:pt-1">
@@ -122,7 +122,7 @@
                 @if ($brands->count())
                     <div class="space-y-2">
                         <div class="mb-2 font-bold">{{ __('Brands') }}</div>
-                        <div class="flex flex-col px-2">
+                        <div class="flex flex-col px-2 select-none">
                             @foreach ($brands as $menuBrand)
                                 <label
                                     class="flex items-center justify-between py-1 text-sm cursor-pointer group last:pb-1 first:pt-1">
