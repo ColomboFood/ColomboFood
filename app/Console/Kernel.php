@@ -19,7 +19,9 @@ class Kernel extends ConsoleKernel
         $schedule->job(new ClearUnpaidOrders)->daily();
 
         $schedule->command('export:daily-orders')->daily();
+        $schedule->command('import:products')->daily();
         $schedule->command('sitemap:generate')->daily();
+        
     }
 
     /**
