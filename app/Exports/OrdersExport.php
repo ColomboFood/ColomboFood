@@ -17,7 +17,7 @@ class OrdersExport implements FromView
 
     public function __construct($from = null, $to = null, $statuses = [])
     {
-        $this->shipping = Product::withTrashed()->where('name','consegna')->first();
+        $this->shipping = Product::withoutGlobalScopes()->where('name',insensitiveLike(),'%consegna%')->first();
         $this->from = $from;
         $this->to = $to;
         $this->statuses = count($statuses) ? $statuses : OrderStatus::all()->pluck('id');

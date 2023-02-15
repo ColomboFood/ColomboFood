@@ -40,7 +40,7 @@ class SocialiteController extends Controller
         $user = User::where('email', $googleUser->email)->first();
 
         if($user){
-            if($user->socliate_provider != 'google')
+            if($user->socialite_provider != 'google')
                 $user = null;
         }
         else{

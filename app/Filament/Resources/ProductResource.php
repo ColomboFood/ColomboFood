@@ -353,6 +353,7 @@ class ProductResource extends Resource
             ->filters(
                 [
                     Tables\Filters\TrashedFilter::make(),
+                    Tables\Filters\TernaryFilter::make('hidden')->label(__('Hidden')),
                     Tables\Filters\SelectFilter::make('categories')->label(__('Categories'))
                         ->multiple()
                         ->options(\App\Models\Category::all()->pluck('name', 'id'))
@@ -406,8 +407,6 @@ class ProductResource extends Resource
                         ->query(fn (Builder $query): Builder => $query->whereColumn('selling_price', '<', 'original_price')),
                     Tables\Filters\Filter::make('featured')->label(__('Featured'))
                         ->query(fn (Builder $query): Builder => $query->where('featured', true)),
-                    Tables\Filters\Filter::make('hidden')->label(__('Hidden'))
-                        ->query(fn (Builder $query): Builder => $query->where('hidden', true)),
                     Tables\Filters\Filter::make('exlude_variants')->label(__('Exclude Variants'))
                         ->query( fn (Builder $query): Builder => $query->where('variant_id', null)->orWhereColumn('id','variant_id') ),
 
