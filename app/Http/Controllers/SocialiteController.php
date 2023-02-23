@@ -37,7 +37,7 @@ class SocialiteController extends Controller
             return redirect()->route('login');
         }
 
-        $user = User::where('email', $googleUser->email)->first();
+        $user = User::where('email', insensitiveLike(), $googleUser->email)->first();
 
         if($user){
             if($user->socialite_provider != 'google')

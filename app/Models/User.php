@@ -127,6 +127,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerif
         return $this->hasMany(Review::class);
     }
 
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => strtolower($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
     protected function fiscalCode(): Attribute
     {
         return Attribute::make(

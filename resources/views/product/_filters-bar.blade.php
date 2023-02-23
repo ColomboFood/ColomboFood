@@ -73,8 +73,7 @@
                             <div class="pl-2 text-sm select-none" x-data="{
                                 open: @js($openMenus->contains($category1->name))
                             }">
-                                <div
-                                    class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category1->name) ? 'font-black' : '' }}"]>
+                                <div class="flex items-center justify-between cursor-pointer mb-1 {{ $openMenus->contains($category1->name) ? 'font-black' : '' }}"]>
                                     <span wire:click="toggleCategory('{{ $category1->slug }}')"
                                         x-on:click="open=true">{{ $category1->name }}</span>
                                     @if ($categories->filter(fn($c) => $c->parent_id == $category1->id)->count())
@@ -88,7 +87,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="flex flex-col pl-4 mt-1 space-y-1" x-show="open">
+                                <div class="flex flex-col pl-4 space-y-1" x-show="open">
                                     @foreach ($categories->where('parent_id', $category1->id) as $category2)
                                         <div
                                             class="flex items-center justify-between cursor-pointer {{ $openMenus->contains($category2->name) ? 'font-black' : '' }}">
