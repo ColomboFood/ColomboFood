@@ -58,7 +58,8 @@ class BrandResource extends Resource
                                     ->imageCropAspectRatio('16:9')
                                     ->panelAspectRatio('16:9')
                                     ->enableDownload()
-                                    ->columnSpan('full'),
+                                    ->columnSpan('full')
+                                    ->maxSize(config('media-library.max_file_size')/1024),
                             ])->columns([
                                 'md' => 2,
                             ]),  
@@ -71,7 +72,8 @@ class BrandResource extends Resource
                                     ->collection('logo')
                                     ->panelLayout('circular')
                                     ->panelAspectRatio('1:1')
-                                    ->enableDownload(),
+                                    ->enableDownload()
+                                    ->maxSize(config('media-library.max_file_size')/1024),
                             ]),
                         Forms\Components\Section::make(__('Settings'))
                             ->schema([

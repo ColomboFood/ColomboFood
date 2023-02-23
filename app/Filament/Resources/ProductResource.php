@@ -267,7 +267,8 @@ class ProductResource extends Resource
                                     ->enableReordering()
                                     ->enableDownload()
                                     ->panelLayout('circular')
-                                    ->panelAspectRatio('5:6'),
+                                    ->panelAspectRatio('5:6')
+                                    ->maxSize(config('media-library.max_file_size')/1024),
                             ]),
                         Forms\Components\Section::make(__('Settings'))
                             ->schema([
