@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LoadShoppingLists::class,
             \App\Http\Middleware\LastSeen::class,
+            \App\Http\Middleware\Localization::class,
         ],
 
         'api' => [

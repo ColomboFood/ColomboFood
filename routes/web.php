@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/it', function(){ 
+    Session::put('locale', 'it');
+    return redirect()->back();
+} );
+Route::get('/en', function(){ 
+    Session::put('locale', 'en');
+    return redirect()->back();
+} );
+
 Route::get('/', [App\Http\Controllers\HomeController::class , 'index'] )->name('home');
 Route::get('/about-us', [App\Http\Controllers\HomeController::class , 'aboutUs'] )->name('about-us');
 Route::get('/delivery', [App\Http\Controllers\HomeController::class , 'delivery'] )->name('delivery');
