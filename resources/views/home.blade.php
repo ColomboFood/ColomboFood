@@ -12,7 +12,7 @@
                     <form method="GET" action="{{ route('product.index') }}">
                         <div class="flex items-center w-full pr-2 mt-6 transition focus-within:border-primary-500 focus-within:border-b-2">
                             <input class="flex-1 bg-transparent border-transparent peer focus:border-transparent focus:ring focus:ring-transparent"
-                                type="text" name="query" placeholder="{{ __('Search...') }}"
+                                type="text" name="query" placeholder="{{ __('Search...') }}" autocomplete="off"
                             />
                             <button type="submit" class="transition duration-300 opacity-50 hover:opacity-100 peer-focus:opacity-100">
                                 <svg class="w-5 h-5 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">

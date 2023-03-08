@@ -89,6 +89,10 @@ class Category extends Model implements HasMedia
                     $query->where('name', insensitiveLike(), '%' . $filters['query'] . '%')
                         ->orWhere('short_description', insensitiveLike(), '%' . $filters['query'] . '%')
                         ->orWhere('description', insensitiveLike(), '%' . $filters['query'] . '%')
+                        ->orWhereHas('tags', fn($query) => $query->where('name', insensitiveLike(), '%' . $filters['query'] . '%' ))
+                        ->orWhereHas('categories', fn($query) => $query->where('name', insensitiveLike(), '%' . $filters['query'] . '%' ))
+                        ->orWhereHas('collections', fn($query) => $query->where('name', insensitiveLike(), '%' . $filters['query'] . '%' ))
+                        ->orWhereHas('brand', fn($query) => $query->where('name', insensitiveLike(), '%' . $filters['query'] . '%' ))
                 );
 
                 return $query;
