@@ -104,10 +104,10 @@
                 </p>
                 <div class="flex flex-col w-full mt-6 space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-row">
                     <form class="w-full sm:w-1/2" method="GET" action="{{ route('product.index') }}">
-                        <x-button class="w-full">{{ __('To Shop') }}</x-button>
+                        <x-button class="w-full h-full">{{ __('To Shop') }}</x-button>
                     </form>
                     <form class="w-full sm:w-1/2" method="GET" action="{{  route('product.show', $randomProduct) }}">
-                        <x-secondary-button class="w-full">{{ __('Random Product') }}</x-secondary-button>
+                        <x-secondary-button class="w-full h-full">{{ __('Random Product') }}</x-secondary-button>
                     </form>
                 </div>
             </div>

@@ -112,7 +112,7 @@ class Index extends Component
     }
 
     public function voiceSearch($transcript) {
-        if( isset($transcript['final']) ) $this->query = $transcript['final'];
+        if( isset($transcript['final']) && trim($transcript['final']) ) $this->query = $transcript['final'];
     }
 
     public function mount()
