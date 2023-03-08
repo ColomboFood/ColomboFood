@@ -36,7 +36,7 @@ class ExportDailyOrders extends Command
             yesterday()->startOfDay(), 
             today()->startOfDay(), 
             [OrderStatus::where('name','like','paid')->first()->id]), 
-            'data/export/daily_orders-'.(today()->format('d_m_y')).'.csv', 
+            'data/export/daily_orders-'.(yesterday()->format('d_m_y')).'.csv', 
             config('filesystems.default') ,
             \Maatwebsite\Excel\Excel::CSV, [
             'visibility' => 'private',
