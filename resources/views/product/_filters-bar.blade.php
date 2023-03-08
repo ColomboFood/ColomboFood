@@ -63,6 +63,7 @@
                         </svg>
                     </x-button>
                 </div>
+                <x-voice-search class="mt-2" wire:change="voiceSearch"/>
             </div>
 
             <div class="w-full p-2 mt-4 space-y-6">

@@ -33,9 +33,15 @@ class Index extends Component
         'orderby' => ['except' => '']
     ];
 
-    public function updatingQuery()
+    public function updatingQuery($value)
     {
+        if(trim($value))
         $this->resetPage();
+    }
+
+    public function updatedQuery()
+    {
+        $this->query = trim($this->query);
     }
 
     public function updatingCategory()
@@ -103,6 +109,10 @@ class Index extends Component
         if($this->category == $categoryModel->slug) $this->category = $categoryModel->parent ? $categoryModel->parent->slug : null;
         else $this->category = $categoryModel->slug;
         $this->setOpenMenus();
+    }
+
+    public function voiceSearch($transcript) {
+        if( isset($transcript['final']) ) $this->query = $transcript['final'];
     }
 
     public function mount()
