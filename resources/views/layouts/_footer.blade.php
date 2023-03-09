@@ -13,7 +13,7 @@
             <span class="mb-2 font-bold uppercase opacity-50">{{ __('Useful Links') }}</span>
             <a class="cursor-pointer hover:underline" href="{{ route('contact-us') }}">{{ __('Contact Us') }}</a>
             <a class="cursor-pointer hover:underline" href="{{ route('contact-us') . "#work-with-us" }}">{{ __('Work with us') }}</a>
-            <a href="https://www.iubenda.com/privacy-policy/77646933" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy ">
+            <a href="https://www.iubenda.com/privacy-policy/80514097" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy ">
                 {{ __('Privacy Policy') }}
             </a>
             <script type="text/javascript">
