@@ -525,7 +525,7 @@ class Product extends Model implements Buyable, HasMedia, Sitemapable
     public function shouldBeSearchable()
     {
         //&& (!$this->variant_id || ($this->variant_id == $this->id))
-        return (!$this->attributes['hidden']);
+        return (isset($this->attributes['hidden']) && !$this->attributes['hidden']);
     }
 
     /**

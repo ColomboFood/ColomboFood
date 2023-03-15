@@ -79,7 +79,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerif
 
     public function canAccessFilament(): bool
     {
-        return $this->is_admin;
+        return $this->is_admin ?? false;
     }
 
     public function getFilamentAvatarUrl(): ?string

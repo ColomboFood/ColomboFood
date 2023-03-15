@@ -129,19 +129,19 @@ class Index extends Component
             'query' => $this->query,
             'collection' => $this->collection,
             'brand' => $this->brand,
-        ])->get();
+        ])->orderBy('name')->get();
 
         $this->collections = Collection::filterByProducts([
             'query' => $this->query,
             'category' => $this->category,
             'brand' => $this->brand,
-        ])->get();
+        ])->orderBy('name')->get();
 
         $this->brands = Brand::filterByProducts([
             'query' => $this->query,
             'category' => $this->category,
             'collection' => $this->collection,
-        ])->get();
+        ])->orderBy('name')->get();
 
         return view('product.index',[
             'products' => Product::with('media')->filter([
