@@ -5,7 +5,7 @@
         style="background-image: url('/img/homebanner.png')"
     >
         <div class="pt-24 mx-auto lg:container lg:pt-32">
-            <div class="w-full px-6 py-4 mx-auto text-center bg-white lg:text-left lg:px-2 lg:w-96 lg:p-auto bg-opacity-80 lg:bg-opacity-0 lg:ml-20">
+            <div class="w-full px-6 py-4 mx-auto text-center bg-white lg:text-left lg:px-2 lg:w-96 lg:p-auto bg-opacity-80 lg:bg-opacity-0 lg:ml-20 xl:ml-40">
                 <div class="mx-auto max-w-max">
                     <x-jet-application-logo class="mx-auto lg:w-full max-h-28 lg:max-h-none"/>
                     {{-- <x-algolia-autocomplete class="w-full mt-6"/> --}}
@@ -30,7 +30,7 @@
         style="background-image: url({{$featured_collection->hero}})"
     >
         <div class="pt-24 mx-auto lg:container lg:pt-32">
-            <div class="w-full px-6 py-4 mx-auto text-center bg-white lg:text-left lg:px-2 lg:w-96 lg:p-auto bg-opacity-80 lg:bg-opacity-0 lg:ml-20">
+            <div class="w-full px-6 py-4 mx-auto text-center bg-white lg:text-left lg:px-2 lg:w-96 lg:p-auto bg-opacity-80 lg:bg-opacity-0 lg:ml-20 xl:ml-40">
                 <div class="mx-auto max-w-max">
                     <x-jet-application-logo class="mx-auto lg:w-full max-h-28 lg:max-h-none"/>
                     {{-- <x-algolia-autocomplete class="w-full mt-6"/> --}}
