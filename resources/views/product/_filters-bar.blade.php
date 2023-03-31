@@ -59,6 +59,7 @@
                             $wire.set('query', query)
                         },
                         store(query) {
+                            query = query.trim();
                             if( query ){
                                 if( !this.recentSearches.length || !this.recentSearches.includes(query) ){
                                     if(this.recentSearches.length && query.startsWith(this.recentSearches[0]))
