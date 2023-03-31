@@ -42,6 +42,7 @@ class Index extends Component
     public function updatedQuery()
     {
         $this->query = trim($this->query);
+        $this->emit('storeQuery', $this->query);
     }
 
     public function updatingCategory()

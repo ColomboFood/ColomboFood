@@ -52,16 +52,57 @@
             </div>
 
             <div class="flex flex-col">
-                <div class="flex">
-                    <x-input class="w-full" type="text" placeholder="{{ __('Search...') }}"
-                        wire:model.debounce.200ms="query" />
-                    <x-button class="">
+                <div class="relative flex"
+                    x-data="{
+                        recentSearches: localStorage.getItem('recentSearches') ? JSON.parse(localStorage.getItem('recentSearches')) : [],
+                        search(query) {
+                            $wire.set('query', query)
+                        },
+                        store(query) {
+                            if( query ){
+                                if( !this.recentSearches.length || !this.recentSearches.includes(query) ){
+                                    if(this.recentSearches.length && query.startsWith(this.recentSearches[0]))
+                                        this.recentSearches[0] = query;
+                                    else{
+                                        this.recentSearches.unshift(query);
+                                        if(this.recentSearches.length > 3) this.recentSearches.pop();
+                                    }
+                                    localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
+                                }
+                                else{
+                                    this.recentSearches.sort( (a,b) => a == query ? -1 : 0 );
+                                    localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
+                                }
+                            }                       
+                        }
+                    }"
+                    x-init="
+                        Livewire.on('storeQuery', (query) => store(query));
+                        store($wire.get('query'));
+                    "
+                >
+                    <x-input class="w-full peer" type="text" placeholder="{{ __('Search...') }}"
+                        wire:model.debounce.200ms="query"
+                    />
+                    <x-button class=""
+                        wire:click="render"
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </x-button>
+                    <div class="absolute z-50 hidden w-full py-2 text-sm bg-white shadow-lg hover:block peer-focus:block top-full"
+                        x-show="recentSearches.length"
+                    >
+                        <template x-for="recentSearch in recentSearches">
+                            <div class="px-4 py-1 transition cursor-pointer hover:bg-gray-50"
+                                x-on:click="search(recentSearch)"
+                                x-text="recentSearch"
+                            ></div>
+                        </template>
+                    </div>
                 </div>
                 <x-voice-search class="mt-2" wire:change="voiceSearch"/>
             </div>
